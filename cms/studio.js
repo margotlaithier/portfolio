@@ -1,6 +1,11 @@
 (function () {
     const STORAGE_KEY = 'portfolio-studio-draft-v1';
     const GITHUB_CONFIG_KEY = 'portfolio-studio-github-v1';
+    const REQUIRED_DEPLOY_CHECKS = [
+        'pages build and deployment / build (dynamic)',
+        'pages build and deployment / deploy (dynamic)',
+        'pages build and deployment / report-build-status (dynamic)',
+    ];
 
     function clone(value) {
         return JSON.parse(JSON.stringify(value));
@@ -54,6 +59,14 @@
         github: defaultGitHubConfig(),
         dirty: false,
         commitStatus: 'idle',
+        deployment: {
+            active: false,
+            commitSha: '',
+            checks: {},
+            summary: 'idle',
+            message: '',
+            pollTimer: null,
+        },
         saveQueued: false,
         saveInFlight: false,
         saveTimer: null,
@@ -117,7 +130,106 @@
     }
 
     function isStudioLocked() {
-        return hasGitHubSync() && (state.commitStatus === 'pending' || state.commitStatus === 'error');
+        return hasGitHubSync() && (state.commitStatus === 'pending' || state.commitStatus === 'error' || state.deployment.active);
+    }
+
+    function resetDeploymentState() {
+        if (state.deployment.pollTimer) {
+            clearTimeout(state.deployment.pollTimer);
+        }
+        state.deployment = {
+            active: false,
+            commitSha: '',
+            checks: {},
+            summary: 'idle',
+            message: '',
+            pollTimer: null,
+        };
+    }
+
+    function deploymentCheckState(check) {
+        if (!check) return 'pending';
+        if (check.status !== 'completed') return 'pending';
+        return check.conclusion === 'success' ? 'success' : 'error';
+    }
+
+    function refreshSaveState() {
+        state.saveState = activeSaveTargetLabel();
+        updateSaveState();
+    }
+
+    function deploymentSummary() {
+        const checks = REQUIRED_DEPLOY_CHECKS.map((name) => state.deployment.checks[name]);
+        if (checks.some((check) => deploymentCheckState(check) === 'error')) {
+            return 'error';
+        }
+        if (checks.every((check) => deploymentCheckState(check) === 'success')) {
+            return 'success';
+        }
+        return 'pending';
+    }
+
+    async function fetchDeploymentChecks() {
+        const response = await fetch(`https://api.github.com/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/commits/${encodeURIComponent(state.deployment.commitSha)}/check-runs`, {
+            headers: {
+                Authorization: `Bearer ${state.github.token}`,
+                Accept: 'application/vnd.github+json',
+            },
+        });
+        if (!response.ok) {
+            throw new Error(`github_checks_failed_${response.status}`);
+        }
+        const payload = await response.json();
+        const map = {};
+        for (const check of payload.check_runs || []) {
+            if (REQUIRED_DEPLOY_CHECKS.includes(check.name)) {
+                map[check.name] = {
+                    status: check.status,
+                    conclusion: check.conclusion,
+                    detailsUrl: check.details_url || '',
+                };
+            }
+        }
+        state.deployment.checks = map;
+        state.deployment.summary = deploymentSummary();
+        if (state.deployment.summary === 'success') {
+            state.deployment.message = 'Les 3 étapes GitHub Pages sont terminées avec succès.';
+        } else if (state.deployment.summary === 'error') {
+            state.deployment.message = 'Au moins une étape GitHub Pages a échoué.';
+        } else {
+            state.deployment.message = 'Déploiement GitHub Pages en cours...';
+        }
+    }
+
+    async function checkDeploymentStatus() {
+        if (!hasGitHubSync() || !state.deployment.commitSha) {
+            return;
+        }
+        try {
+            await fetchDeploymentChecks();
+            if (state.deployment.summary === 'success') {
+                state.deployment.active = false;
+                state.commitStatus = 'success';
+                refreshSaveState();
+            } else if (state.deployment.summary === 'error') {
+                state.deployment.active = true;
+                state.commitStatus = 'error';
+                refreshSaveState();
+            } else {
+                state.deployment.active = true;
+                state.commitStatus = 'pending';
+                refreshSaveState();
+                state.deployment.pollTimer = setTimeout(checkDeploymentStatus, 5000);
+            }
+        } catch (error) {
+            console.error(error);
+            state.deployment.active = true;
+            state.deployment.summary = 'error';
+            state.deployment.message = 'Impossible de lire le statut du déploiement GitHub Pages.';
+            state.commitStatus = 'error';
+            refreshSaveState();
+        }
+        render();
     }
 
     async function fetchGitHubSha() {
@@ -172,6 +284,17 @@
         await flushGitHubSave();
     }
 
+    async function refreshDeploymentChecks() {
+        if (!state.deployment.active || !state.deployment.commitSha || state.saveInFlight) {
+            return;
+        }
+        if (state.deployment.pollTimer) {
+            clearTimeout(state.deployment.pollTimer);
+            state.deployment.pollTimer = null;
+        }
+        await checkDeploymentStatus();
+    }
+
     async function flushServerSave() {
         if (!state.serverWritable || hasGitHubSync()) {
             return;
@@ -215,10 +338,10 @@
             return;
         }
         state.saveInFlight = true;
+        resetDeploymentState();
         state.commitStatus = 'pending';
-        state.saveState = activeSaveTargetLabel();
+        refreshSaveState();
         render();
-        updateSaveState();
         try {
             const sha = state.github.currentSha || await fetchGitHubSha();
             const response = await fetch(`https://api.github.com/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/contents/${state.github.path.split('/').map(encodeURIComponent).join('/')}`, {
@@ -242,16 +365,21 @@
             state.github.currentSha = payload?.content?.sha || state.github.currentSha;
             persistGitHubConfig();
             state.dirty = false;
-            state.commitStatus = 'success';
-            state.saveState = activeSaveTargetLabel();
+            state.deployment.commitSha = payload?.commit?.sha || '';
+            state.deployment.active = true;
+            state.deployment.summary = 'pending';
+            state.deployment.message = 'Commit créé. Vérification du build et du déploiement GitHub Pages...';
+            refreshSaveState();
         } catch (error) {
             console.error(error);
             state.commitStatus = 'error';
-            state.saveState = activeSaveTargetLabel();
+            refreshSaveState();
         } finally {
             state.saveInFlight = false;
-            updateSaveState();
             render();
+            if (state.deployment.active && state.deployment.commitSha) {
+                await checkDeploymentStatus();
+            }
         }
     }
 
@@ -870,6 +998,7 @@
                     </div>
                 </div>
             </div>
+            ${renderDeploymentOverlay()}
         `;
 
         root.querySelectorAll('[data-section]').forEach((button) => {
@@ -893,6 +1022,7 @@
         root.querySelector('[data-action="add-about-card"]')?.addEventListener('click', addAboutCard);
         root.querySelector('[data-action="test-github"]')?.addEventListener('click', testGitHubConnection);
         root.querySelector('[data-action="commit-github"]')?.addEventListener('click', commitStudioChanges);
+        root.querySelector('[data-action="refresh-deployment"]')?.addEventListener('click', refreshDeploymentChecks);
         root.querySelectorAll('[data-action="move-project"]').forEach((button) => {
             button.addEventListener('click', () => moveProject(Number(button.dataset.direction)));
         });
@@ -1039,14 +1169,51 @@
                     node.matches('[data-github-field]') ||
                     node.matches('[data-action="test-github"]') ||
                     node.matches('[data-action="commit-github"]') ||
-                    node.matches('[data-section]') ||
-                    node.matches('[data-project-slug]')
+                    node.matches('[data-action="refresh-deployment"]')
                 ) {
                     return;
                 }
                 node.disabled = true;
             });
         }
+    }
+
+    function renderDeploymentOverlay() {
+        if (!state.deployment.active) {
+            return '';
+        }
+        return `
+            <div style="position:fixed;inset:0;background:rgba(16,16,16,.58);backdrop-filter:blur(3px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:2rem;">
+                <div style="width:min(720px,100%);background:#f7f2eb;color:#1e1a17;border:1px solid rgba(0,0,0,.08);box-shadow:0 24px 80px rgba(0,0,0,.24);padding:2rem;border-radius:1.1rem;">
+                    <div style="display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;">
+                        <div>
+                            <div style="font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;opacity:.72;">Déploiement en cours</div>
+                            <h2 style="margin:.4rem 0 0;font-size:1.8rem;line-height:1.05;">Attente du commit complet</h2>
+                        </div>
+                        <button type="button" data-action="refresh-deployment" style="border:1px solid rgba(0,0,0,.14);background:white;padding:.7rem 1rem;border-radius:999px;cursor:pointer;">Re-vérifier</button>
+                    </div>
+                    <p style="margin:1rem 0 1.3rem;line-height:1.5;">${escapeHtml(state.deployment.message || 'Le Studio reste bloqué tant que les 3 étapes GitHub Pages ne sont pas toutes successful.')}</p>
+                    <div style="display:grid;gap:.75rem;">
+                        ${REQUIRED_DEPLOY_CHECKS.map((name) => {
+                            const check = state.deployment.checks[name];
+                            const stepState = deploymentCheckState(check);
+                            const color = stepState === 'success' ? '#1f7a3e' : stepState === 'error' ? '#b42318' : '#946200';
+                            const label = stepState === 'success' ? 'Successful' : stepState === 'error' ? 'Failed' : 'En attente';
+                            return `
+                                <div style="display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:.9rem 1rem;border-radius:.9rem;background:white;border:1px solid rgba(0,0,0,.08);">
+                                    <div>
+                                        <div style="font-weight:600;">${escapeHtml(name)}</div>
+                                        <div style="font-size:.92rem;opacity:.75;">${escapeHtml(check?.status || 'queued')}</div>
+                                    </div>
+                                    <div style="font-weight:700;color:${color};">${label}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    <div style="margin-top:1rem;font-size:.92rem;opacity:.72;">Aucune action sur le Studio n’est possible tant que les 3 checks ne sont pas tous validés.</div>
+                </div>
+            </div>
+        `;
     }
 
     async function initialise() {
