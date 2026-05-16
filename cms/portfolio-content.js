@@ -277,7 +277,7 @@ window.PORTFOLIO_CONTENT = {
       "slug": "chambre-parentale",
       "path": "projets/architecture-interieure/chambre-parentale/",
       "title": "Chambre parentale",
-      "cardTitleHtml": "Chambre parentale",
+      "cardTitleHtml": "Chambre<br>parentale",
       "type": "Projet d'étude · Architecture d'intérieur",
       "intro": "Projet d'aménagement d'une chambre pensée comme un espace de retrait calme, structuré par des rangements intégrés, une lumière douce et une composition sobre des matières.",
       "date": "2025",
