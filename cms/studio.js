@@ -1,6 +1,7 @@
 (function () {
     const STORAGE_KEY = 'portfolio-studio-draft-v1';
     const GITHUB_CONFIG_KEY = 'portfolio-studio-github-v1';
+    const DEPLOYMENT_STATE_KEY = 'portfolio-studio-deployment-v1';
     const REQUIRED_DEPLOY_CHECKS = [
         'pages build and deployment / build (dynamic)',
         'pages build and deployment / deploy (dynamic)',
@@ -90,6 +91,23 @@
         console.warn('Impossible de charger la configuration GitHub.', error);
     }
 
+    try {
+        const deploymentDraft = localStorage.getItem(DEPLOYMENT_STATE_KEY);
+        if (deploymentDraft) {
+            const deployment = JSON.parse(deploymentDraft);
+            state.deployment = {
+                ...state.deployment,
+                ...deployment,
+                pollTimer: null,
+            };
+            if (state.deployment.active) {
+                state.commitStatus = deployment.summary === 'error' ? 'error' : 'pending';
+            }
+        }
+    } catch (error) {
+        console.warn('Impossible de charger l’état de déploiement.', error);
+    }
+
     const root = document.getElementById('studio-app');
 
     function hasGitHubSync() {
@@ -105,6 +123,17 @@
 
     function persistGitHubConfig() {
         localStorage.setItem(GITHUB_CONFIG_KEY, JSON.stringify(state.github));
+    }
+
+    function persistDeploymentState() {
+        const deployment = {
+            active: state.deployment.active,
+            commitSha: state.deployment.commitSha,
+            checks: state.deployment.checks,
+            summary: state.deployment.summary,
+            message: state.deployment.message,
+        };
+        localStorage.setItem(DEPLOYMENT_STATE_KEY, JSON.stringify(deployment));
     }
 
     function activeSaveTargetLabel() {
@@ -145,6 +174,7 @@
             message: '',
             pollTimer: null,
         };
+        localStorage.removeItem(DEPLOYMENT_STATE_KEY);
     }
 
     function deploymentCheckState(check) {
@@ -199,6 +229,7 @@
         } else {
             state.deployment.message = 'Déploiement GitHub Pages en cours...';
         }
+        persistDeploymentState();
     }
 
     async function checkDeploymentStatus() {
@@ -211,14 +242,18 @@
                 state.deployment.active = false;
                 state.commitStatus = 'success';
                 refreshSaveState();
+                persistDeploymentState();
+                localStorage.removeItem(DEPLOYMENT_STATE_KEY);
             } else if (state.deployment.summary === 'error') {
                 state.deployment.active = true;
                 state.commitStatus = 'error';
                 refreshSaveState();
+                persistDeploymentState();
             } else {
                 state.deployment.active = true;
                 state.commitStatus = 'pending';
                 refreshSaveState();
+                persistDeploymentState();
                 state.deployment.pollTimer = setTimeout(checkDeploymentStatus, 5000);
             }
         } catch (error) {
@@ -228,6 +263,7 @@
             state.deployment.message = 'Impossible de lire le statut du déploiement GitHub Pages.';
             state.commitStatus = 'error';
             refreshSaveState();
+            persistDeploymentState();
         }
         render();
     }
@@ -369,6 +405,7 @@
             state.deployment.active = true;
             state.deployment.summary = 'pending';
             state.deployment.message = 'Commit créé. Vérification du build et du déploiement GitHub Pages...';
+            persistDeploymentState();
             refreshSaveState();
         } catch (error) {
             console.error(error);
@@ -1229,6 +1266,9 @@
             state.saveState = hasGitHubSync() ? 'GitHub direct actif' : 'Serveur studio absent. Active GitHub direct ou ouvre http://localhost:4173/studio.html';
         }
         render();
+        if (state.deployment.active && state.deployment.commitSha && hasGitHubSync()) {
+            await checkDeploymentStatus();
+        }
     }
 
     initialise();
