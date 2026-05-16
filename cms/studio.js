@@ -7,6 +7,11 @@
         'pages build and deployment / deploy (dynamic)',
         'pages build and deployment / report-build-status (dynamic)',
     ];
+    const REQUIRED_DEPLOY_CHECK_PREFIXES = {
+        'pages build and deployment / build (dynamic)': 'pages build and deployment / build',
+        'pages build and deployment / deploy (dynamic)': 'pages build and deployment / deploy',
+        'pages build and deployment / report-build-status (dynamic)': 'pages build and deployment / report-build-status',
+    };
 
     function clone(value) {
         return JSON.parse(JSON.stringify(value));
@@ -36,6 +41,38 @@
 
     function encodeBase64Utf8(value) {
         return btoa(unescape(encodeURIComponent(value)));
+    }
+
+    function githubApiUrl(path, query = {}) {
+        const url = new URL(`https://api.github.com${path}`);
+        Object.entries(query).forEach(([key, value]) => {
+            if (value !== undefined && value !== null && value !== '') {
+                url.searchParams.set(key, value);
+            }
+        });
+        url.searchParams.set('_ts', String(Date.now()));
+        return url.toString();
+    }
+
+    function canonicalDeployCheckName(name = '') {
+        const normalized = String(name).trim().toLowerCase();
+        for (const [canonical, prefix] of Object.entries(REQUIRED_DEPLOY_CHECK_PREFIXES)) {
+            if (normalized.startsWith(prefix.toLowerCase())) {
+                return canonical;
+            }
+        }
+        return '';
+    }
+
+    function statusStateToCheckLike(stateValue, targetUrl = '') {
+        const normalized = String(stateValue || '').toLowerCase();
+        if (normalized === 'success') {
+            return { status: 'completed', conclusion: 'success', detailsUrl: targetUrl };
+        }
+        if (normalized === 'pending') {
+            return { status: 'in_progress', conclusion: null, detailsUrl: targetUrl };
+        }
+        return { status: 'completed', conclusion: 'failure', detailsUrl: targetUrl };
     }
 
     function defaultGitHubConfig() {
@@ -199,11 +236,38 @@
         return 'pending';
     }
 
-    async function fetchDeploymentChecks() {
-        const response = await fetch(`https://api.github.com/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/commits/${encodeURIComponent(state.deployment.commitSha)}/check-runs`, {
+    async function fetchCommitStatuses() {
+        const response = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/commits/${encodeURIComponent(state.deployment.commitSha)}/status`), {
+            cache: 'no-store',
+            mode: 'cors',
             headers: {
                 Authorization: `Bearer ${state.github.token}`,
                 Accept: 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2026-03-10',
+            },
+        });
+        if (!response.ok) {
+            throw new Error(`github_statuses_failed_${response.status}`);
+        }
+        const payload = await response.json();
+        const map = {};
+        for (const status of payload.statuses || []) {
+            const canonicalName = canonicalDeployCheckName(status.context);
+            if (canonicalName && !map[canonicalName]) {
+                map[canonicalName] = statusStateToCheckLike(status.state, status.target_url || '');
+            }
+        }
+        return map;
+    }
+
+    async function fetchDeploymentCheckRuns() {
+        const response = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/commits/${encodeURIComponent(state.deployment.commitSha)}/check-runs`), {
+            cache: 'no-store',
+            mode: 'cors',
+            headers: {
+                Authorization: `Bearer ${state.github.token}`,
+                Accept: 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2026-03-10',
             },
         });
         if (!response.ok) {
@@ -212,12 +276,34 @@
         const payload = await response.json();
         const map = {};
         for (const check of payload.check_runs || []) {
-            if (REQUIRED_DEPLOY_CHECKS.includes(check.name)) {
-                map[check.name] = {
+            const canonicalName = canonicalDeployCheckName(check.name);
+            if (canonicalName) {
+                map[canonicalName] = {
                     status: check.status,
                     conclusion: check.conclusion,
                     detailsUrl: check.details_url || '',
                 };
+            }
+        }
+        return map;
+    }
+
+    async function fetchDeploymentChecks() {
+        let map = {};
+        let statusesError = null;
+        try {
+            map = await fetchCommitStatuses();
+        } catch (error) {
+            statusesError = error;
+        }
+        if (Object.keys(map).length < REQUIRED_DEPLOY_CHECKS.length) {
+            try {
+                const fallbackMap = await fetchDeploymentCheckRuns();
+                map = { ...fallbackMap, ...map };
+            } catch (error) {
+                if (!Object.keys(map).length) {
+                    throw statusesError || error;
+                }
             }
         }
         state.deployment.checks = map;
@@ -269,7 +355,11 @@
     }
 
     async function fetchGitHubSha() {
-        const response = await fetch(`https://api.github.com/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/contents/${state.github.path.split('/').map(encodeURIComponent).join('/')}?ref=${encodeURIComponent(state.github.branch)}`, {
+        const response = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/contents/${state.github.path.split('/').map(encodeURIComponent).join('/')}`, {
+            ref: state.github.branch,
+        }), {
+            cache: 'no-store',
+            mode: 'cors',
             headers: {
                 Authorization: `Bearer ${state.github.token}`,
                 Accept: 'application/vnd.github+json',
@@ -293,7 +383,11 @@
         state.saveState = 'Test de connexion GitHub...';
         updateSaveState();
         try {
-            const response = await fetch(`https://api.github.com/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/contents/${state.github.path.split('/').map(encodeURIComponent).join('/')}?ref=${encodeURIComponent(state.github.branch)}`, {
+            const response = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/contents/${state.github.path.split('/').map(encodeURIComponent).join('/')}`, {
+                ref: state.github.branch,
+            }), {
+                cache: 'no-store',
+                mode: 'cors',
                 headers: {
                     Authorization: `Bearer ${state.github.token}`,
                     Accept: 'application/vnd.github+json',
