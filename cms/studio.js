@@ -38,7 +38,7 @@
             owner: '',
             repo: '',
             branch: 'main',
-            path: 'portfolio/cms/portfolio-content.js',
+            path: 'cms/portfolio-content.js',
             token: '',
             currentSha: '',
             commitMessage: 'Studio portfolio update',
@@ -52,6 +52,8 @@
         saveState: 'Brouillon local uniquement',
         serverWritable: false,
         github: defaultGitHubConfig(),
+        dirty: false,
+        commitStatus: 'idle',
         saveQueued: false,
         saveInFlight: false,
         saveTimer: null,
@@ -94,12 +96,28 @@
 
     function activeSaveTargetLabel() {
         if (hasGitHubSync()) {
+            if (state.commitStatus === 'pending') {
+                return 'Commit GitHub en cours...';
+            }
+            if (state.commitStatus === 'error') {
+                return 'Échec du commit GitHub. Studio verrouillé jusqu’au prochain commit.';
+            }
+            if (state.dirty) {
+                return 'Modifications locales en attente de commit GitHub';
+            }
+            if (state.commitStatus === 'success') {
+                return 'Commit GitHub réussi';
+            }
             return 'GitHub direct actif';
         }
         if (state.serverWritable) {
             return 'Auto-enregistrement direct actif';
         }
         return 'Brouillon local uniquement';
+    }
+
+    function isStudioLocked() {
+        return hasGitHubSync() && (state.commitStatus === 'pending' || state.commitStatus === 'error');
     }
 
     async function fetchGitHubSha() {
@@ -147,6 +165,13 @@
         updateSaveState();
     }
 
+    async function commitStudioChanges() {
+        if (!hasGitHubSync() || state.saveInFlight || !state.dirty) {
+            return;
+        }
+        await flushGitHubSave();
+    }
+
     async function flushServerSave() {
         if (!state.serverWritable || hasGitHubSync()) {
             return;
@@ -190,7 +215,9 @@
             return;
         }
         state.saveInFlight = true;
-        state.saveState = 'Enregistrement GitHub...';
+        state.commitStatus = 'pending';
+        state.saveState = activeSaveTargetLabel();
+        render();
         updateSaveState();
         try {
             const sha = state.github.currentSha || await fetchGitHubSha();
@@ -214,21 +241,17 @@
             const payload = await response.json();
             state.github.currentSha = payload?.content?.sha || state.github.currentSha;
             persistGitHubConfig();
-            state.saveState = 'Fichier mis à jour sur GitHub';
+            state.dirty = false;
+            state.commitStatus = 'success';
+            state.saveState = activeSaveTargetLabel();
         } catch (error) {
             console.error(error);
-            state.saveState = 'Échec de l’enregistrement GitHub';
+            state.commitStatus = 'error';
+            state.saveState = activeSaveTargetLabel();
         } finally {
             state.saveInFlight = false;
             updateSaveState();
-            if (state.saveQueued) {
-                state.saveQueued = false;
-                if (hasGitHubSync()) {
-                    flushGitHubSave();
-                } else {
-                    flushServerSave();
-                }
-            }
+            render();
         }
     }
 
@@ -241,14 +264,19 @@
 
     function persist() {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state.data));
-        if (state.serverWritable || hasGitHubSync()) {
+        if (hasGitHubSync()) {
+            state.dirty = true;
+            if (state.commitStatus !== 'error') {
+                state.commitStatus = 'dirty';
+            }
+            state.saveState = activeSaveTargetLabel();
+            updateSaveState();
+            return;
+        }
+        if (state.serverWritable) {
             clearTimeout(state.saveTimer);
             state.saveTimer = setTimeout(() => {
-                if (hasGitHubSync()) {
-                    flushGitHubSave();
-                } else {
-                    flushServerSave();
-                }
+                flushServerSave();
             }, 180);
         }
     }
@@ -506,7 +534,7 @@
                             <button type="button" data-action="test-github">Tester la connexion</button>
                         </div>
                         <div class="studio-note">Utilise un token GitHub finement limité avec accès écriture au contenu du dépôt. Ce mode permet l’édition depuis Safari sur iPad sans serveur local.</div>
-                        <div class="studio-note">Chemin attendu par défaut : <code>portfolio/cms/portfolio-content.js</code>.</div>
+                        <div class="studio-note">Chemin attendu par défaut : <code>cms/portfolio-content.js</code>.</div>
                     </div>
                 </div>
             `;
@@ -825,12 +853,13 @@
                     <div class="studio-toolbar">
                         <div>
                             <strong>Le site public lira le fichier <code>cms/portfolio-content.js</code>.</strong>
-                            <div class="studio-note">Le Studio enregistre directement dans <code>cms/portfolio-content.js</code> via serveur local ou GitHub direct.</div>
+                            <div class="studio-note">En mode GitHub, les changements restent en brouillon jusqu’au bouton de commit.</div>
                             <div class="studio-note" data-save-state>${escapeHtml(state.saveState)}</div>
                         </div>
                         <div class="studio-toolbar-actions">
+                            <button type="button" data-action="commit-github" class="studio-primary"${!hasGitHubSync() || !state.dirty || state.saveInFlight ? ' disabled' : ''}>Sauvegarder / Commit</button>
                             <button type="button" data-action="download-json">Télécharger JSON</button>
-                            <button type="button" data-action="download-js" class="studio-primary">Télécharger portfolio-content.js</button>
+                            <button type="button" data-action="download-js">Télécharger portfolio-content.js</button>
                             <label>Importer JSON<input id="studio-import" class="studio-file-input" type="file" accept=".json,application/json" /></label>
                             <button type="button" data-action="reset-draft">Effacer le brouillon</button>
                         </div>
@@ -863,6 +892,7 @@
         root.querySelector('[data-action="add-hero-image"]')?.addEventListener('click', addHeroImage);
         root.querySelector('[data-action="add-about-card"]')?.addEventListener('click', addAboutCard);
         root.querySelector('[data-action="test-github"]')?.addEventListener('click', testGitHubConnection);
+        root.querySelector('[data-action="commit-github"]')?.addEventListener('click', commitStudioChanges);
         root.querySelectorAll('[data-action="move-project"]').forEach((button) => {
             button.addEventListener('click', () => moveProject(Number(button.dataset.direction)));
         });
@@ -919,6 +949,9 @@
                 state.github.currentSha = '';
             }
             persistGitHubConfig();
+            if (!hasGitHubSync()) {
+                state.commitStatus = 'idle';
+            }
             state.saveState = activeSaveTargetLabel();
             updateSaveState();
         });
@@ -999,6 +1032,21 @@
         root.querySelectorAll('[data-remove-about-card]').forEach((button) => {
             button.addEventListener('click', () => removeAboutCard(Number(button.dataset.removeAboutCard)));
         });
+
+        if (isStudioLocked()) {
+            root.querySelectorAll('input, textarea, select, button').forEach((node) => {
+                if (
+                    node.matches('[data-github-field]') ||
+                    node.matches('[data-action="test-github"]') ||
+                    node.matches('[data-action="commit-github"]') ||
+                    node.matches('[data-section]') ||
+                    node.matches('[data-project-slug]')
+                ) {
+                    return;
+                }
+                node.disabled = true;
+            });
+        }
     }
 
     async function initialise() {
