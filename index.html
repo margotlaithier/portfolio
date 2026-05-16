@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="icon" href="logo.svg" type="image/svg+xml" />
+    <script>
+        document.documentElement.classList.add('render-pending');
+        window.addEventListener('load', () => {
+            const reveal = () => requestAnimationFrame(() => {
+                document.documentElement.classList.remove('render-pending');
+            });
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(reveal, reveal);
+            } else {
+                reveal();
+            }
+        });
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" as="style" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" />
+    <link rel="preload" href="styles.css" as="style" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&amp;fit=crop&amp;w=900&amp;q=80" crossorigin />
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&amp;fit=crop&amp;w=800&amp;q=80" crossorigin />
+    <script src="https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js" defer></script>
+    <script src="playfair-points.js" defer></script>
+</head>
+<body class="page-home">
+    
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="#intro">
+                <span class="brand-kicker">Architecture d'intérieur</span>
+                <span class="brand-name brand-name-static" data-brand-static="true">
+                    <img class="brand-logo-complete" src="logo-complet.svg" alt="Margot Laithier" />
+                </span>
+            </a>
+
+            <nav class="site-nav">
+                <a href="#intro" data-nav="intro" class="is-current">Accueil</a>
+                <a href="#vision" data-nav="vision">À propos</a>
+                <a href="#projets" data-nav="projets">Projets</a>
+                <a href="#contact" data-nav="contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+    <div class="panel-rail" aria-hidden="true">
+        <span class="panel-dot" data-dot="intro"></span>
+        <span class="panel-dot" data-dot="vision"></span>
+        <span class="panel-dot" data-dot="projets"></span>
+        <span class="panel-dot" data-dot="contact"></span>
+    </div>
+
+    <main class="page-shell">
+        <div class="scroll-pages">
+            <section class="page-panel hero-panel is-active" id="intro" data-panel="intro">
+                <div class="panel-inner">
+                    <div class="hero-copy">
+                        <span class="panel-label">Portfolio</span>
+                        <h1 class="hero-title">
+                            <span class="title-line"><span>Architecture intérieure</span></span>
+                        </h1>
+                        <p class="hero-text">Projets académiques, recherches et études.</p>
+                        <p class="hero-caption">IFAT • Plescop, Morbihan</p>
+                    </div>
+
+                    <div class="hero-visual">
+                        <div class="hero-stack">
+                            <div class="floating-card large"><img fetchpriority="high" decoding="async" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Résidence contemporaine dans la nature" /></div>
+                            <div class="floating-card small"><img fetchpriority="high" decoding="async" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80" alt="Intérieur contemporain de studio urbain" /></div>
+                        </div>
+                        <div class="floating-note">Plans, coupes, matières, maquettes et vues d'ambiance.</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="page-panel manifesto-panel" id="vision" data-panel="vision">
+                <div class="panel-inner">
+                    <div class="manifesto-side">
+                        <span class="panel-label">À propos</span>
+                        <strong>Un travail entre dessin, espace et mise en oeuvre.</strong>
+                        <span>École, ateliers, recherches</span>
+                    </div>
+
+                    <div class="manifesto-grid">
+                        
+                            <article class="manifesto-card">
+                                <h3>Plans</h3>
+                                <p>Travailler la distribution, les seuils, les circulations et les rapports entre les pièces.</p>
+                            </article>
+                        
+                            <article class="manifesto-card">
+                                <h3>Maquettes</h3>
+                                <p>Passer par le volume pour vérifier les proportions, les masses et la lumière.</p>
+                            </article>
+                        
+                            <article class="manifesto-card">
+                                <h3>Matières</h3>
+                                <p>Observer ce que changent les textures, les assemblages et la couleur dans la perception d'un espace.</p>
+                            </article>
+                        
+                            <article class="manifesto-card">
+                                <h3>Détails</h3>
+                                <p>Faire dialoguer structure, mobilier et usage sans séparer brutalement l'idée de sa mise en oeuvre.</p>
+                            </article>
+                        
+                    </div>
+                </div>
+            </section>
+
+            <section class="page-panel projets-panel" id="projets" data-panel="projets">
+                <div class="panel-inner">
+                    <div class="projets-head">
+                        <div>
+                            <span class="panel-label">Sélection</span>
+                            <h2 class="projets-title">Quelques projets.</h2>
+                        </div>
+                        <a class="projets-link" href="projets.html">Voir tous les projets</a>
+                    </div>
+                    <div class="portfolio-grid">
+                        
+        <a class="portfolio-card card-third" href="projets/architecture-interieure/chambre-parentale/">
+            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80" alt="Chambre parentale" />
+            <span class="card-number">01</span>
+            <div class="corner-arrow">
+                <svg viewBox="0 0 24 24">
+                    <path d="M7 17L17 7M7 7h10v10" />
+                </svg>
+            </div>
+            <div class="overlay">
+                <span class="overlay-tag">2025</span>
+                <h2 class="overlay-title">Chambre parentale</h2>
+                <p class="overlay-desc">Composition douce autour du rangement, de la lumière et d'une matérialité apaisée.</p>
+                <span class="overlay-cta"><span class="cta-line"></span>Voir le projet</span>
+            </div>
+        </a>
+        <a class="portfolio-card card-half" href="projets/architecture/quartier-maisons-roses/">
+            <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=900&q=80" alt="Quartier de maisons roses" />
+            <span class="card-number">02</span>
+            <div class="corner-arrow">
+                <svg viewBox="0 0 24 24">
+                    <path d="M7 17L17 7M7 7h10v10" />
+                </svg>
+            </div>
+            <div class="overlay">
+                <span class="overlay-tag">2025</span>
+                <h2 class="overlay-title">Quartier de<br>maisons roses</h2>
+                <p class="overlay-desc">Étude d'un ensemble résidentiel articulé autour de venelles, patios et tonalités minérales rosées.</p>
+                <span class="overlay-cta"><span class="cta-line"></span>Voir le projet</span>
+            </div>
+        </a>
+        <a class="portfolio-card card-third" href="projets/design/produit/lampe-sur-pied/">
+            <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=900&q=80" alt="Lampe sur pied" />
+            <span class="card-number">03</span>
+            <div class="corner-arrow">
+                <svg viewBox="0 0 24 24">
+                    <path d="M7 17L17 7M7 7h10v10" />
+                </svg>
+            </div>
+            <div class="overlay">
+                <span class="overlay-tag">2025</span>
+                <h2 class="overlay-title">Lampe sur<br>pied</h2>
+                <p class="overlay-desc">Objet lumineux conçu comme une ligne verticale, entre présence discrète et diffusion chaude.</p>
+                <span class="overlay-cta"><span class="cta-line"></span>Voir le projet</span>
+            </div>
+        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="page-panel contact-panel" id="contact" data-panel="contact">
+                <div class="panel-inner">
+                    <div>
+                        <span class="panel-label">Contact</span>
+                        <h2 class="contact-title">Échanger ?</h2>
+                        <p class="contact-text">Vous pouvez me joindre ici pour toute prise de contact.</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-list">
+                            <div class="contact-item">
+                                <span>Email</span>
+                                <a href="mailto:margot.laithier22@gmail.com">margot.laithier22@gmail.com</a>
+                            </div>
+                            <div class="contact-item">
+                                <span>Localisation</span>
+                                <strong>Morbihan, Bretagne</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="footer-kicker">Architecture d'intérieur</span>
+                    <strong class="footer-title">PORTFOLIO</strong>
+                </div>
+
+                <div class="footer-nav">
+                    <span class="footer-heading">Navigation</span>
+                    <div class="footer-list">
+                        <a href="#intro">Accueil</a>
+                        <a href="#vision">À propos</a>
+                        <a href="#projets">Projets</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+
+                <div class="footer-contact">
+                    <span class="footer-heading">Contact</span>
+                    <div class="footer-list">
+                        <a href="mailto:margot.laithier22@gmail.com">margot.laithier22@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        const panels = Array.from(document.querySelectorAll('.page-panel'));
+        const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
+        const dots = Array.from(document.querySelectorAll('[data-dot]'));
+        const cards = document.querySelectorAll('.portfolio-card');
+        const isTouchDevice = window.matchMedia('(hover: none)').matches;
+
+        function setCurrentPanel(panelId) {
+            navLinks.forEach((link) => {
+                link.classList.toggle('is-current', link.dataset.nav === panelId);
+            });
+
+            dots.forEach((dot) => {
+                dot.classList.toggle('is-current', dot.dataset.dot === panelId);
+            });
+        }
+
+        function updatePanelState() {
+            const viewportCenter = window.innerHeight * 0.5;
+            let currentPanel = panels[0];
+
+            panels.forEach((panel) => {
+                const rect = panel.getBoundingClientRect();
+                const panelMiddle = rect.top + rect.height / 2;
+                const distanceToCenter = Math.abs(panelMiddle - viewportCenter);
+
+                if (!currentPanel || distanceToCenter < Math.abs((currentPanel.getBoundingClientRect().top + currentPanel.getBoundingClientRect().height / 2) - viewportCenter)) {
+                    currentPanel = panel;
+                }
+
+                const activeBandTop = window.innerHeight * 0.18;
+                const activeBandBottom = window.innerHeight * 0.82;
+                const isActive = rect.top < activeBandBottom && rect.bottom > activeBandTop;
+
+                panel.classList.toggle('is-active', isActive);
+
+                if (!isActive && rect.bottom <= activeBandTop) {
+                    panel.classList.add('is-leaving');
+                } else {
+                    panel.classList.remove('is-leaving');
+                }
+            });
+
+            if (currentPanel) {
+                setCurrentPanel(currentPanel.dataset.panel);
+            }
+        }
+
+        function setupTouchCards() {
+            if (!isTouchDevice) {
+                return;
+            }
+
+            cards.forEach((card) => {
+                card.addEventListener('click', (event) => {
+                    if (!card.classList.contains('active')) {
+                        event.preventDefault();
+                        cards.forEach((item) => item.classList.remove('active'));
+                        card.classList.add('active');
+                    }
+                });
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('.portfolio-card')) {
+                    cards.forEach((card) => card.classList.remove('active'));
+                }
+            });
+        }
+
+        navLinks.forEach((link) => {
+            link.addEventListener('click', () => {
+                navLinks.forEach((item) => item.classList.remove('is-current'));
+                link.classList.add('is-current');
+            });
+        });
+
+        setupTouchCards();
+        updatePanelState();
+        window.addEventListener('scroll', updatePanelState, { passive: true });
+        window.addEventListener('resize', updatePanelState);
+    </script>
+</body>
+</html>
