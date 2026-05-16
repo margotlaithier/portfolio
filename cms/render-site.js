@@ -116,6 +116,84 @@
         `;
     }
 
+    function enhanceHomeInteractions() {
+        const panels = Array.from(document.querySelectorAll('.page-panel'));
+        const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
+        const dots = Array.from(document.querySelectorAll('[data-dot]'));
+        const cards = document.querySelectorAll('.portfolio-card');
+        const isTouchDevice = window.matchMedia('(hover: none)').matches;
+
+        function setCurrentPanel(panelId) {
+            navLinks.forEach((link) => {
+                link.classList.toggle('is-current', link.dataset.nav === panelId);
+            });
+
+            dots.forEach((dot) => {
+                dot.classList.toggle('is-current', dot.dataset.dot === panelId);
+            });
+        }
+
+        function updatePanelState() {
+            const viewportCenter = window.innerHeight * 0.5;
+            let currentPanel = panels[0];
+
+            panels.forEach((panel) => {
+                const rect = panel.getBoundingClientRect();
+                const panelMiddle = rect.top + rect.height / 2;
+                const distanceToCenter = Math.abs(panelMiddle - viewportCenter);
+
+                if (!currentPanel || distanceToCenter < Math.abs((currentPanel.getBoundingClientRect().top + currentPanel.getBoundingClientRect().height / 2) - viewportCenter)) {
+                    currentPanel = panel;
+                }
+
+                const activeBandTop = window.innerHeight * 0.18;
+                const activeBandBottom = window.innerHeight * 0.82;
+                const isActive = rect.top < activeBandBottom && rect.bottom > activeBandTop;
+
+                panel.classList.toggle('is-active', isActive);
+
+                if (!isActive && rect.bottom <= activeBandTop) {
+                    panel.classList.add('is-leaving');
+                } else {
+                    panel.classList.remove('is-leaving');
+                }
+            });
+
+            if (currentPanel) {
+                setCurrentPanel(currentPanel.dataset.panel);
+            }
+        }
+
+        if (isTouchDevice) {
+            cards.forEach((card) => {
+                card.addEventListener('click', (event) => {
+                    if (!card.classList.contains('active')) {
+                        event.preventDefault();
+                        cards.forEach((item) => item.classList.remove('active'));
+                        card.classList.add('active');
+                    }
+                });
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('.portfolio-card')) {
+                    cards.forEach((card) => card.classList.remove('active'));
+                }
+            });
+        }
+
+        navLinks.forEach((link) => {
+            link.addEventListener('click', () => {
+                navLinks.forEach((item) => item.classList.remove('is-current'));
+                link.classList.add('is-current');
+            });
+        });
+
+        updatePanelState();
+        window.addEventListener('scroll', updatePanelState, { passive: true });
+        window.addEventListener('resize', updatePanelState);
+    }
+
     function renderHome(rootPrefix) {
         const selectedProjects = content.home.featured.selectedSlugs
             .map((slug) => projectsBySlug.get(slug))
@@ -219,6 +297,8 @@
             </main>
             ${renderFooter(rootPrefix, 'home')}
         `;
+
+        enhanceHomeInteractions();
     }
 
     function renderProjectsPage(rootPrefix) {
