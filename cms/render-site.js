@@ -361,6 +361,17 @@
         `;
     }
 
+    function renderZoomableFigure({ src, alt, figureClass = '', imgClass = '' }) {
+        return `
+            <figure class="${figureClass} study-zoomable" data-zoomable-src="${escapeHtml(src)}" data-zoomable-alt="${escapeHtml(alt)}">
+                <button class="study-zoom-button" type="button" aria-label="Agrandir l'image">
+                    <span class="study-zoom-button-icon">+</span>
+                </button>
+                <img${imgClass ? ` class="${imgClass}"` : ''} src="${src}" alt="${escapeHtml(alt)}" />
+            </figure>
+        `;
+    }
+
     function renderBlock(block, rootPrefix, mode) {
         const asset = (source) => mode === 'project' && source && !/^(https?:)?\/\//.test(source) ? source : linkAsset(rootPrefix, source);
         if (block.type === 'copy') {
@@ -385,21 +396,23 @@
         if (block.type === 'pair') {
             return `
                 <div class="study-gallery-pair">
-                    ${(block.items || []).map((item) => `
-                        <figure${item.fitContain ? ' class="study-fit-contain"' : ''}>
-                            <img${item.fitContain ? ' class="study-fit-contain"' : ''} src="${asset(item.src)}" alt="${escapeHtml(item.alt)}" />
-                        </figure>
-                    `).join('')}
+                    ${(block.items || []).map((item) => renderZoomableFigure({
+                        src: asset(item.src),
+                        alt: item.alt,
+                        figureClass: item.fitContain ? 'study-fit-contain' : '',
+                        imgClass: item.fitContain ? 'study-fit-contain' : '',
+                    })).join('')}
                 </div>
             `;
         }
 
         if (block.type === 'image') {
-            return `
-                <figure class="study-frame${block.fitContain ? ' study-fit-contain' : ''}">
-                    <img${block.fitContain ? ' class="study-fit-contain"' : ''} src="${asset(block.src)}" alt="${escapeHtml(block.alt)}" />
-                </figure>
-            `;
+            return renderZoomableFigure({
+                src: asset(block.src),
+                alt: block.alt,
+                figureClass: `study-frame${block.fitContain ? ' study-fit-contain' : ''}`,
+                imgClass: block.fitContain ? 'study-fit-contain' : '',
+            });
         }
 
         if (block.type === 'grid') {
@@ -408,11 +421,12 @@
                     ${(block.items || []).map((item) => {
                         const widthClass = item.width && item.width !== 'quarter' ? ` study-thumb-${item.width}` : '';
                         const fitClass = item.fitContain ? ' study-fit-contain' : '';
-                        return `
-                            <figure class="study-thumb${widthClass}${fitClass}">
-                                <img${fitClass ? ' class="study-fit-contain"' : ''} src="${asset(item.src)}" alt="${escapeHtml(item.alt)}" />
-                            </figure>
-                        `;
+                        return renderZoomableFigure({
+                            src: asset(item.src),
+                            alt: item.alt,
+                            figureClass: `study-thumb${widthClass}${fitClass}`,
+                            imgClass: fitClass ? 'study-fit-contain' : '',
+                        });
                     }).join('')}
                 </div>
             `;
@@ -476,8 +490,68 @@
                 </section>
                 ${layoutInner}
             </main>
+            <div class="study-lightbox" data-study-lightbox hidden aria-hidden="true">
+                <div class="study-lightbox-backdrop" data-study-lightbox-close></div>
+                <div class="study-lightbox-dialog">
+                    <button class="study-lightbox-close" type="button" data-study-lightbox-close aria-label="Refermer l'image">
+                        <span class="study-lightbox-close-icon">-</span>
+                    </button>
+                    <img data-study-lightbox-image src="" alt="" />
+                </div>
+            </div>
             ${renderFooter(rootPrefix, 'projects')}
         `;
+        enhanceProjectImageZoom();
+    }
+
+    function enhanceProjectImageZoom() {
+        const lightbox = document.querySelector('[data-study-lightbox]');
+        const lightboxImage = document.querySelector('[data-study-lightbox-image]');
+        if (!lightbox || !lightboxImage) {
+            return;
+        }
+
+        const closeLightbox = () => {
+            lightbox.hidden = true;
+            lightbox.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('study-lightbox-open');
+            lightboxImage.src = '';
+            lightboxImage.alt = '';
+        };
+
+        const openLightbox = (src, alt) => {
+            lightboxImage.src = src;
+            lightboxImage.alt = alt || '';
+            lightbox.hidden = false;
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('study-lightbox-open');
+        };
+
+        document.querySelectorAll('.study-zoomable').forEach((figure) => {
+            const src = figure.dataset.zoomableSrc;
+            const alt = figure.dataset.zoomableAlt || '';
+            const button = figure.querySelector('.study-zoom-button');
+            const open = () => {
+                if (src) {
+                    openLightbox(src, alt);
+                }
+            };
+            figure.addEventListener('click', open);
+            button?.addEventListener('click', (event) => {
+                event.stopPropagation();
+                open();
+            });
+        });
+
+        lightbox.querySelectorAll('[data-study-lightbox-close]').forEach((node) => {
+            node.addEventListener('click', closeLightbox);
+        });
+        lightboxImage.addEventListener('click', closeLightbox);
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !lightbox.hidden) {
+                closeLightbox();
+            }
+        });
     }
 
     const content = clone(window.PORTFOLIO_CONTENT || {});

@@ -75,6 +75,46 @@
         return { status: 'completed', conclusion: 'failure', detailsUrl: targetUrl };
     }
 
+    function pagesBuildStatusToCheckLike(statusValue, targetUrl = '') {
+        const normalized = String(statusValue || '').toLowerCase();
+        if (normalized === 'built') {
+            return { status: 'completed', conclusion: 'success', detailsUrl: targetUrl };
+        }
+        if (normalized === 'errored' || normalized === 'error' || normalized === 'failed' || normalized === 'failure' || normalized === 'cancelled' || normalized === 'canceled') {
+            return { status: 'completed', conclusion: 'failure', detailsUrl: targetUrl };
+        }
+        if (normalized === 'queued' || normalized === 'building' || normalized === 'pending' || normalized === 'unknown' || !normalized) {
+            return { status: 'in_progress', conclusion: null, detailsUrl: targetUrl };
+        }
+        return { status: 'in_progress', conclusion: null, detailsUrl: targetUrl };
+    }
+
+    function pagesDeploymentStatusToCheckLike(statusValue, targetUrl = '') {
+        const normalized = String(statusValue || '').toLowerCase();
+        if (normalized === 'succeed' || normalized === 'built') {
+            return { status: 'completed', conclusion: 'success', detailsUrl: targetUrl };
+        }
+        if (normalized === 'failed' || normalized === 'failure' || normalized === 'error' || normalized === 'errored' || normalized === 'cancelled' || normalized === 'canceled') {
+            return { status: 'completed', conclusion: 'failure', detailsUrl: targetUrl };
+        }
+        if (normalized === 'queued' || normalized === 'pending' || normalized === 'building' || normalized === 'in_progress' || normalized === 'deployment_in_progress' || normalized === 'unknown' || !normalized) {
+            return { status: 'in_progress', conclusion: null, detailsUrl: targetUrl };
+        }
+        return { status: 'in_progress', conclusion: null, detailsUrl: targetUrl };
+    }
+
+    function inferPagesSiteUrl() {
+        const owner = String(state.github.owner || '').trim();
+        const repo = String(state.github.repo || '').trim();
+        if (!owner || !repo) {
+            return '';
+        }
+        if (repo.toLowerCase() === `${owner.toLowerCase()}.github.io`) {
+            return `https://${owner}.github.io/`;
+        }
+        return `https://${owner}.github.io/${repo}/`;
+    }
+
     function defaultGitHubConfig() {
         return {
             enabled: false,
@@ -244,8 +284,29 @@
         if (code.includes('github_checks_failed_403')) {
             return 'Lecture des checks refusée. Le token GitHub n’a pas accès aux checks GitHub Actions.';
         }
+        if (code.includes('github_actions_runs_failed_403') || code.includes('github_actions_jobs_failed_403')) {
+            return 'Lecture des workflows GitHub Actions refusée. Le token GitHub doit pouvoir lire les Actions du dépôt.';
+        }
+        if (code.includes('github_pages_build_failed_403')) {
+            return 'Lecture du build GitHub Pages refusée. Le token GitHub doit avoir la permission `Pages: Read`.';
+        }
+        if (code.includes('github_pages_deployment_failed_403')) {
+            return 'Lecture du statut du déploiement GitHub Pages refusée. Le token GitHub doit avoir la permission `Pages: Read`.';
+        }
         if (code.includes('github_statuses_failed_404') || code.includes('github_checks_failed_404')) {
             return 'Commit ou dépôt introuvable pour le suivi du déploiement. Vérifie `owner`, `repo`, `branch` et le SHA du commit.';
+        }
+        if (code.includes('github_actions_runs_missing')) {
+            return 'Aucun workflow GitHub Actions Pages trouvé pour ce commit.';
+        }
+        if (code.includes('github_pages_deployment_failed_404')) {
+            return 'Aucun déploiement GitHub Pages trouvé pour ce SHA.';
+        }
+        if (code.includes('github_pages_build_for_commit_missing')) {
+            return 'Aucun build GitHub Pages trouvé pour ce commit dans l’historique récent.';
+        }
+        if (code.includes('github_pages_build_sha_mismatch')) {
+            return 'Le dernier build GitHub Pages trouvé ne correspond pas au commit attendu.';
         }
         if (code.includes('Failed to fetch')) {
             return 'Impossible de joindre l’API GitHub depuis le navigateur. Vérifie la connexion réseau, le token, ou un blocage CORS côté navigateur.';
@@ -305,9 +366,118 @@
         return map;
     }
 
+    async function fetchDeploymentActionJobs() {
+        const runsResponse = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/actions/runs`, {
+            head_sha: state.deployment.commitSha,
+            per_page: '20',
+        }), {
+            cache: 'no-store',
+            mode: 'cors',
+            headers: {
+                Authorization: `Bearer ${state.github.token}`,
+                Accept: 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2026-03-10',
+            },
+        });
+        if (!runsResponse.ok) {
+            throw new Error(`github_actions_runs_failed_${runsResponse.status}`);
+        }
+        const runsPayload = await runsResponse.json();
+        const workflowRun = (runsPayload.workflow_runs || []).find((run) =>
+            canonicalDeployCheckName(run.name) ||
+            String(run.name || '').toLowerCase().includes('pages build and deployment')
+        );
+        if (!workflowRun?.id) {
+            throw new Error('github_actions_runs_missing');
+        }
+
+        const jobsResponse = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/actions/runs/${encodeURIComponent(String(workflowRun.id))}/jobs`, {
+            per_page: '100',
+        }), {
+            cache: 'no-store',
+            mode: 'cors',
+            headers: {
+                Authorization: `Bearer ${state.github.token}`,
+                Accept: 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2026-03-10',
+            },
+        });
+        if (!jobsResponse.ok) {
+            throw new Error(`github_actions_jobs_failed_${jobsResponse.status}`);
+        }
+        const jobsPayload = await jobsResponse.json();
+        const map = {};
+        for (const job of jobsPayload.jobs || []) {
+            const canonicalName = canonicalDeployCheckName(job.name);
+            if (canonicalName) {
+                map[canonicalName] = {
+                    status: job.status,
+                    conclusion: job.conclusion,
+                    detailsUrl: job.html_url || '',
+                };
+            }
+        }
+        return map;
+    }
+
+    async function fetchLatestPagesBuild() {
+        const response = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/pages/builds/latest`), {
+            cache: 'no-store',
+            mode: 'cors',
+            headers: {
+                Authorization: `Bearer ${state.github.token}`,
+                Accept: 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2026-03-10',
+            },
+        });
+        if (!response.ok) {
+            throw new Error(`github_pages_build_failed_${response.status}`);
+        }
+        return response.json();
+    }
+
+    async function fetchPagesBuildForCommit() {
+        const response = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/pages/builds`, {
+            per_page: '30',
+        }), {
+            cache: 'no-store',
+            mode: 'cors',
+            headers: {
+                Authorization: `Bearer ${state.github.token}`,
+                Accept: 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2026-03-10',
+            },
+        });
+        if (!response.ok) {
+            throw new Error(`github_pages_builds_failed_${response.status}`);
+        }
+        const payload = await response.json();
+        return (payload || []).find((build) => String(build.commit || '') === String(state.deployment.commitSha || '')) || null;
+    }
+
+    async function fetchPagesDeploymentStatus() {
+        const response = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/pages/deployments/${encodeURIComponent(state.deployment.commitSha)}`), {
+            cache: 'no-store',
+            mode: 'cors',
+            headers: {
+                Authorization: `Bearer ${state.github.token}`,
+                Accept: 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2026-03-10',
+            },
+        });
+        if (!response.ok) {
+            throw new Error(`github_pages_deployment_failed_${response.status}`);
+        }
+        return response.json();
+    }
+
     async function fetchDeploymentChecks() {
         let map = {};
         let statusesError = null;
+        let checksError = null;
+        let actionsError = null;
+        let pagesDeploymentError = null;
+        let pagesBuildsError = null;
         try {
             map = await fetchCommitStatuses();
         } catch (error) {
@@ -318,8 +488,51 @@
                 const fallbackMap = await fetchDeploymentCheckRuns();
                 map = { ...fallbackMap, ...map };
             } catch (error) {
+                checksError = error;
+            }
+        }
+        if (Object.keys(map).length < REQUIRED_DEPLOY_CHECKS.length) {
+            try {
+                const deployment = await fetchPagesDeploymentStatus();
+                const synthetic = pagesDeploymentStatusToCheckLike(deployment.status, deployment.page_url || deployment.preview_url || '');
+                map = Object.fromEntries(REQUIRED_DEPLOY_CHECKS.map((name) => [name, synthetic]));
+            } catch (error) {
+                pagesDeploymentError = error;
+            }
+        }
+        if (Object.keys(map).length < REQUIRED_DEPLOY_CHECKS.length) {
+            try {
+                const actionsMap = await fetchDeploymentActionJobs();
+                map = { ...actionsMap, ...map };
+            } catch (error) {
+                actionsError = error;
                 if (!Object.keys(map).length) {
-                    throw statusesError || error;
+                    try {
+                        const exactBuild = await fetchPagesBuildForCommit();
+                        if (exactBuild) {
+                            const synthetic = pagesBuildStatusToCheckLike(exactBuild.status, exactBuild.url || '');
+                            map = Object.fromEntries(REQUIRED_DEPLOY_CHECKS.map((name) => [name, synthetic]));
+                        } else {
+                            throw new Error('github_pages_build_for_commit_missing');
+                        }
+                    } catch (pagesBuildsErrorCandidate) {
+                        pagesBuildsError = pagesBuildsErrorCandidate;
+                    }
+                }
+            }
+        }
+        if (Object.keys(map).length < REQUIRED_DEPLOY_CHECKS.length) {
+            try {
+                const latestBuild = await fetchLatestPagesBuild();
+                const buildSha = latestBuild.commit || '';
+                if (!buildSha || buildSha !== state.deployment.commitSha) {
+                    throw new Error('github_pages_build_sha_mismatch');
+                }
+                const synthetic = pagesBuildStatusToCheckLike(latestBuild.status, latestBuild.url || '');
+                map = Object.fromEntries(REQUIRED_DEPLOY_CHECKS.map((name) => [name, synthetic]));
+            } catch (pagesError) {
+                if (!Object.keys(map).length) {
+                    throw statusesError || checksError || pagesDeploymentError || actionsError || pagesBuildsError || pagesError;
                 }
             }
         }
@@ -422,6 +635,199 @@
             state.saveState = 'Connexion GitHub échouée';
         }
         updateSaveState();
+    }
+
+    async function runGitHubApiDiagnostic() {
+        const lines = [];
+
+        async function runStep(label, runner) {
+            try {
+                const detail = await runner();
+                lines.push(`OK - ${label}${detail ? ` : ${detail}` : ''}`);
+            } catch (error) {
+                const message = error?.message || String(error);
+                lines.push(`ECHEC - ${label} : ${message}`);
+            }
+        }
+
+        state.saveState = 'Diagnostic GitHub API en cours...';
+        updateSaveState();
+
+        await runStep('Accès brut à api.github.com', async () => {
+            const response = await fetch(githubApiUrl('/'), {
+                cache: 'no-store',
+                mode: 'cors',
+            });
+            if (!response.ok) {
+                throw new Error(`http_${response.status}`);
+            }
+            return 'API joignable';
+        });
+
+        if (!hasGitHubSync()) {
+            lines.push('ECHEC - Configuration GitHub incomplète');
+        } else {
+            await runStep('Lecture du fichier cible', async () => {
+                const response = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/contents/${state.github.path.split('/').map(encodeURIComponent).join('/')}`, {
+                    ref: state.github.branch,
+                }), {
+                    cache: 'no-store',
+                    mode: 'cors',
+                    headers: {
+                        Authorization: `Bearer ${state.github.token}`,
+                        Accept: 'application/vnd.github+json',
+                    },
+                });
+                if (!response.ok) {
+                    throw new Error(`http_${response.status}`);
+                }
+                const payload = await response.json();
+                return payload.sha ? `sha ${payload.sha.slice(0, 7)}` : 'fichier trouvé';
+            });
+
+            const ref = state.deployment.commitSha || state.github.currentSha;
+            if (!ref) {
+                lines.push('INFO - Aucun SHA de commit disponible pour tester les statuts de déploiement');
+            } else {
+                await runStep('Lecture des commit statuses', async () => {
+                    const response = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/commits/${encodeURIComponent(ref)}/status`), {
+                        cache: 'no-store',
+                        mode: 'cors',
+                        headers: {
+                            Authorization: `Bearer ${state.github.token}`,
+                            Accept: 'application/vnd.github+json',
+                            'X-GitHub-Api-Version': '2026-03-10',
+                        },
+                    });
+                    if (!response.ok) {
+                        throw new Error(`http_${response.status}`);
+                    }
+                    const payload = await response.json();
+                    return `state ${payload.state || 'unknown'}, ${payload.total_count || 0} status`;
+                });
+
+                await runStep('Lecture des check-runs', async () => {
+                    const response = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/commits/${encodeURIComponent(ref)}/check-runs`), {
+                        cache: 'no-store',
+                        mode: 'cors',
+                        headers: {
+                            Authorization: `Bearer ${state.github.token}`,
+                            Accept: 'application/vnd.github+json',
+                            'X-GitHub-Api-Version': '2026-03-10',
+                        },
+                    });
+                    if (!response.ok) {
+                        throw new Error(`http_${response.status}`);
+                    }
+                    const payload = await response.json();
+                    return `${(payload.check_runs || []).length} check-run(s)`;
+                });
+
+                await runStep('Lecture des jobs GitHub Actions', async () => {
+                    const runsResponse = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/actions/runs`, {
+                        head_sha: ref,
+                        per_page: '20',
+                    }), {
+                        cache: 'no-store',
+                        mode: 'cors',
+                        headers: {
+                            Authorization: `Bearer ${state.github.token}`,
+                            Accept: 'application/vnd.github+json',
+                            'X-GitHub-Api-Version': '2026-03-10',
+                        },
+                    });
+                    if (!runsResponse.ok) {
+                        throw new Error(`http_${runsResponse.status}`);
+                    }
+                    const runsPayload = await runsResponse.json();
+                    const workflowRun = (runsPayload.workflow_runs || []).find((run) =>
+                        canonicalDeployCheckName(run.name) ||
+                        String(run.name || '').toLowerCase().includes('pages build and deployment')
+                    );
+                    if (!workflowRun?.id) {
+                        throw new Error('workflow_run_missing');
+                    }
+                    const jobsResponse = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/actions/runs/${encodeURIComponent(String(workflowRun.id))}/jobs`, {
+                        per_page: '100',
+                    }), {
+                        cache: 'no-store',
+                        mode: 'cors',
+                        headers: {
+                            Authorization: `Bearer ${state.github.token}`,
+                            Accept: 'application/vnd.github+json',
+                            'X-GitHub-Api-Version': '2026-03-10',
+                        },
+                    });
+                    if (!jobsResponse.ok) {
+                        throw new Error(`http_${jobsResponse.status}`);
+                    }
+                    const jobsPayload = await jobsResponse.json();
+                    return `${(jobsPayload.jobs || []).length} job(s)`;
+                });
+
+                await runStep('Lecture du statut du déploiement GitHub Pages', async () => {
+                    const response = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/pages/deployments/${encodeURIComponent(ref)}`), {
+                        cache: 'no-store',
+                        mode: 'cors',
+                        headers: {
+                            Authorization: `Bearer ${state.github.token}`,
+                            Accept: 'application/vnd.github+json',
+                            'X-GitHub-Api-Version': '2026-03-10',
+                        },
+                    });
+                    if (!response.ok) {
+                        throw new Error(`http_${response.status}`);
+                    }
+                    const payload = await response.json();
+                    return `status ${payload.status || 'unknown'}`;
+                });
+
+                await runStep('Recherche du build GitHub Pages pour ce commit', async () => {
+                    const response = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/pages/builds`, {
+                        per_page: '30',
+                    }), {
+                        cache: 'no-store',
+                        mode: 'cors',
+                        headers: {
+                            Authorization: `Bearer ${state.github.token}`,
+                            Accept: 'application/vnd.github+json',
+                            'X-GitHub-Api-Version': '2026-03-10',
+                        },
+                    });
+                    if (!response.ok) {
+                        throw new Error(`http_${response.status}`);
+                    }
+                    const payload = await response.json();
+                    const build = (payload || []).find((item) => String(item.commit || '') === String(ref));
+                    if (!build) {
+                        throw new Error('build_missing');
+                    }
+                    return `status ${build.status || 'unknown'}`;
+                });
+
+                await runStep('Lecture du dernier build GitHub Pages', async () => {
+                    const response = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/pages/builds/latest`), {
+                        cache: 'no-store',
+                        mode: 'cors',
+                        headers: {
+                            Authorization: `Bearer ${state.github.token}`,
+                            Accept: 'application/vnd.github+json',
+                            'X-GitHub-Api-Version': '2026-03-10',
+                        },
+                    });
+                    if (!response.ok) {
+                        throw new Error(`http_${response.status}`);
+                    }
+                    const payload = await response.json();
+                    return `status ${payload.status || 'unknown'}, commit ${(payload.commit || '').slice(0, 7) || 'n/a'}`;
+                });
+
+            }
+        }
+
+        state.saveState = 'Diagnostic GitHub API terminé';
+        updateSaveState();
+        window.alert(lines.join('\n'));
     }
 
     async function commitStudioChanges() {
@@ -808,6 +1214,7 @@
                         </div>
                         <div class="studio-inline-actions">
                             <button type="button" data-action="test-github">Tester la connexion</button>
+                            <button type="button" data-action="diagnostic-github">Diagnostic GitHub API</button>
                         </div>
                         <div class="studio-note">Utilise un token GitHub finement limité avec accès écriture au contenu du dépôt. Ce mode permet l’édition depuis Safari sur iPad sans serveur local.</div>
                         <div class="studio-note">Chemin attendu par défaut : <code>cms/portfolio-content.js</code>.</div>
@@ -1169,6 +1576,7 @@
         root.querySelector('[data-action="add-hero-image"]')?.addEventListener('click', addHeroImage);
         root.querySelector('[data-action="add-about-card"]')?.addEventListener('click', addAboutCard);
         root.querySelector('[data-action="test-github"]')?.addEventListener('click', testGitHubConnection);
+        root.querySelector('[data-action="diagnostic-github"]')?.addEventListener('click', runGitHubApiDiagnostic);
         root.querySelector('[data-action="commit-github"]')?.addEventListener('click', commitStudioChanges);
         root.querySelector('[data-action="refresh-deployment"]')?.addEventListener('click', refreshDeploymentChecks);
         root.querySelectorAll('[data-action="move-project"]').forEach((button) => {
@@ -1316,6 +1724,7 @@
                 if (
                     node.matches('[data-github-field]') ||
                     node.matches('[data-action="test-github"]') ||
+                    node.matches('[data-action="diagnostic-github"]') ||
                     node.matches('[data-action="commit-github"]') ||
                     node.matches('[data-action="refresh-deployment"]')
                 ) {
@@ -1332,33 +1741,12 @@
         }
         return `
             <div style="position:fixed;inset:0;background:rgba(16,16,16,.58);backdrop-filter:blur(3px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:2rem;">
-                <div style="width:min(720px,100%);background:#f7f2eb;color:#1e1a17;border:1px solid rgba(0,0,0,.08);box-shadow:0 24px 80px rgba(0,0,0,.24);padding:2rem;border-radius:1.1rem;">
-                    <div style="display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;">
-                        <div>
-                            <div style="font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;opacity:.72;">Déploiement en cours</div>
-                            <h2 style="margin:.4rem 0 0;font-size:1.8rem;line-height:1.05;">Attente du commit complet</h2>
-                        </div>
-                        <button type="button" data-action="refresh-deployment" style="border:1px solid rgba(0,0,0,.14);background:white;padding:.7rem 1rem;border-radius:999px;cursor:pointer;">Re-vérifier</button>
-                    </div>
-                    <p style="margin:1rem 0 1.3rem;line-height:1.5;">${escapeHtml(state.deployment.message || 'Le Studio reste bloqué tant que les 3 étapes GitHub Pages ne sont pas toutes successful.')}</p>
-                    <div style="display:grid;gap:.75rem;">
-                        ${REQUIRED_DEPLOY_CHECKS.map((name) => {
-                            const check = state.deployment.checks[name];
-                            const stepState = deploymentCheckState(check);
-                            const color = stepState === 'success' ? '#1f7a3e' : stepState === 'error' ? '#b42318' : '#946200';
-                            const label = stepState === 'success' ? 'Successful' : stepState === 'error' ? 'Failed' : 'En attente';
-                            return `
-                                <div style="display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:.9rem 1rem;border-radius:.9rem;background:white;border:1px solid rgba(0,0,0,.08);">
-                                    <div>
-                                        <div style="font-weight:600;">${escapeHtml(name)}</div>
-                                        <div style="font-size:.92rem;opacity:.75;">${escapeHtml(check?.status || 'queued')}</div>
-                                    </div>
-                                    <div style="font-weight:700;color:${color};">${label}</div>
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                    <div style="margin-top:1rem;font-size:.92rem;opacity:.72;">Aucune action sur le Studio n’est possible tant que les 3 checks ne sont pas tous validés.</div>
+                <style>@keyframes studio-spin{to{transform:rotate(360deg);}}</style>
+                <div style="width:min(560px,100%);background:#f7f2eb;color:#1e1a17;border:1px solid rgba(0,0,0,.08);box-shadow:0 24px 80px rgba(0,0,0,.24);padding:2.2rem;border-radius:1.1rem;text-align:center;">
+                    <div style="font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;opacity:.72;">Enregistrement en cours</div>
+                    <h2 style="margin:.5rem 0 0;font-size:1.9rem;line-height:1.05;">Mise à jour du portfolio</h2>
+                    <p style="margin:1rem auto 0;max-width:34rem;line-height:1.6;">Le Studio reste bloqué pendant l’envoi et la propagation de la mise à jour. Il se déverrouillera automatiquement dès que le nouveau contenu sera effectivement publié.</p>
+                    <div style="margin:1.5rem auto 0;width:3rem;height:3rem;border-radius:999px;border:3px solid rgba(0,0,0,.12);border-top-color:#1e1a17;animation:studio-spin 1s linear infinite;"></div>
                 </div>
             </div>
         `;
