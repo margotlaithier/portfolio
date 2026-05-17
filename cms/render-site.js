@@ -364,9 +364,6 @@
     function renderZoomableFigure({ src, alt, figureClass = '', imgClass = '' }) {
         return `
             <figure class="${figureClass} study-zoomable" data-zoomable-src="${escapeHtml(src)}" data-zoomable-alt="${escapeHtml(alt)}">
-                <button class="study-zoom-button" type="button" aria-label="Agrandir l'image">
-                    <span class="study-zoom-button-icon">+</span>
-                </button>
                 <img${imgClass ? ` class="${imgClass}"` : ''} src="${src}" alt="${escapeHtml(alt)}" />
             </figure>
         `;
@@ -493,9 +490,6 @@
             <div class="study-lightbox" data-study-lightbox hidden aria-hidden="true">
                 <div class="study-lightbox-backdrop" data-study-lightbox-close></div>
                 <div class="study-lightbox-dialog">
-                    <button class="study-lightbox-close" type="button" data-study-lightbox-close aria-label="Refermer l'image">
-                        <span class="study-lightbox-close-icon">-</span>
-                    </button>
                     <img data-study-lightbox-image src="" alt="" />
                 </div>
             </div>
@@ -530,17 +524,12 @@
         document.querySelectorAll('.study-zoomable').forEach((figure) => {
             const src = figure.dataset.zoomableSrc;
             const alt = figure.dataset.zoomableAlt || '';
-            const button = figure.querySelector('.study-zoom-button');
             const open = () => {
                 if (src) {
                     openLightbox(src, alt);
                 }
             };
             figure.addEventListener('click', open);
-            button?.addEventListener('click', (event) => {
-                event.stopPropagation();
-                open();
-            });
         });
 
         lightbox.querySelectorAll('[data-study-lightbox-close]').forEach((node) => {

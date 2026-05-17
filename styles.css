@@ -2025,42 +2025,6 @@ img {
     cursor: zoom-in;
 }
 
-.page-projet-detail .study-zoom-button {
-    position: absolute;
-    right: 0.95rem;
-    top: 0.95rem;
-    width: 2.8rem;
-    height: 2.8rem;
-    display: grid;
-    place-items: center;
-    border: 0;
-    border-radius: 999px;
-    background: rgba(247, 242, 235, 0.92);
-    color: var(--text);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-    opacity: 0;
-    transform: translateY(-6px);
-    transition: opacity 180ms ease, transform 180ms ease, background 180ms ease;
-    pointer-events: none;
-}
-
-.page-projet-detail .study-zoom-button-icon {
-    font-size: 1.55rem;
-    line-height: 1;
-    font-weight: 400;
-}
-
-.page-projet-detail .study-zoomable:hover .study-zoom-button,
-.page-projet-detail .study-zoomable:focus-within .study-zoom-button {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-.page-projet-detail .study-zoomable:hover .study-zoom-button {
-    background: rgba(255, 255, 255, 0.98);
-}
-
 body.study-lightbox-open {
     overflow: hidden;
 }
@@ -2103,35 +2067,6 @@ body.study-lightbox-open {
     cursor: zoom-out;
 }
 
-.page-projet-detail .study-lightbox-close {
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-    z-index: 2;
-    width: 3rem;
-    height: 3rem;
-    display: grid;
-    place-items: center;
-    border: 0;
-    border-radius: 999px;
-    background: rgba(247, 242, 235, 0.94);
-    color: var(--text);
-    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.2);
-    cursor: zoom-out;
-    transition: background 180ms ease, transform 180ms ease;
-}
-
-.page-projet-detail .study-lightbox-close:hover {
-    background: #fff;
-    transform: scale(1.04);
-}
-
-.page-projet-detail .study-lightbox-close-icon {
-    font-size: 1.7rem;
-    line-height: 1;
-    font-weight: 400;
-}
-
 @media (max-width: 980px) {
     .page-projet-detail .study-hero-grid,
     .page-projet-detail .study-layout-grid {
@@ -2172,22 +2107,7 @@ body.study-lightbox-open {
         max-height: 44vh;
     }
 
-    .page-projet-detail .study-zoom-button {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-        width: 2.55rem;
-        height: 2.55rem;
-        right: 0.75rem;
-        top: 0.75rem;
-    }
-
     .page-projet-detail .study-lightbox {
         padding: 1rem;
-    }
-
-    .page-projet-detail .study-lightbox-close {
-        right: 0.65rem;
-        top: 0.65rem;
     }
 }
