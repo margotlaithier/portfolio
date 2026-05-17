@@ -96,7 +96,7 @@ window.PORTFOLIO_CONTENT = {
       "slug": "quartier-maisons-roses",
       "path": "projets/architecture/quartier-maisons-roses/",
       "title": "Quartier de maisons roses",
-      "cardTitleHtml": "Quartier de<br>maisons roses",
+      "cardTitleHtml": "Quartier de maisons roses",
       "type": "Projet d'étude · Architecture",
       "intro": "Étude d'un ensemble résidentiel composé de maisons groupées, articulées par des venelles, des patios et une matérialité minérale rosée.",
       "date": "2025",
