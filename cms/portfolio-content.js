@@ -12,7 +12,7 @@ window.PORTFOLIO_CONTENT = {
       "titleLines": [
         "Architecture intérieure"
       ],
-      "text": "Projets académiques, recherches et études.",
+      "text": "Projets, recherches et études.",
       "caption": "IFAT • Plescop, Morbihan",
       "images": [
         {
@@ -26,7 +26,7 @@ window.PORTFOLIO_CONTENT = {
           "alt": "Intérieur contemporain de studio urbain"
         }
       ],
-      "note": "Plans, coupes, matières, maquettes et vues d'ambiance."
+      "note": ""
     },
     "about": {
       "panelLabel": "À propos",
@@ -279,13 +279,14 @@ window.PORTFOLIO_CONTENT = {
       "title": "Chambre parentale",
       "cardTitleHtml": "Chambre<br>parentale",
       "type": "Projet d'étude · Architecture d'intérieur",
-      "intro": "Projet d'aménagement d'une chambre pensée comme un espace de retrait calme, structuré par des rangements intégrés, une lumière douce et une composition sobre des matières.",
+      "intro": "Projet d'aménagement d'une chambre pensée comme un espace de retrait calme, à la lisibilité simple et épuré. ",
       "date": "2025",
       "layout": "detail",
       "characteristics": [
-        "Aménagement intérieur",
         "Mobilier sur mesure",
-        "Ambiance et matière"
+        "Béton ciré",
+        "Bois",
+        "Lumière naturelle"
       ],
       "blocks": [
         {
@@ -306,7 +307,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "Intention",
-          "text": "Le projet recherche un équilibre entre intimité, fonctionnalité et respiration. La tête de lit, les rangements et les percements sont pensés comme un ensemble continu qui stabilise l'espace."
+          "text": "Le projet recherche un équilibre entre intimité, fonctionnalité et respiration."
         },
         {
           "type": "pair",
@@ -374,7 +375,7 @@ window.PORTFOLIO_CONTENT = {
       "cardImage": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
       "cardAlt": "Chambre parentale",
       "cardYear": "2025",
-      "cardDescription": "Composition douce autour du rangement, de la lumière et d'une matérialité apaisée."
+      "cardDescription": "Création d’une suite parentale avec dressing et salle de bain. "
     },
     {
       "slug": "cuisine",
