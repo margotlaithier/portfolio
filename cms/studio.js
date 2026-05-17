@@ -236,6 +236,23 @@
         return 'pending';
     }
 
+    function describeDeploymentError(error) {
+        const code = String(error?.message || '');
+        if (code.includes('github_statuses_failed_403')) {
+            return 'Lecture des commit statuses refusée. Le token GitHub doit avoir la permission `Commit statuses: Read`.';
+        }
+        if (code.includes('github_checks_failed_403')) {
+            return 'Lecture des checks refusée. Le token GitHub n’a pas accès aux checks GitHub Actions.';
+        }
+        if (code.includes('github_statuses_failed_404') || code.includes('github_checks_failed_404')) {
+            return 'Commit ou dépôt introuvable pour le suivi du déploiement. Vérifie `owner`, `repo`, `branch` et le SHA du commit.';
+        }
+        if (code.includes('Failed to fetch')) {
+            return 'Impossible de joindre l’API GitHub depuis le navigateur. Vérifie la connexion réseau, le token, ou un blocage CORS côté navigateur.';
+        }
+        return `Impossible de lire le statut du déploiement GitHub Pages. ${code || ''}`.trim();
+    }
+
     async function fetchCommitStatuses() {
         const response = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/commits/${encodeURIComponent(state.deployment.commitSha)}/status`), {
             cache: 'no-store',
@@ -346,7 +363,7 @@
             console.error(error);
             state.deployment.active = true;
             state.deployment.summary = 'error';
-            state.deployment.message = 'Impossible de lire le statut du déploiement GitHub Pages.';
+            state.deployment.message = describeDeploymentError(error);
             state.commitStatus = 'error';
             refreshSaveState();
             persistDeploymentState();
@@ -1348,11 +1365,18 @@
     }
 
     async function initialise() {
+        const isStudioServer =
+            (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') &&
+            window.location.port === '4173';
         try {
-            const response = await fetch('/__studio/status', { cache: 'no-store' });
-            if (response.ok) {
-                state.serverWritable = true;
-                state.saveState = activeSaveTargetLabel();
+            if (isStudioServer) {
+                const response = await fetch('/__studio/status', { cache: 'no-store' });
+                if (response.ok) {
+                    state.serverWritable = true;
+                    state.saveState = activeSaveTargetLabel();
+                } else {
+                    state.saveState = hasGitHubSync() ? 'GitHub direct actif' : 'Serveur studio absent. Active GitHub direct ou ouvre http://localhost:4173/studio.html';
+                }
             } else {
                 state.saveState = hasGitHubSync() ? 'GitHub direct actif' : 'Serveur studio absent. Active GitHub direct ou ouvre http://localhost:4173/studio.html';
             }
