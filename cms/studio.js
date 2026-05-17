@@ -1172,9 +1172,9 @@
                             <div class="studio-field"><label>Titre du portfolio</label><input data-path="site.portfolioTitle" value="${escapeHtml(state.data.site.portfolioTitle || '')}" /></div>
                             <div class="studio-field"><label>Baseline marque</label><input data-path="site.brandKicker" value="${escapeHtml(state.data.site.brandKicker || '')}" /></div>
                             <div class="studio-field"><label>Email</label><input data-path="site.email" value="${escapeHtml(state.data.site.email || '')}" /></div>
-                            <div class="studio-field"><label>Localisation</label><input data-path="site.location" value="${escapeHtml(state.data.site.location || '')}" /></div>
                             <div class="studio-field"><label>Titre footer</label><input data-path="site.footerTitle" value="${escapeHtml(state.data.site.footerTitle || '')}" /></div>
                         </div>
+                        <div class="studio-note">Cette section reflète uniquement les champs réellement utilisés par le portfolio public actuel.</div>
                     </div>
                     <div class="studio-card">
                         <h2>Catégories</h2>
@@ -1414,6 +1414,7 @@
                     <div class="studio-block-list">
                         ${(project.blocks || []).map((block, blockIndex) => renderBlockEditor(block, blockIndex)).join('')}
                     </div>
+                    <div class="studio-note">Sur le portfolio actuel, toutes les images des blocs projet sont ouvrables en plein écran au clic.</div>
                 </div>
             </div>
         `;
