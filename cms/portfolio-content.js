@@ -1,6 +1,6 @@
 window.PORTFOLIO_CONTENT = {
   "site": {
-    "portfolioTitle": "Portfolio",
+    "portfolioTitle": "Portfoli",
     "brandKicker": "Architecture d'intérieur",
     "email": "margot.laithier22@gmail.com",
     "location": "Morbihan, Bretagne",
