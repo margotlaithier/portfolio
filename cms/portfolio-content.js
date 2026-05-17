@@ -268,7 +268,7 @@ window.PORTFOLIO_CONTENT = {
       ],
       "category": "Architecture d'intérieur",
       "cardSize": "third",
-      "cardImage": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
+      "cardImage": "https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q202_Luxe_WanakaNZ_LivingRoom_0264-LightOn_R1.jpg?w=2500",
       "cardAlt": "Airbnb",
       "cardYear": "2025",
       "cardDescription": "Mise en scène d'un logement saisonnier pensée pour la flexibilité, l'accueil et la lisibilité des usages."
