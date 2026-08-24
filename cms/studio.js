@@ -713,10 +713,35 @@
                     throw new Error(`http_${response.status}`);
                 }
                 const payload = await response.json();
-                return payload.sha ? `sha ${payload.sha.slice(0, 7)}` : 'fichier trouvé';
+                return payload.sha ? `sha du fichier ${payload.sha.slice(0, 7)}` : 'fichier trouvé';
             });
 
-            const ref = state.deployment.commitSha || state.github.currentSha;
+            let ref = state.deployment.commitSha || '';
+            if (ref) {
+                lines.push(`OK - Commit à diagnostiquer : ${ref.slice(0, 7)} (déploiement mémorisé)`);
+            } else {
+                await runStep('Lecture du commit en tête de branche', async () => {
+                    const response = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/commits/${encodeURIComponent(state.github.branch)}`), {
+                        cache: 'no-store',
+                        mode: 'cors',
+                        headers: {
+                            Authorization: `Bearer ${state.github.token}`,
+                            Accept: 'application/vnd.github+json',
+                            'X-GitHub-Api-Version': '2026-03-10',
+                        },
+                    });
+                    if (!response.ok) {
+                        throw new Error(`http_${response.status}`);
+                    }
+                    const payload = await response.json();
+                    ref = payload.sha || '';
+                    if (!ref) {
+                        throw new Error('commit_sha_missing');
+                    }
+                    return `commit ${ref.slice(0, 7)}`;
+                });
+            }
+
             if (!ref) {
                 lines.push('INFO - Aucun SHA de commit disponible pour tester les statuts de déploiement');
             } else {
@@ -776,7 +801,7 @@
                         String(run.name || '').toLowerCase().includes('pages build and deployment')
                     );
                     if (!workflowRun?.id) {
-                        throw new Error('workflow_run_missing');
+                        return 'aucun workflow Pages pour ce commit (déploiement depuis une branche possible)';
                     }
                     const jobsResponse = await fetch(githubApiUrl(`/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(state.github.repo)}/actions/runs/${encodeURIComponent(String(workflowRun.id))}/jobs`, {
                         per_page: '100',
@@ -831,7 +856,7 @@
                     const payload = await response.json();
                     const build = (payload || []).find((item) => String(item.commit || '') === String(ref));
                     if (!build) {
-                        throw new Error('build_missing');
+                        return 'aucun build encore trouvé pour ce commit';
                     }
                     return `status ${build.status || 'unknown'}`;
                 });
