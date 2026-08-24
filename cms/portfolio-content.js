@@ -230,206 +230,206 @@ window.PORTFOLIO_CONTENT = {
           "type": "grid",
           "items": [
             {
-              "src": "images/scenographie-theatre-01.jpeg",
-              "alt": "Scénographie théâtre — image 1",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-02.jpeg",
-              "alt": "Scénographie théâtre — image 2",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-03.jpeg",
-              "alt": "Scénographie théâtre — image 3",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-04.jpeg",
-              "alt": "Scénographie théâtre — image 4",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-05.jpeg",
-              "alt": "Scénographie théâtre — image 5",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-06.jpeg",
-              "alt": "Scénographie théâtre — image 6",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-07.jpeg",
-              "alt": "Scénographie théâtre — image 7",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-08.jpeg",
-              "alt": "Scénographie théâtre — image 8",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-09.jpeg",
-              "alt": "Scénographie théâtre — image 9",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-10.jpeg",
-              "alt": "Scénographie théâtre — image 10",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-11.jpeg",
-              "alt": "Scénographie théâtre — image 11",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-12.jpeg",
-              "alt": "Scénographie théâtre — image 12",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-13.jpeg",
-              "alt": "Scénographie théâtre — image 13",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-14.jpeg",
-              "alt": "Scénographie théâtre — image 14",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-15.jpeg",
-              "alt": "Scénographie théâtre — image 15",
+              "src": "images/scenographie-theatre-17.jpeg",
+              "alt": "Étude du personnage en costume — silhouette initiale",
               "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/scenographie-theatre-16.jpeg",
-              "alt": "Scénographie théâtre — image 16",
+              "alt": "Étude du personnage en costume — recherche de motifs",
               "width": "quarter",
               "fitContain": false
             },
             {
-              "src": "images/scenographie-theatre-17.jpeg",
-              "alt": "Scénographie théâtre — image 17",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-18.jpeg",
-              "alt": "Scénographie théâtre — image 18",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-19.jpeg",
-              "alt": "Scénographie théâtre — image 19",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-20.jpeg",
-              "alt": "Scénographie théâtre — image 20",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-21.jpeg",
-              "alt": "Scénographie théâtre — image 21",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-22.jpeg",
-              "alt": "Scénographie théâtre — image 22",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-23.jpeg",
-              "alt": "Scénographie théâtre — image 23",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-24.jpeg",
-              "alt": "Scénographie théâtre — image 24",
+              "src": "images/scenographie-theatre-15.jpeg",
+              "alt": "Étude du personnage en costume — superposition des motifs",
               "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/scenographie-theatre-25.jpeg",
-              "alt": "Scénographie théâtre — image 25",
+              "alt": "Personnage en costume — proposition colorée finale",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-20.jpeg",
+              "alt": "Étude du personnage casual — silhouette initiale",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-19.jpeg",
+              "alt": "Étude du personnage casual — premiers motifs",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-18.jpeg",
+              "alt": "Étude du personnage casual — motifs développés",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-24.jpeg",
+              "alt": "Personnage casual — proposition colorée finale",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-23.jpeg",
+              "alt": "Étude du personnage féminin — silhouette initiale",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-21.jpeg",
+              "alt": "Étude du personnage féminin — motifs développés",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-22.jpeg",
+              "alt": "Étude du personnage féminin — recherche de composition",
               "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/scenographie-theatre-26.jpeg",
-              "alt": "Scénographie théâtre — image 26",
+              "alt": "Personnage féminin — proposition colorée finale",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-14.jpeg",
+              "alt": "Étude du personnage en chemise — silhouette initiale",
               "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/scenographie-theatre-27.jpeg",
-              "alt": "Scénographie théâtre — image 27",
+              "alt": "Personnage en chemise — proposition colorée",
               "width": "quarter",
               "fitContain": false
             },
             {
-              "src": "images/scenographie-theatre-28.jpeg",
-              "alt": "Scénographie théâtre — image 28",
+              "src": "images/scenographie-theatre-11.jpeg",
+              "alt": "Personnage en chemise mis en scène dans la rue",
               "width": "quarter",
               "fitContain": false
             },
             {
-              "src": "images/scenographie-theatre-29.jpeg",
-              "alt": "Scénographie théâtre — image 29",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-30.jpeg",
-              "alt": "Scénographie théâtre — image 30",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-31.jpeg",
-              "alt": "Scénographie théâtre — image 31",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-32.jpeg",
-              "alt": "Scénographie théâtre — image 32",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-33.jpeg",
-              "alt": "Scénographie théâtre — image 33",
+              "src": "images/scenographie-theatre-12.jpeg",
+              "alt": "Personnage en chemise face au groupe",
               "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/scenographie-theatre-34.jpeg",
-              "alt": "Scénographie théâtre — image 34",
+              "alt": "Symbole de déconnexion utilisé dans la scénographie",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-30.jpeg",
+              "alt": "Première maquette de la scénographie",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-29.jpeg",
+              "alt": "Vue frontale développée de la maquette",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-28.jpeg",
+              "alt": "Vue rapprochée de l’espace scénique",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-33.jpeg",
+              "alt": "Scène centrale avant ajout des réactions",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-32.jpeg",
+              "alt": "Scène centrale entourée des réactions",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-31.jpeg",
+              "alt": "Vue zénithale de la scénographie finale",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-08.jpeg",
+              "alt": "Scène collective des personnages dans la ville",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-10.jpeg",
+              "alt": "Personnage féminin photographié dans la rue",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-01.jpeg",
+              "alt": "Personnage féminin en direct sur les réseaux sociaux",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-07.jpeg",
+              "alt": "Personnage féminin recevant des réactions en direct",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-02.jpeg",
+              "alt": "Personnage féminin dans une interface TikTok",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-04.jpeg",
+              "alt": "Personnage casual dans une publication sportive",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-05.jpeg",
+              "alt": "Personnage casual assis dans une publication sociale",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-03.jpeg",
+              "alt": "Personnage en costume filmé dans un magasin",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-09.jpeg",
+              "alt": "Personnage en costume réalisant un selfie",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-06.jpeg",
+              "alt": "Deux personnages réunis dans une interface TikTok",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-13.jpeg",
+              "alt": "Scène collective finale dans la ville",
               "width": "quarter",
               "fitContain": false
             }

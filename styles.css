@@ -9,25 +9,28 @@
     --header-height: 78px;
 }
 
-/* Scénographie : galerie plus dense pour les 35 visuels du projet. */
+/* Scénographie : quatre étapes par ligne pour lire l'évolution du projet. */
 body[data-project-slug="scenographie-theatre"] .study-gallery-grid {
-    column-count: 3;
-    column-gap: 18px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    column-count: initial;
 }
 
 body[data-project-slug="scenographie-theatre"] .study-thumb {
-    margin-bottom: 18px;
+    display: block;
+    margin: 0;
 }
 
 @media (max-width: 900px) {
     body[data-project-slug="scenographie-theatre"] .study-gallery-grid {
-        column-count: 2;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
 @media (max-width: 600px) {
     body[data-project-slug="scenographie-theatre"] .study-gallery-grid {
-        column-count: 1;
+        grid-template-columns: 1fr;
     }
 }
 
