@@ -496,10 +496,17 @@
                 </section>
                 ${layoutInner}
             </main>
-            <div class="study-lightbox" data-study-lightbox hidden aria-hidden="true">
+            <div class="study-lightbox" data-study-lightbox hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Galerie du projet">
                 <div class="study-lightbox-backdrop" data-study-lightbox-close></div>
                 <div class="study-lightbox-dialog">
+                    <button class="study-lightbox-arrow study-lightbox-prev" type="button" data-study-lightbox-prev aria-label="Image précédente">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+                    </button>
                     <img data-study-lightbox-image src="" alt="" />
+                    <button class="study-lightbox-arrow study-lightbox-next" type="button" data-study-lightbox-next aria-label="Image suivante">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+                    </button>
+                    <span class="study-lightbox-counter" data-study-lightbox-counter aria-live="polite"></span>
                 </div>
             </div>
             ${renderFooter(rootPrefix, 'projects')}
@@ -510,9 +517,45 @@
     function enhanceProjectImageZoom() {
         const lightbox = document.querySelector('[data-study-lightbox]');
         const lightboxImage = document.querySelector('[data-study-lightbox-image]');
-        if (!lightbox || !lightboxImage) {
+        const previousButton = document.querySelector('[data-study-lightbox-prev]');
+        const nextButton = document.querySelector('[data-study-lightbox-next]');
+        const counter = document.querySelector('[data-study-lightbox-counter]');
+        const figures = Array.from(document.querySelectorAll('.study-zoomable'));
+        const images = figures.map((figure) => ({
+            src: figure.dataset.zoomableSrc,
+            alt: figure.dataset.zoomableAlt || '',
+        })).filter((image) => image.src);
+        let activeIndex = -1;
+        let activeTrigger = null;
+
+        if (!lightbox || !lightboxImage || !previousButton || !nextButton || images.length === 0) {
             return;
         }
+
+        const hasMultipleImages = images.length > 1;
+        previousButton.hidden = !hasMultipleImages;
+        nextButton.hidden = !hasMultipleImages;
+
+        const normaliseIndex = (index) => (index + images.length) % images.length;
+
+        const preloadAdjacentImages = () => {
+            [-1, 1].forEach((offset) => {
+                const adjacent = images[normaliseIndex(activeIndex + offset)];
+                const preload = new Image();
+                preload.src = adjacent.src;
+            });
+        };
+
+        const showImage = (index) => {
+            activeIndex = normaliseIndex(index);
+            const image = images[activeIndex];
+            lightboxImage.src = image.src;
+            lightboxImage.alt = image.alt;
+            if (counter) {
+                counter.textContent = `${activeIndex + 1} / ${images.length}`;
+            }
+            preloadAdjacentImages();
+        };
 
         const closeLightbox = () => {
             lightbox.hidden = true;
@@ -520,26 +563,39 @@
             document.body.classList.remove('study-lightbox-open');
             lightboxImage.src = '';
             lightboxImage.alt = '';
+            activeIndex = -1;
+            if (activeTrigger) {
+                activeTrigger.focus({ preventScroll: true });
+                activeTrigger = null;
+            }
         };
 
-        const openLightbox = (src, alt) => {
-            lightboxImage.src = src;
-            lightboxImage.alt = alt || '';
+        const openLightbox = (index, trigger) => {
+            activeTrigger = trigger;
+            showImage(index);
             lightbox.hidden = false;
             lightbox.setAttribute('aria-hidden', 'false');
             document.body.classList.add('study-lightbox-open');
+            if (hasMultipleImages) {
+                nextButton.focus({ preventScroll: true });
+            }
         };
 
-        document.querySelectorAll('.study-zoomable').forEach((figure) => {
-            const src = figure.dataset.zoomableSrc;
-            const alt = figure.dataset.zoomableAlt || '';
-            const open = () => {
-                if (src) {
-                    openLightbox(src, alt);
+        figures.forEach((figure, index) => {
+            figure.tabIndex = 0;
+            figure.setAttribute('role', 'button');
+            figure.setAttribute('aria-label', `Agrandir l’image ${index + 1} sur ${images.length}`);
+            figure.addEventListener('click', () => openLightbox(index, figure));
+            figure.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openLightbox(index, figure);
                 }
-            };
-            figure.addEventListener('click', open);
+            });
         });
+
+        previousButton.addEventListener('click', () => showImage(activeIndex - 1));
+        nextButton.addEventListener('click', () => showImage(activeIndex + 1));
 
         lightbox.querySelectorAll('[data-study-lightbox-close]').forEach((node) => {
             node.addEventListener('click', closeLightbox);
@@ -548,6 +604,12 @@
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape' && !lightbox.hidden) {
                 closeLightbox();
+            }
+            if (event.key === 'ArrowLeft' && !lightbox.hidden) {
+                showImage(activeIndex - 1);
+            }
+            if (event.key === 'ArrowRight' && !lightbox.hidden) {
+                showImage(activeIndex + 1);
             }
         });
     }
