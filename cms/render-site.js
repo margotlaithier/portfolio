@@ -471,17 +471,25 @@
             ${renderHeader(rootPrefix, 'projects')}
             <main class="study-page">
                 <section class="study-hero">
-                    <div class="container study-hero-grid">
-                        <div>
-                            ${project.type ? `<div class="study-type">${escapeHtml(project.type)}</div>` : ''}
-                            <h1 class="study-title">${escapeHtml(project.title)}</h1>
-                            ${project.intro ? `<p class="study-intro">${escapeHtml(project.intro)}</p>` : ''}
-                        </div>
-                        ${project.date ? `
-                            <div class="study-meta">
-                                <div class="study-meta-block"><span class="meta-label">Date</span><strong>${escapeHtml(project.date)}</strong></div>
+                    <div class="container">
+                        <a class="project-back-link" href="${rootPrefix}projets.html" aria-label="Retour aux projets">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M19 12H5M11 6l-6 6 6 6" />
+                            </svg>
+                            <span>Retour aux projets</span>
+                        </a>
+                        <div class="study-hero-grid">
+                            <div>
+                                ${project.type ? `<div class="study-type">${escapeHtml(project.type)}</div>` : ''}
+                                <h1 class="study-title">${escapeHtml(project.title)}</h1>
+                                ${project.intro ? `<p class="study-intro">${escapeHtml(project.intro)}</p>` : ''}
                             </div>
-                        ` : ''}
+                            ${project.date ? `
+                                <div class="study-meta">
+                                    <div class="study-meta-block"><span class="meta-label">Date</span><strong>${escapeHtml(project.date)}</strong></div>
+                                </div>
+                            ` : ''}
+                        </div>
                     </div>
                 </section>
                 ${layoutInner}

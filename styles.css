@@ -1850,6 +1850,56 @@ img {
     padding: 3rem 0 2.4rem;
 }
 
+.page-projet-detail .project-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 2.25rem;
+    color: var(--text);
+    font-size: 0.76rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.25s ease;
+}
+
+.page-projet-detail .project-back-link svg {
+    box-sizing: content-box;
+    width: 1.15rem;
+    height: 1.15rem;
+    padding: 0.65rem;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.34);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    box-shadow: 0 8px 22px rgba(31, 26, 22, 0.08);
+    transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.page-projet-detail .project-back-link:hover svg,
+.page-projet-detail .project-back-link:focus-visible svg {
+    color: #fff;
+    border-color: var(--accent);
+    background: var(--accent);
+    box-shadow: 0 10px 26px rgba(231, 62, 1, 0.24);
+    transform: translateX(-0.25rem);
+}
+
+.page-projet-detail .project-back-link:hover,
+.page-projet-detail .project-back-link:focus-visible {
+    color: var(--accent);
+}
+
+.page-projet-detail .project-back-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 0.35rem;
+}
+
 .page-projet-detail .study-hero-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 280px;
@@ -2183,6 +2233,10 @@ body.study-lightbox-open {
 }
 
 @media (max-width: 760px) {
+    .page-projet-detail .project-back-link {
+        margin-bottom: 1.75rem;
+    }
+
     .page-projet-detail .study-title {
         width: 100%;
         min-width: 0;
