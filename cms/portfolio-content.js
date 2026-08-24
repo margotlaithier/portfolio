@@ -667,66 +667,6 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Chambre parentale — image 10",
               "width": "quarter",
               "fitContain": false
-            },
-            {
-              "src": "images/chambre-parentale-11.jpeg",
-              "alt": "Chambre parentale — image 11",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/chambre-parentale-12.jpeg",
-              "alt": "Chambre parentale — image 12",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/chambre-parentale-13.jpeg",
-              "alt": "Chambre parentale — image 13",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/chambre-parentale-14.jpeg",
-              "alt": "Chambre parentale — image 14",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/chambre-parentale-15.jpeg",
-              "alt": "Chambre parentale — image 15",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/chambre-parentale-16.jpeg",
-              "alt": "Chambre parentale — image 16",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/chambre-parentale-17.jpeg",
-              "alt": "Chambre parentale — image 17",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/chambre-parentale-18.jpeg",
-              "alt": "Chambre parentale — image 18",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/chambre-parentale-19.jpeg",
-              "alt": "Chambre parentale — image 19",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/chambre-parentale-20.jpeg",
-              "alt": "Chambre parentale — image 20",
-              "width": "quarter",
-              "fitContain": false
             }
           ]
         },
