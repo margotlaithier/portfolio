@@ -2213,18 +2213,22 @@ body.study-lightbox-open {
     z-index: 1;
     display: grid;
     grid-template-columns: 3rem minmax(0, auto) 3rem;
+    grid-template-rows: minmax(0, auto) auto;
     align-items: center;
-    gap: 1rem;
+    column-gap: 1rem;
+    row-gap: 0.8rem;
     width: max-content;
     max-width: calc(100vw - 4rem);
-    max-height: 88vh;
+    max-height: calc(100dvh - 4rem);
 }
 
 .page-projet-detail .study-lightbox-dialog img {
     grid-column: 2;
+    grid-row: 1;
     display: block;
     max-width: min(calc(100vw - 12rem), 1500px);
-    max-height: 88vh;
+    max-height: 78vh;
+    max-height: calc(100dvh - 7.5rem);
     width: auto;
     height: auto;
     border-radius: 10px;
@@ -2268,20 +2272,21 @@ body.study-lightbox-open {
 
 .page-projet-detail .study-lightbox-prev {
     grid-column: 1;
+    grid-row: 1;
 }
 
 .page-projet-detail .study-lightbox-next {
     grid-column: 3;
+    grid-row: 1;
 }
 
 .page-projet-detail .study-lightbox-counter {
-    position: absolute;
-    left: 50%;
-    bottom: -1.75rem;
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: center;
     color: rgba(255, 255, 255, 0.76);
     font-size: 0.72rem;
     letter-spacing: 0.14em;
-    transform: translateX(-50%);
 }
 
 @media (max-width: 1180px), (hover: none) and (pointer: coarse) {
@@ -2367,7 +2372,8 @@ body.study-lightbox-open {
 
     .page-projet-detail .study-lightbox-dialog img {
         max-width: calc(100vw - 7.2rem);
-        max-height: 82vh;
+        max-height: 76vh;
+        max-height: calc(100dvh - 6.5rem);
     }
 
     .page-projet-detail .study-lightbox-arrow {
