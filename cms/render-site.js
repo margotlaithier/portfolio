@@ -521,10 +521,20 @@
         const nextButton = document.querySelector('[data-study-lightbox-next]');
         const counter = document.querySelector('[data-study-lightbox-counter]');
         const figures = Array.from(document.querySelectorAll('.study-zoomable'));
-        const images = figures.map((figure) => ({
-            src: figure.dataset.zoomableSrc,
-            alt: figure.dataset.zoomableAlt || '',
-        })).filter((image) => image.src);
+        const imageNumberFromSource = (source) => {
+            const cleanSource = String(source || '').split(/[?#]/, 1)[0];
+            const filename = cleanSource.split('/').pop() || '';
+            const match = filename.match(/(?:^|[-_])(\d+)\.[^.]+$/);
+            return match ? String(Number(match[1])) : '';
+        };
+        const images = figures.map((figure) => {
+            const src = figure.dataset.zoomableSrc;
+            return {
+                src,
+                alt: figure.dataset.zoomableAlt || '',
+                number: imageNumberFromSource(src),
+            };
+        }).filter((image) => image.src);
         let activeIndex = -1;
         let activeTrigger = null;
 
@@ -552,7 +562,7 @@
             lightboxImage.src = image.src;
             lightboxImage.alt = image.alt;
             if (counter) {
-                counter.textContent = `${activeIndex + 1} / ${images.length}`;
+                counter.textContent = `${image.number || activeIndex + 1} / ${images.length}`;
             }
             preloadAdjacentImages();
         };
@@ -582,9 +592,10 @@
         };
 
         figures.forEach((figure, index) => {
+            const imageNumber = images[index]?.number || String(index + 1);
             figure.tabIndex = 0;
             figure.setAttribute('role', 'button');
-            figure.setAttribute('aria-label', `Agrandir l’image ${index + 1} sur ${images.length}`);
+            figure.setAttribute('aria-label', `Agrandir l’image ${imageNumber} sur ${images.length}`);
             figure.addEventListener('click', () => openLightbox(index, figure));
             figure.addEventListener('keydown', (event) => {
                 if (event.key === 'Enter' || event.key === ' ') {
