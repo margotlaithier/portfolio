@@ -195,78 +195,6 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Quartier de maisons roses — image 14",
               "width": "quarter",
               "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-15.jpeg",
-              "alt": "Quartier de maisons roses — image 15",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-16.jpeg",
-              "alt": "Quartier de maisons roses — image 16",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-17.jpeg",
-              "alt": "Quartier de maisons roses — image 17",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-18.jpeg",
-              "alt": "Quartier de maisons roses — image 18",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-19.jpeg",
-              "alt": "Quartier de maisons roses — image 19",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-20.jpeg",
-              "alt": "Quartier de maisons roses — image 20",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-21.jpeg",
-              "alt": "Quartier de maisons roses — image 21",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-22.jpeg",
-              "alt": "Quartier de maisons roses — image 22",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-23.jpeg",
-              "alt": "Quartier de maisons roses — image 23",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-24.jpeg",
-              "alt": "Quartier de maisons roses — image 24",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-25.jpeg",
-              "alt": "Quartier de maisons roses — image 25",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-26.jpeg",
-              "alt": "Quartier de maisons roses — image 26",
-              "width": "quarter",
-              "fitContain": false
             }
           ]
         },
@@ -504,12 +432,6 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Scénographie théâtre — image 34",
               "width": "quarter",
               "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-35.jpeg",
-              "alt": "Scénographie théâtre — image 35",
-              "width": "quarter",
-              "fitContain": false
             }
           ]
         },
@@ -521,7 +443,7 @@ window.PORTFOLIO_CONTENT = {
       ],
       "category": "Architecture",
       "cardSize": "half",
-      "cardImage": "projets/architecture/scenographie-theatre/images/scenographie-theatre-29.jpeg",
+      "cardImage": "projets/architecture/scenographie-theatre/images/scenographie-theatre-28.jpeg",
       "cardAlt": "Scénographie théâtre",
       "cardYear": "2024",
       "cardDescription": "Travail sur le rapport scène-salle, les percées visuelles et la lecture spatiale du dispositif."
@@ -1104,30 +1026,6 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Croquis — image 37",
               "width": "quarter",
               "fitContain": false
-            },
-            {
-              "src": "images/croquis-38.jpeg",
-              "alt": "Croquis — image 38",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/croquis-39.jpeg",
-              "alt": "Croquis — image 39",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/croquis-40.jpeg",
-              "alt": "Croquis — image 40",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/croquis-41.jpeg",
-              "alt": "Croquis — image 41",
-              "width": "quarter",
-              "fitContain": false
             }
           ]
         }
@@ -1585,42 +1483,6 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Lampe sur pied — image 6",
               "width": "quarter",
               "fitContain": false
-            },
-            {
-              "src": "images/lampe-sur-pied-07.jpeg",
-              "alt": "Lampe sur pied — image 7",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/lampe-sur-pied-08.jpeg",
-              "alt": "Lampe sur pied — image 8",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/lampe-sur-pied-09.jpeg",
-              "alt": "Lampe sur pied — image 9",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/lampe-sur-pied-10.jpeg",
-              "alt": "Lampe sur pied — image 10",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/lampe-sur-pied-11.jpeg",
-              "alt": "Lampe sur pied — image 11",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/lampe-sur-pied-12.jpeg",
-              "alt": "Lampe sur pied — image 12",
-              "width": "quarter",
-              "fitContain": false
             }
           ]
         },
@@ -2060,12 +1922,6 @@ window.PORTFOLIO_CONTENT = {
             {
               "src": "images/projets-personnels-08.jpeg",
               "alt": "Projets personnels — image 8",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/projets-personnels-09.jpeg",
-              "alt": "Projets personnels — image 9",
               "width": "quarter",
               "fitContain": false
             }
