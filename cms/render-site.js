@@ -34,6 +34,7 @@
             cardYear: project.cardYear || project.date,
             cardDescription: project.cardDescription || project.intro,
             cardSize: project.cardSize || 'third',
+            cardImageFit: project.cardImageFit || 'cover',
             characteristics: project.characteristics || [],
             blocks: project.blocks || [],
         };
@@ -98,8 +99,8 @@
 
     function renderProjectCard(project, rootPrefix) {
         return `
-            <a class="portfolio-card card-${escapeHtml(project.cardSize)}" href="${rootPrefix}${project.path}">
-                <img src="${linkAsset(rootPrefix, project.cardImage)}" alt="${escapeHtml(project.cardAlt || project.title)}" />
+            <a class="portfolio-card card-${escapeHtml(project.cardSize)}${project.cardImageFit === 'contain' ? ' card-image-contain' : ''}" href="${rootPrefix}${project.path}">
+                <img src="${linkAsset(rootPrefix, project.cardImage)}" alt="${escapeHtml(project.cardAlt || project.title)}" loading="lazy" decoding="async" />
                 <div class="corner-arrow">
                     <svg viewBox="0 0 24 24">
                         <path d="M7 17L17 7M7 7h10v10" />
@@ -360,10 +361,10 @@
         `;
     }
 
-    function renderZoomableFigure({ src, alt, figureClass = '', imgClass = '' }) {
+    function renderZoomableFigure({ src, alt, figureClass = '', imgClass = '', loading = 'lazy' }) {
         return `
             <figure class="${figureClass} study-zoomable" data-zoomable-src="${escapeHtml(src)}" data-zoomable-alt="${escapeHtml(alt)}">
-                <img${imgClass ? ` class="${imgClass}"` : ''} src="${src}" alt="${escapeHtml(alt)}" />
+                <img${imgClass ? ` class="${imgClass}"` : ''} src="${src}" alt="${escapeHtml(alt)}" loading="${loading}" decoding="async" />
             </figure>
         `;
     }
@@ -414,7 +415,7 @@
         if (block.type === 'grid') {
             return `
                 <div class="study-gallery-grid">
-                    ${(block.items || []).map((item) => {
+                    ${(block.items || []).map((item, itemIndex) => {
                         const widthClass = item.width && item.width !== 'quarter' ? ` study-thumb-${item.width}` : '';
                         const fitClass = item.fitContain ? ' study-fit-contain' : '';
                         return renderZoomableFigure({
@@ -422,6 +423,7 @@
                             alt: item.alt,
                             figureClass: `study-thumb${widthClass}${fitClass}`,
                             imgClass: fitClass ? 'study-fit-contain' : '',
+                            loading: itemIndex < 2 ? 'eager' : 'lazy',
                         });
                     }).join('')}
                 </div>
