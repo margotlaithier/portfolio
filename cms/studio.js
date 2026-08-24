@@ -1,5 +1,6 @@
 (function () {
     const STORAGE_KEY = 'portfolio-studio-draft-v1';
+    const STORAGE_VERSION = 2;
     const GITHUB_CONFIG_KEY = 'portfolio-studio-github-v1';
     const DEPLOYMENT_STATE_KEY = 'portfolio-studio-deployment-v1';
     const REQUIRED_DEPLOY_CHECKS = [
@@ -15,6 +16,16 @@
 
     function clone(value) {
         return JSON.parse(JSON.stringify(value));
+    }
+
+    function contentSignature(value) {
+        const serialized = JSON.stringify(value);
+        let hash = 2166136261;
+        for (let index = 0; index < serialized.length; index += 1) {
+            hash ^= serialized.charCodeAt(index);
+            hash = Math.imul(hash, 16777619);
+        }
+        return `${serialized.length}-${(hash >>> 0).toString(16)}`;
     }
 
     function escapeHtml(value = '') {
@@ -128,14 +139,19 @@
         };
     }
 
+    const sourceData = clone(window.PORTFOLIO_CONTENT || {});
+    const sourceSignature = contentSignature(sourceData);
+    let restoredDraft = false;
+
     const state = {
-        data: clone(window.PORTFOLIO_CONTENT || {}),
+        data: clone(sourceData),
         activeSection: 'site',
-        activeProjectSlug: (window.PORTFOLIO_CONTENT?.projects || [])[0]?.slug || '',
+        activeProjectSlug: (sourceData.projects || [])[0]?.slug || '',
         saveState: 'Brouillon local uniquement',
         serverWritable: false,
         github: defaultGitHubConfig(),
         dirty: false,
+        sourceRefreshDetected: false,
         commitStatus: 'idle',
         deployment: {
             active: false,
@@ -153,7 +169,19 @@
     try {
         const draft = localStorage.getItem(STORAGE_KEY);
         if (draft) {
-            state.data = JSON.parse(draft);
+            const parsedDraft = JSON.parse(draft);
+            const isCurrentDraft =
+                parsedDraft?.version === STORAGE_VERSION &&
+                parsedDraft?.sourceSignature === sourceSignature &&
+                parsedDraft?.data;
+
+            if (isCurrentDraft) {
+                state.data = clone(parsedDraft.data);
+                restoredDraft = contentSignature(state.data) !== sourceSignature;
+            } else {
+                localStorage.removeItem(STORAGE_KEY);
+                state.sourceRefreshDetected = true;
+            }
         }
     } catch (error) {
         console.warn('Impossible de charger le brouillon studio.', error);
@@ -214,6 +242,9 @@
     }
 
     function activeSaveTargetLabel() {
+        if (state.sourceRefreshDetected) {
+            return 'Nouvelle version du fichier chargée. Ancien brouillon local ignoré.';
+        }
         if (hasGitHubSync()) {
             if (state.commitStatus === 'pending') {
                 return 'Commit GitHub en cours...';
@@ -945,7 +976,13 @@
     }
 
     function persist() {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state.data));
+        state.sourceRefreshDetected = false;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+            version: STORAGE_VERSION,
+            sourceSignature,
+            savedAt: new Date().toISOString(),
+            data: state.data,
+        }));
         if (hasGitHubSync()) {
             state.dirty = true;
             if (state.commitStatus !== 'error') {
@@ -1588,9 +1625,10 @@
         root.querySelector('[data-action="download-js"]')?.addEventListener('click', () => download('portfolio-content.js', jsPayload(state.data), 'application/javascript'));
         root.querySelector('[data-action="reset-draft"]')?.addEventListener('click', () => {
             localStorage.removeItem(STORAGE_KEY);
-            state.data = clone(window.PORTFOLIO_CONTENT || {});
-            state.saveState = state.serverWritable ? 'Brouillon réinitialisé, enregistrement...' : 'Brouillon local réinitialisé';
-            persist();
+            state.data = clone(sourceData);
+            state.dirty = false;
+            state.sourceRefreshDetected = false;
+            state.saveState = 'Brouillon local effacé. Version du fichier restaurée.';
             render();
         });
 
@@ -1754,6 +1792,7 @@
     }
 
     async function initialise() {
+        state.dirty = restoredDraft;
         const isStudioServer =
             (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') &&
             window.location.port === '4173';
@@ -1771,6 +1810,9 @@
             }
         } catch (error) {
             state.saveState = hasGitHubSync() ? 'GitHub direct actif' : 'Serveur studio absent. Active GitHub direct ou ouvre http://localhost:4173/studio.html';
+        }
+        if (hasGitHubSync() || state.sourceRefreshDetected) {
+            state.saveState = activeSaveTargetLabel();
         }
         render();
         if (state.deployment.active && state.deployment.commitSha && hasGitHubSync()) {
