@@ -205,8 +205,10 @@
                 ...deployment,
                 pollTimer: null,
             };
-            if (state.deployment.active) {
-                state.commitStatus = deployment.summary === 'error' ? 'error' : 'pending';
+            if (state.deployment.commitSha) {
+                // A deployment can only be monitored after GitHub has accepted the commit.
+                // Do not turn a Pages monitoring failure into a commit failure on reload.
+                state.commitStatus = 'success';
             }
         }
     } catch (error) {
@@ -246,14 +248,20 @@
             return 'Nouvelle version du fichier chargée. Ancien brouillon local ignoré.';
         }
         if (hasGitHubSync()) {
-            if (state.commitStatus === 'pending') {
+            if (state.saveInFlight || state.commitStatus === 'pending') {
                 return 'Commit GitHub en cours...';
             }
             if (state.commitStatus === 'error') {
-                return 'Échec du commit GitHub. Studio verrouillé jusqu’au prochain commit.';
+                return 'Échec du commit GitHub. Les modifications sont conservées : corrige la configuration ou réessaie.';
             }
             if (state.dirty) {
                 return 'Modifications locales en attente de commit GitHub';
+            }
+            if (state.deployment.commitSha && state.deployment.summary === 'error') {
+                return `Commit GitHub réussi. ${state.deployment.message}`;
+            }
+            if (state.deployment.active) {
+                return state.deployment.message || 'Commit GitHub réussi. Déploiement GitHub Pages en cours...';
             }
             if (state.commitStatus === 'success') {
                 return 'Commit GitHub réussi';
@@ -267,7 +275,7 @@
     }
 
     function isStudioLocked() {
-        return hasGitHubSync() && (state.commitStatus === 'pending' || state.commitStatus === 'error' || state.deployment.active);
+        return hasGitHubSync() && state.saveInFlight;
     }
 
     function resetDeploymentState() {
@@ -593,12 +601,12 @@
                 localStorage.removeItem(DEPLOYMENT_STATE_KEY);
             } else if (state.deployment.summary === 'error') {
                 state.deployment.active = true;
-                state.commitStatus = 'error';
+                state.commitStatus = 'success';
                 refreshSaveState();
                 persistDeploymentState();
             } else {
                 state.deployment.active = true;
-                state.commitStatus = 'pending';
+                state.commitStatus = 'success';
                 refreshSaveState();
                 persistDeploymentState();
                 state.deployment.pollTimer = setTimeout(checkDeploymentStatus, 5000);
@@ -608,7 +616,7 @@
             state.deployment.active = true;
             state.deployment.summary = 'error';
             state.deployment.message = describeDeploymentError(error);
-            state.commitStatus = 'error';
+            state.commitStatus = 'success';
             refreshSaveState();
             persistDeploymentState();
         }
@@ -974,6 +982,7 @@
             state.github.currentSha = payload?.content?.sha || state.github.currentSha;
             persistGitHubConfig();
             state.dirty = false;
+            state.commitStatus = 'success';
             state.deployment.commitSha = payload?.commit?.sha || '';
             state.deployment.active = true;
             state.deployment.summary = 'pending';
@@ -986,6 +995,7 @@
             refreshSaveState();
         } finally {
             state.saveInFlight = false;
+            refreshSaveState();
             render();
             if (state.deployment.active && state.deployment.commitSha) {
                 await checkDeploymentStatus();
@@ -1010,9 +1020,7 @@
         }));
         if (hasGitHubSync()) {
             state.dirty = true;
-            if (state.commitStatus !== 'error') {
-                state.commitStatus = 'dirty';
-            }
+            state.commitStatus = 'dirty';
             state.saveState = activeSaveTargetLabel();
             updateSaveState();
             return;
@@ -1800,16 +1808,16 @@
     }
 
     function renderDeploymentOverlay() {
-        if (!state.deployment.active) {
+        if (!state.saveInFlight) {
             return '';
         }
         return `
             <div style="position:fixed;inset:0;background:rgba(16,16,16,.58);backdrop-filter:blur(3px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:2rem;">
                 <style>@keyframes studio-spin{to{transform:rotate(360deg);}}</style>
                 <div style="width:min(560px,100%);background:#f7f2eb;color:#1e1a17;border:1px solid rgba(0,0,0,.08);box-shadow:0 24px 80px rgba(0,0,0,.24);padding:2.2rem;border-radius:1.1rem;text-align:center;">
-                    <div style="font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;opacity:.72;">Enregistrement en cours</div>
+                    <div style="font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;opacity:.72;">Commit GitHub en cours</div>
                     <h2 style="margin:.5rem 0 0;font-size:1.9rem;line-height:1.05;">Mise à jour du portfolio</h2>
-                    <p style="margin:1rem auto 0;max-width:34rem;line-height:1.6;">Le Studio reste bloqué pendant l’envoi et la propagation de la mise à jour. Il se déverrouillera automatiquement dès que le nouveau contenu sera effectivement publié.</p>
+                    <p style="margin:1rem auto 0;max-width:34rem;line-height:1.6;">Le Studio reste bloqué uniquement pendant l’envoi du contenu à GitHub. Il se déverrouillera dès que le commit aura été créé, sans attendre le déploiement GitHub Pages.</p>
                     <div style="margin:1.5rem auto 0;width:3rem;height:3rem;border-radius:999px;border:3px solid rgba(0,0,0,.12);border-top-color:#1e1a17;animation:studio-spin 1s linear infinite;"></div>
                 </div>
             </div>
