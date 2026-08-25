@@ -278,7 +278,8 @@ img {
     object-fit: contain;
 }
 
-.portfolio-card:hover img {
+.portfolio-card:hover img,
+.portfolio-card.active img {
     transform: scale(1.06);
     filter: brightness(0.28) saturate(0.5);
 }
@@ -294,7 +295,8 @@ img {
     transition: opacity 0.45s ease;
 }
 
-.portfolio-card:hover .overlay {
+.portfolio-card:hover .overlay,
+.portfolio-card.active .overlay {
     opacity: 1;
 }
 
@@ -316,7 +318,11 @@ img {
 .portfolio-card:hover .overlay-tag,
 .portfolio-card:hover .overlay-title,
 .portfolio-card:hover .overlay-desc,
-.portfolio-card:hover .overlay-cta {
+.portfolio-card:hover .overlay-cta,
+.portfolio-card.active .overlay-tag,
+.portfolio-card.active .overlay-title,
+.portfolio-card.active .overlay-desc,
+.portfolio-card.active .overlay-cta {
     transform: translateY(0);
 }
 
@@ -376,7 +382,8 @@ img {
     transition: width 0.35s ease;
 }
 
-.portfolio-card:hover .cta-line {
+.portfolio-card:hover .cta-line,
+.portfolio-card.active .cta-line {
     width: 46px;
 }
 
@@ -396,7 +403,8 @@ img {
     transition: opacity 0.4s ease 0.18s, transform 0.4s ease 0.18s;
 }
 
-.portfolio-card:hover .corner-arrow {
+.portfolio-card:hover .corner-arrow,
+.portfolio-card.active .corner-arrow {
     opacity: 1;
     transform: scale(1) rotate(0deg);
 }
@@ -419,7 +427,8 @@ img {
     transition: color 0.4s ease;
 }
 
-.portfolio-card:hover .card-number {
+.portfolio-card:hover .card-number,
+.portfolio-card.active .card-number {
     color: rgba(255, 255, 255, 0.35);
 }
 

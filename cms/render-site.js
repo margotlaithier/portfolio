@@ -167,12 +167,35 @@
         };
     }
 
+    function enhanceProjectCardInteractions() {
+        const cards = document.querySelectorAll('.portfolio-card');
+        const touchQuery = window.matchMedia('(hover: none), (pointer: coarse)');
+
+        cards.forEach((card) => {
+            card.addEventListener('click', (event) => {
+                const isTouchClick = touchQuery.matches || event.pointerType === 'touch';
+
+                if (!isTouchClick || card.classList.contains('active')) {
+                    return;
+                }
+
+                event.preventDefault();
+                cards.forEach((item) => item.classList.remove('active'));
+                card.classList.add('active');
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.portfolio-card')) {
+                cards.forEach((card) => card.classList.remove('active'));
+            }
+        });
+    }
+
     function enhanceHomeInteractions() {
         const panels = Array.from(document.querySelectorAll('.page-panel'));
         const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
         const dots = Array.from(document.querySelectorAll('[data-dot]'));
-        const cards = document.querySelectorAll('.portfolio-card');
-        const isTouchDevice = window.matchMedia('(hover: none)').matches;
 
         function setCurrentPanel(panelId) {
             navLinks.forEach((link) => {
@@ -212,24 +235,6 @@
             }
         }
 
-        if (isTouchDevice) {
-            cards.forEach((card) => {
-                card.addEventListener('click', (event) => {
-                    if (!card.classList.contains('active')) {
-                        event.preventDefault();
-                        cards.forEach((item) => item.classList.remove('active'));
-                        card.classList.add('active');
-                    }
-                });
-            });
-
-            document.addEventListener('click', (event) => {
-                if (!event.target.closest('.portfolio-card')) {
-                    cards.forEach((card) => card.classList.remove('active'));
-                }
-            });
-        }
-
         navLinks.forEach((link) => {
             link.addEventListener('click', () => {
                 navLinks.forEach((item) => item.classList.remove('is-current'));
@@ -240,6 +245,7 @@
         updatePanelState();
         window.addEventListener('scroll', updatePanelState, { passive: true });
         window.addEventListener('resize', updatePanelState);
+        enhanceProjectCardInteractions();
     }
 
     function renderHome(rootPrefix) {
@@ -345,6 +351,8 @@
             </main>
             ${renderFooter(rootPrefix, 'projects')}
         `;
+
+        enhanceProjectCardInteractions();
     }
 
     function renderZoomableFigure({ src, alt, figureClass = '', imgClass = '', loading = 'lazy' }) {
