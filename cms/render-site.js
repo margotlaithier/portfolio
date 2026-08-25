@@ -11,6 +11,10 @@
             .replace(/"/g, '&quot;');
     }
 
+    function renderEmail(value = '') {
+        return escapeHtml(value).replace(/\./g, '<span class="email-dot">.</span>');
+    }
+
     function linkAsset(rootPrefix, assetPath = '') {
         if (!assetPath) return '';
         if (/^(https?:)?\/\//.test(assetPath) || assetPath.startsWith('data:')) {
@@ -88,7 +92,7 @@
                         <div class="footer-contact">
                             <span class="footer-heading">Contact</span>
                             <div class="footer-list">
-                                <a href="mailto:${escapeHtml(content.site.email)}">${escapeHtml(content.site.email)}</a>
+                                <a href="mailto:${escapeHtml(content.site.email)}">${renderEmail(content.site.email)}</a>
                             </div>
                         </div>
                     </div>
@@ -313,7 +317,7 @@
                                 <div class="contact-list">
                                     <div class="contact-item">
                                         <span>Email</span>
-                                        <a href="mailto:${escapeHtml(content.home.contact.email)}">${escapeHtml(content.home.contact.email)}</a>
+                                        <a class="email-points" href="mailto:${escapeHtml(content.home.contact.email)}">${renderEmail(content.home.contact.email)}</a>
                                     </div>
                                     <div class="contact-item">
                                         <span>Localisation</span>

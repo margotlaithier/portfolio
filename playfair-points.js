@@ -47,7 +47,7 @@
             return false;
         }
 
-        if (element.matches('a[href^="mailto:"]')) {
+        if (element.matches('a[href^="mailto:"]:not(.email-points)')) {
             return false;
         }
 

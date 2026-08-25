@@ -1084,13 +1084,22 @@ img {
     border-bottom: 0;
 }
 
-.page-home .contact-item span {
+.page-home .contact-item > span {
     display: block;
     margin-bottom: 0.35rem;
     font-size: 0.72rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--muted);
+}
+
+.email-dot {
+    display: inline;
+    margin: 0;
+    color: #e73e01;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: none;
 }
 
 .page-home .contact-item strong,
