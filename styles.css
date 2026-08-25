@@ -1272,6 +1272,7 @@ img {
 .page-projets .projets-row {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-flow: dense;
     gap: 24px;
 }
 
@@ -1374,6 +1375,7 @@ img {
 .page-projets-continu .projets-row {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-flow: dense;
     gap: 24px;
 }
 
@@ -1470,6 +1472,12 @@ img {
     transform: none;
 }
 
+.page-home .home-projects-catalog .portfolio-card.card-square,
+.page-home .home-projects-catalog .portfolio-card.card-aspect-square {
+    height: auto;
+    aspect-ratio: 1;
+}
+
 .projects-all-link {
     width: max-content;
     margin: 0 0 2rem auto;
@@ -1487,10 +1495,28 @@ img {
     aspect-ratio: 7 / 4;
 }
 
+.page-projets .portfolio-card.card-aspect-widescreen {
+    align-self: start;
+    height: auto;
+    aspect-ratio: 16 / 9;
+}
+
 .page-projets .portfolio-card.card-aspect-portrait {
     align-self: start;
     height: auto;
     aspect-ratio: 3 / 4;
+}
+
+.page-projets .portfolio-card.card-aspect-portrait-tall {
+    align-self: start;
+    height: auto;
+    aspect-ratio: 7 / 10;
+}
+
+.page-projets .portfolio-card.card-aspect-portrait-wide {
+    align-self: start;
+    height: auto;
+    aspect-ratio: 4 / 5;
 }
 
 .page-projets .portfolio-card.card-aspect-square {
@@ -1499,8 +1525,14 @@ img {
 }
 
 .page-projets .portfolio-card.card-aspect-landscape.card-image-contain img,
-.page-projets .portfolio-card.card-aspect-landscape-wide.card-image-contain img {
+.page-projets .portfolio-card.card-aspect-landscape-wide.card-image-contain img,
+.page-projets .portfolio-card.card-aspect-widescreen.card-image-contain img {
     padding: 0;
+}
+
+.page-projets .portfolio-card.card-image-contain:hover img,
+.page-projets .portfolio-card.card-image-contain.active img {
+    transform: scale(1);
 }
 
 .page-projets .portfolio-card.card-aspect-landscape .overlay-desc,
@@ -1543,14 +1575,37 @@ img {
         aspect-ratio: 7 / 5;
     }
 
+    .page-projets .portfolio-card.card-half.card-aspect-landscape {
+        grid-column: span 2;
+    }
+
     .page-projets .portfolio-card.card-aspect-landscape-wide {
         grid-column: span 1;
         aspect-ratio: 7 / 4;
     }
 
+    .page-projets .portfolio-card.card-half.card-aspect-landscape-wide {
+        grid-column: span 2;
+    }
+
+    .page-projets .portfolio-card.card-aspect-widescreen {
+        grid-column: span 2;
+        aspect-ratio: 16 / 9;
+    }
+
     .page-projets .portfolio-card.card-aspect-portrait {
         grid-column: span 1;
         aspect-ratio: 3 / 4;
+    }
+
+    .page-projets .portfolio-card.card-aspect-portrait-tall {
+        grid-column: span 1;
+        aspect-ratio: 7 / 10;
+    }
+
+    .page-projets .portfolio-card.card-aspect-portrait-wide {
+        grid-column: span 1;
+        aspect-ratio: 4 / 5;
     }
 }
 
@@ -1583,9 +1638,32 @@ img {
         aspect-ratio: 7 / 4;
     }
 
+    .page-home .home-projects-catalog .portfolio-card.card-aspect-widescreen {
+        aspect-ratio: 16 / 9;
+    }
+
     .page-home .home-projects-catalog .portfolio-card.card-aspect-portrait {
         aspect-ratio: 3 / 4;
     }
+
+    .page-home .home-projects-catalog .portfolio-card.card-aspect-portrait-tall {
+        aspect-ratio: 7 / 10;
+    }
+
+    .page-home .home-projects-catalog .portfolio-card.card-aspect-portrait-wide {
+        aspect-ratio: 4 / 5;
+    }
+}
+
+.page-projets .portfolio-card.card-ratio-exact {
+    align-self: start;
+    height: auto;
+    aspect-ratio: var(--card-ratio);
+}
+
+.page-projets .portfolio-card.card-ratio-exact:hover img,
+.page-projets .portfolio-card.card-ratio-exact.active img {
+    transform: scale(1);
 }
 
 /* project detail shared */

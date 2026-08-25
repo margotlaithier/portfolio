@@ -36,6 +36,7 @@
             cardSize: project.cardSize || 'third',
             cardImageFit: project.cardImageFit || 'cover',
             cardAspect: project.cardAspect || 'auto',
+            cardRatio: project.cardRatio || '',
             characteristics: project.characteristics || [],
             blocks: project.blocks || [],
         };
@@ -100,8 +101,15 @@
         const aspectClass = project.cardAspect && project.cardAspect !== 'auto'
             ? ` card-aspect-${escapeHtml(project.cardAspect)}`
             : '';
+        const ratioMatch = String(project.cardRatio || '').match(/^(\d+)\s*\/\s*(\d+)$/);
+        const ratioClass = ratioMatch && Number(ratioMatch[1]) > 0 && Number(ratioMatch[2]) > 0
+            ? ' card-ratio-exact'
+            : '';
+        const ratioStyle = ratioClass
+            ? ` style="--card-ratio: ${ratioMatch[1]} / ${ratioMatch[2]}"`
+            : '';
         return `
-            <a class="portfolio-card card-${escapeHtml(project.cardSize)}${project.cardImageFit === 'contain' ? ' card-image-contain' : ''}${aspectClass}" href="${rootPrefix}${project.path}">
+            <a class="portfolio-card card-${escapeHtml(project.cardSize)}${project.cardImageFit === 'contain' ? ' card-image-contain' : ''}${aspectClass}${ratioClass}" href="${rootPrefix}${project.path}"${ratioStyle}>
                 <img src="${linkAsset(rootPrefix, project.cardImage)}" alt="${escapeHtml(project.cardAlt || project.title)}" loading="lazy" decoding="async" />
                 <div class="corner-arrow">
                     <svg viewBox="0 0 24 24">

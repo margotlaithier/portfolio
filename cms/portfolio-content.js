@@ -74,6 +74,18 @@ window.PORTFOLIO_CONTENT = {
           "type": "grid",
           "items": [
             {
+              "src": "images/quartier-maisons-roses-14.jpeg",
+              "alt": "Quartier de maisons roses — image 14",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/quartier-maisons-roses-13.jpeg",
+              "alt": "Quartier de maisons roses — image 13",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
               "src": "images/quartier-maisons-roses-01.jpeg",
               "alt": "Quartier de maisons roses — image 1",
               "width": "quarter",
@@ -98,14 +110,14 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/quartier-maisons-roses-05.jpeg",
-              "alt": "Quartier de maisons roses — image 5",
+              "src": "images/quartier-maisons-roses-10.jpeg",
+              "alt": "Quartier de maisons roses — image 10",
               "width": "quarter",
               "fitContain": false
             },
             {
-              "src": "images/quartier-maisons-roses-06.jpeg",
-              "alt": "Quartier de maisons roses — image 6",
+              "src": "images/quartier-maisons-roses-11.jpeg",
+              "alt": "Quartier de maisons roses — image 11",
               "width": "quarter",
               "fitContain": false
             },
@@ -128,32 +140,20 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/quartier-maisons-roses-10.jpeg",
-              "alt": "Quartier de maisons roses — image 10",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-11.jpeg",
-              "alt": "Quartier de maisons roses — image 11",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
               "src": "images/quartier-maisons-roses-12.jpeg",
               "alt": "Quartier de maisons roses — image 12",
               "width": "quarter",
               "fitContain": false
             },
             {
-              "src": "images/quartier-maisons-roses-13.jpeg",
-              "alt": "Quartier de maisons roses — image 13",
+              "src": "images/quartier-maisons-roses-05.jpeg",
+              "alt": "Quartier de maisons roses — image 5",
               "width": "quarter",
               "fitContain": false
             },
             {
-              "src": "images/quartier-maisons-roses-14.jpeg",
-              "alt": "Quartier de maisons roses — image 14",
+              "src": "images/quartier-maisons-roses-06.jpeg",
+              "alt": "Quartier de maisons roses — image 6",
               "width": "quarter",
               "fitContain": false
             }
@@ -167,7 +167,8 @@ window.PORTFOLIO_CONTENT = {
       ],
       "category": "Architecture",
       "cardSize": "half",
-      "cardImage": "projets/architecture/quartier-maisons-roses/images/quartier-maisons-roses-05.jpeg",
+      "cardImage": "projets/architecture/quartier-maisons-roses/images/quartier-maisons-roses-14.jpeg",
+      "cardRatio": "8064 / 6048",
       "cardAlt": "Quartier de maisons roses",
       "cardYear": "2025",
       "cardDescription": "Création d’une habitation contemporaine répondant à des exigences de structure, de porte-à-faux et d’harmonie architecturale."
@@ -191,6 +192,42 @@ window.PORTFOLIO_CONTENT = {
           "type": "grid",
           "items": [
             {
+              "src": "images/scenographie-theatre-28.jpeg",
+              "alt": "Vue rapprochée de l’espace scénique",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-29.jpeg",
+              "alt": "Vue frontale développée de la maquette",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-30.jpeg",
+              "alt": "Première maquette de la scénographie",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-31.jpeg",
+              "alt": "Vue zénithale de la scénographie finale",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-32.jpeg",
+              "alt": "Scène centrale entourée des réactions",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-33.jpeg",
+              "alt": "Scène centrale avant ajout des réactions",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
               "src": "images/scenographie-theatre-17.jpeg",
               "alt": "Étude du personnage en costume — silhouette initiale",
               "width": "quarter",
@@ -205,12 +242,6 @@ window.PORTFOLIO_CONTENT = {
             {
               "src": "images/scenographie-theatre-15.jpeg",
               "alt": "Étude du personnage en costume — superposition des motifs",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-25.jpeg",
-              "alt": "Personnage en costume — proposition colorée finale",
               "width": "quarter",
               "fitContain": false
             },
@@ -233,12 +264,6 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/scenographie-theatre-24.jpeg",
-              "alt": "Personnage casual — proposition colorée finale",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
               "src": "images/scenographie-theatre-23.jpeg",
               "alt": "Étude du personnage féminin — silhouette initiale",
               "width": "quarter",
@@ -257,14 +282,26 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/scenographie-theatre-26.jpeg",
-              "alt": "Personnage féminin — proposition colorée finale",
+              "src": "images/scenographie-theatre-14.jpeg",
+              "alt": "Étude du personnage en chemise — silhouette initiale",
               "width": "quarter",
               "fitContain": false
             },
             {
-              "src": "images/scenographie-theatre-14.jpeg",
-              "alt": "Étude du personnage en chemise — silhouette initiale",
+              "src": "images/scenographie-theatre-25.jpeg",
+              "alt": "Personnage en costume — proposition colorée finale",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-24.jpeg",
+              "alt": "Personnage casual — proposition colorée finale",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-26.jpeg",
+              "alt": "Personnage féminin — proposition colorée finale",
               "width": "quarter",
               "fitContain": false
             },
@@ -287,48 +324,6 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/scenographie-theatre-34.jpeg",
-              "alt": "Symbole de déconnexion utilisé dans la scénographie",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-30.jpeg",
-              "alt": "Première maquette de la scénographie",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-29.jpeg",
-              "alt": "Vue frontale développée de la maquette",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-28.jpeg",
-              "alt": "Vue rapprochée de l’espace scénique",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-33.jpeg",
-              "alt": "Scène centrale avant ajout des réactions",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-32.jpeg",
-              "alt": "Scène centrale entourée des réactions",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/scenographie-theatre-31.jpeg",
-              "alt": "Vue zénithale de la scénographie finale",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
               "src": "images/scenographie-theatre-08.jpeg",
               "alt": "Scène collective des personnages dans la ville",
               "width": "quarter",
@@ -337,6 +332,12 @@ window.PORTFOLIO_CONTENT = {
             {
               "src": "images/scenographie-theatre-10.jpeg",
               "alt": "Personnage féminin photographié dans la rue",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/scenographie-theatre-13.jpeg",
+              "alt": "Scène collective finale dans la ville",
               "width": "quarter",
               "fitContain": false
             },
@@ -389,8 +390,8 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/scenographie-theatre-13.jpeg",
-              "alt": "Scène collective finale dans la ville",
+              "src": "images/scenographie-theatre-34.jpeg",
+              "alt": "Symbole de déconnexion utilisé dans la scénographie",
               "width": "quarter",
               "fitContain": false
             }
@@ -405,6 +406,7 @@ window.PORTFOLIO_CONTENT = {
       "category": "Architecture",
       "cardSize": "half",
       "cardImage": "projets/architecture/scenographie-theatre/images/scenographie-theatre-28.jpeg",
+      "cardRatio": "2334 / 1751",
       "cardAlt": "Scénographie théâtre",
       "cardYear": "2024",
       "cardDescription": "Travail sur le rapport scène-salle, les percées visuelles et la lecture spatiale du dispositif."
@@ -475,7 +477,8 @@ window.PORTFOLIO_CONTENT = {
       ],
       "category": "Architecture d'intérieur",
       "cardSize": "half",
-      "cardImage": "projets/architecture-interieure/projet-final/images/projet-final-01.jpeg",
+      "cardImage": "projets/architecture-interieure/projet-final/images/projet-final-04.jpeg",
+      "cardRatio": "4736 / 3340",
       "cardAlt": "Airbnb",
       "cardYear": "2025",
       "cardDescription": "Mise en scène d'un logement saisonnier pensée pour la flexibilité, l'accueil et la lisibilité des usages."
@@ -570,7 +573,8 @@ window.PORTFOLIO_CONTENT = {
       ],
       "category": "Architecture d'intérieur",
       "cardSize": "half",
-      "cardImage": "projets/architecture-interieure/chambre-parentale/images/chambre-parentale-01.jpeg",
+      "cardImage": "projets/architecture-interieure/chambre-parentale/images/chambre-parentale-04.jpeg",
+      "cardRatio": "4736 / 3340",
       "cardAlt": "Chambre parentale",
       "cardYear": "2025",
       "cardDescription": "Création d’une suite parentale avec dressing et salle de bain. "
@@ -676,6 +680,7 @@ window.PORTFOLIO_CONTENT = {
       "category": "Architecture d'intérieur",
       "cardSize": "half",
       "cardImage": "projets/architecture-interieure/cuisine/images/cuisine-01.jpeg",
+      "cardRatio": "6656 / 4992",
       "cardAlt": "Cuisine",
       "cardYear": "2024",
       "cardDescription": "Réagencement fonctionnel d'un espace compact avec plan de travail continu et mobilier intégré."
@@ -699,14 +704,8 @@ window.PORTFOLIO_CONTENT = {
           "type": "grid",
           "items": [
             {
-              "src": "images/facade-de-commerce-01.jpeg",
-              "alt": "Rénovation façade de magasin — image 1",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/facade-de-commerce-02.jpeg",
-              "alt": "Rénovation façade de magasin — image 2",
+              "src": "images/facade-de-commerce-06.jpeg",
+              "alt": "Rénovation façade de magasin — image 6",
               "width": "quarter",
               "fitContain": false
             },
@@ -729,8 +728,8 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/facade-de-commerce-06.jpeg",
-              "alt": "Rénovation façade de magasin — image 6",
+              "src": "images/facade-de-commerce-08.jpeg",
+              "alt": "Rénovation façade de magasin — image 8",
               "width": "quarter",
               "fitContain": false
             },
@@ -741,8 +740,14 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/facade-de-commerce-08.jpeg",
-              "alt": "Rénovation façade de magasin — image 8",
+              "src": "images/facade-de-commerce-02.jpeg",
+              "alt": "Rénovation façade de magasin — image 2",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/facade-de-commerce-01.jpeg",
+              "alt": "Rénovation façade de magasin — image 1",
               "width": "quarter",
               "fitContain": false
             }
@@ -755,9 +760,10 @@ window.PORTFOLIO_CONTENT = {
         }
       ],
       "category": "Architecture d'intérieur",
-      "cardSize": "third",
-      "cardAspect": "portrait",
-      "cardImage": "projets/architecture/facade-de-commerce/images/facade-de-commerce-03.jpeg",
+      "cardSize": "half",
+      "cardAspect": "auto",
+      "cardImage": "projets/architecture/facade-de-commerce/images/facade-de-commerce-06.jpeg",
+      "cardRatio": "7646 / 4137",
       "cardAlt": "Rénovation façade de magasin",
       "cardYear": "2024",
       "cardDescription": "Réécriture d'une devanture commerciale entre visibilité, rythme des pleins et identité urbaine."
@@ -777,8 +783,8 @@ window.PORTFOLIO_CONTENT = {
           "type": "grid",
           "items": [
             {
-              "src": "images/croquis-01.jpeg",
-              "alt": "Croquis — image 1",
+              "src": "images/croquis-09.jpeg",
+              "alt": "Croquis — image 9",
               "width": "quarter",
               "fitContain": false
             },
@@ -795,18 +801,6 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/croquis-04.jpeg",
-              "alt": "Croquis — image 4",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/croquis-05.jpeg",
-              "alt": "Croquis — image 5",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
               "src": "images/croquis-06.jpeg",
               "alt": "Croquis — image 6",
               "width": "quarter",
@@ -819,26 +813,20 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/croquis-08.jpeg",
-              "alt": "Croquis — image 8",
+              "src": "images/croquis-04.jpeg",
+              "alt": "Croquis — image 4",
               "width": "quarter",
               "fitContain": false
             },
             {
-              "src": "images/croquis-09.jpeg",
-              "alt": "Croquis — image 9",
+              "src": "images/croquis-05.jpeg",
+              "alt": "Croquis — image 5",
               "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/croquis-10.jpeg",
               "alt": "Croquis — image 10",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/croquis-11.jpeg",
-              "alt": "Croquis — image 11",
               "width": "quarter",
               "fitContain": false
             },
@@ -851,42 +839,6 @@ window.PORTFOLIO_CONTENT = {
             {
               "src": "images/croquis-13.jpeg",
               "alt": "Croquis — image 13",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/croquis-14.jpeg",
-              "alt": "Croquis — image 14",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/croquis-15.jpeg",
-              "alt": "Croquis — image 15",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/croquis-16.jpeg",
-              "alt": "Croquis — image 16",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/croquis-17.jpeg",
-              "alt": "Croquis — image 17",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/croquis-18.jpeg",
-              "alt": "Croquis — image 18",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/croquis-19.jpeg",
-              "alt": "Croquis — image 19",
               "width": "quarter",
               "fitContain": false
             },
@@ -921,6 +873,36 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
+              "src": "images/croquis-27.jpeg",
+              "alt": "Croquis — image 27",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/croquis-37.jpeg",
+              "alt": "Croquis — image 37",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/croquis-14.jpeg",
+              "alt": "Croquis — image 14",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/croquis-15.jpeg",
+              "alt": "Croquis — image 15",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/croquis-16.jpeg",
+              "alt": "Croquis — image 16",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
               "src": "images/croquis-25.jpeg",
               "alt": "Croquis — image 25",
               "width": "quarter",
@@ -933,14 +915,56 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/croquis-27.jpeg",
-              "alt": "Croquis — image 27",
+              "src": "images/croquis-28.jpeg",
+              "alt": "Croquis — image 28",
               "width": "quarter",
               "fitContain": false
             },
             {
-              "src": "images/croquis-28.jpeg",
-              "alt": "Croquis — image 28",
+              "src": "images/croquis-35.jpeg",
+              "alt": "Croquis — image 35",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/croquis-36.jpeg",
+              "alt": "Croquis — image 36",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/croquis-08.jpeg",
+              "alt": "Croquis — image 8",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/croquis-19.jpeg",
+              "alt": "Croquis — image 19",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/croquis-01.jpeg",
+              "alt": "Croquis — image 1",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/croquis-11.jpeg",
+              "alt": "Croquis — image 11",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/croquis-17.jpeg",
+              "alt": "Croquis — image 17",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/croquis-18.jpeg",
+              "alt": "Croquis — image 18",
               "width": "quarter",
               "fitContain": false
             },
@@ -979,24 +1003,6 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Croquis — image 34",
               "width": "quarter",
               "fitContain": false
-            },
-            {
-              "src": "images/croquis-35.jpeg",
-              "alt": "Croquis — image 35",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/croquis-36.jpeg",
-              "alt": "Croquis — image 36",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/croquis-37.jpeg",
-              "alt": "Croquis — image 37",
-              "width": "quarter",
-              "fitContain": false
             }
           ]
         }
@@ -1004,6 +1010,7 @@ window.PORTFOLIO_CONTENT = {
       "category": "Croquis, dessin",
       "cardSize": "half",
       "cardImage": "projets/dessin/croquis/images/croquis-09.jpeg",
+      "cardRatio": "6941 / 4919",
       "cardAlt": "Croquis",
       "cardYear": "2025",
       "cardDescription": "Série de recherches rapides pour saisir atmosphères, proportions et rapports de matières."
@@ -1023,12 +1030,6 @@ window.PORTFOLIO_CONTENT = {
           "type": "grid",
           "items": [
             {
-              "src": "images/modele-vivant-01.jpeg",
-              "alt": "Modèle vivant — image 1",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
               "src": "images/modele-vivant-02.jpeg",
               "alt": "Modèle vivant — image 2",
               "width": "quarter",
@@ -1045,6 +1046,12 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Modèle vivant — image 4",
               "width": "quarter",
               "fitContain": false
+            },
+            {
+              "src": "images/modele-vivant-01.jpeg",
+              "alt": "Modèle vivant — image 1",
+              "width": "quarter",
+              "fitContain": false
             }
           ]
         }
@@ -1053,6 +1060,7 @@ window.PORTFOLIO_CONTENT = {
       "cardSize": "third",
       "cardAspect": "portrait",
       "cardImage": "projets/dessin/modele-vivant/images/modele-vivant-02.jpeg",
+      "cardRatio": "1704 / 2341",
       "cardAlt": "Dessin",
       "cardYear": "2024",
       "cardDescription": "Travaux de représentation plus posés autour du trait, du contraste et de la profondeur."
@@ -1164,6 +1172,7 @@ window.PORTFOLIO_CONTENT = {
       "category": "Volume",
       "cardSize": "six",
       "cardImage": "projets/volume/maquette-coupe-maison-amenagement-interieur/images/maquette-coupe-maison-amenagement-interieur-01.jpeg",
+      "cardRatio": "7611 / 5318",
       "cardAlt": "Maquette coupe de maison et aménagement intérieur",
       "cardYear": "2025",
       "cardDescription": "Maquette analytique révélant structure, coupe habitée et organisation spatiale intérieure."
@@ -1222,6 +1231,7 @@ window.PORTFOLIO_CONTENT = {
       "cardSize": "third",
       "cardAspect": "portrait",
       "cardImage": "projets/volume/oeuf-de-faberge/images/oeuf-de-faberge-01.jpeg",
+      "cardRatio": "3967 / 5451",
       "cardAlt": "Oeuf de Fabergé",
       "cardYear": "2024",
       "cardDescription": "Exercice de détail, de symétrie et d'ornement autour d'un petit volume précieux."
@@ -1245,8 +1255,20 @@ window.PORTFOLIO_CONTENT = {
           "type": "grid",
           "items": [
             {
-              "src": "images/sculpture-fil-de-fer-01.jpeg",
-              "alt": "Sculpture en fil de fer — image 1",
+              "src": "images/sculpture-fil-de-fer-05.jpeg",
+              "alt": "Sculpture en fil de fer — image 5",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/sculpture-fil-de-fer-06.jpeg",
+              "alt": "Sculpture en fil de fer — image 6",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/sculpture-fil-de-fer-04.jpeg",
+              "alt": "Sculpture en fil de fer — image 4",
               "width": "quarter",
               "fitContain": false
             },
@@ -1263,20 +1285,8 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/sculpture-fil-de-fer-04.jpeg",
-              "alt": "Sculpture en fil de fer — image 4",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/sculpture-fil-de-fer-05.jpeg",
-              "alt": "Sculpture en fil de fer — image 5",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/sculpture-fil-de-fer-06.jpeg",
-              "alt": "Sculpture en fil de fer — image 6",
+              "src": "images/sculpture-fil-de-fer-01.jpeg",
+              "alt": "Sculpture en fil de fer — image 1",
               "width": "quarter",
               "fitContain": false
             }
@@ -1291,6 +1301,7 @@ window.PORTFOLIO_CONTENT = {
       "category": "Volume",
       "cardSize": "half",
       "cardImage": "projets/volume/sculpture-fil-de-fer/images/sculpture-fil-de-fer-05.jpeg",
+      "cardRatio": "6902 / 6007",
       "cardAlt": "Sculpture en fil de fer",
       "cardYear": "2024",
       "cardDescription": "Recherche sur le trait dans l'espace, la tension et les silhouettes construites par le vide."
@@ -1389,7 +1400,10 @@ window.PORTFOLIO_CONTENT = {
       ],
       "category": "Design",
       "cardSize": "half",
+      "cardImageFit": "contain",
+      "cardAspect": "widescreen",
       "cardImage": "projets/design/graphique/charte-graphique-restaurant/images/charte-graphique-restaurant-01.jpeg",
+      "cardRatio": "1920 / 1080",
       "cardAlt": "Charte graphique",
       "cardYear": "2025",
       "cardDescription": "Système visuel autour de la hiérarchie, des contrastes et d'une palette structurante."
@@ -1422,6 +1436,12 @@ window.PORTFOLIO_CONTENT = {
           "type": "grid",
           "items": [
             {
+              "src": "images/lampe-sur-pied-06.jpeg",
+              "alt": "Lampe sur pied — image 6",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
               "src": "images/lampe-sur-pied-01.jpeg",
               "alt": "Lampe sur pied — image 1",
               "width": "quarter",
@@ -1450,12 +1470,6 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Lampe sur pied — image 5",
               "width": "quarter",
               "fitContain": false
-            },
-            {
-              "src": "images/lampe-sur-pied-06.jpeg",
-              "alt": "Lampe sur pied — image 6",
-              "width": "quarter",
-              "fitContain": false
             }
           ]
         },
@@ -1465,10 +1479,11 @@ window.PORTFOLIO_CONTENT = {
         }
       ],
       "category": "Design",
-      "cardSize": "third",
+      "cardSize": "half",
       "cardImageFit": "contain",
       "cardAspect": "landscape",
       "cardImage": "projets/design/produit/lampe-sur-pied/images/lampe-sur-pied-06.jpeg",
+      "cardRatio": "4736 / 3340",
       "cardAlt": "Lampe sur pied",
       "cardYear": "2025",
       "cardDescription": "Objet lumineux conçu comme une ligne verticale, entre présence discrète et diffusion chaude."
@@ -1491,6 +1506,12 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "grid",
           "items": [
+            {
+              "src": "images/poste-radio-07.jpeg",
+              "alt": "Poste radio — image 7",
+              "width": "quarter",
+              "fitContain": false
+            },
             {
               "src": "images/poste-radio-01.jpeg",
               "alt": "Poste radio — image 1",
@@ -1528,12 +1549,6 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/poste-radio-07.jpeg",
-              "alt": "Poste radio — image 7",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
               "src": "images/poste-radio-08.jpeg",
               "alt": "Poste radio — image 8",
               "width": "quarter",
@@ -1548,10 +1563,11 @@ window.PORTFOLIO_CONTENT = {
         }
       ],
       "category": "Design",
-      "cardSize": "third",
+      "cardSize": "half",
       "cardImageFit": "contain",
       "cardAspect": "landscape-wide",
       "cardImage": "projets/design/produit/poste-radio/images/poste-radio-07.jpeg",
+      "cardRatio": "1050 / 600",
       "cardAlt": "Poste radio",
       "cardYear": "2024",
       "cardDescription": "Réinterprétation compacte d'un objet familier en travaillant la prise en main et la face avant."
@@ -1571,14 +1587,14 @@ window.PORTFOLIO_CONTENT = {
           "type": "grid",
           "items": [
             {
-              "src": "images/dessins-textures-01.jpeg",
-              "alt": "Dessins et textures — image 1",
+              "src": "images/dessins-textures-02.jpeg",
+              "alt": "Dessins et textures — image 2",
               "width": "quarter",
               "fitContain": false
             },
             {
-              "src": "images/dessins-textures-02.jpeg",
-              "alt": "Dessins et textures — image 2",
+              "src": "images/dessins-textures-01.jpeg",
+              "alt": "Dessins et textures — image 1",
               "width": "quarter",
               "fitContain": false
             },
@@ -1605,8 +1621,9 @@ window.PORTFOLIO_CONTENT = {
       ],
       "category": "Architecture d'intérieur",
       "cardSize": "third",
-      "cardAspect": "portrait",
-      "cardImage": "projets/architecture-interieure/dessins-textures/images/dessins-textures-01.jpeg",
+      "cardAspect": "portrait-wide",
+      "cardImage": "projets/architecture-interieure/dessins-textures/images/dessins-textures-02.jpeg",
+      "cardRatio": "5175 / 6344",
       "cardAlt": "Dessins et textures",
       "cardYear": "",
       "cardDescription": ""
@@ -1632,8 +1649,8 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/un-batiment-une-semaine-02.jpeg",
-              "alt": "Un bâtiment, une semaine — image 2",
+              "src": "images/un-batiment-une-semaine-15.jpeg",
+              "alt": "Un bâtiment, une semaine — image 15",
               "width": "quarter",
               "fitContain": false
             },
@@ -1646,6 +1663,24 @@ window.PORTFOLIO_CONTENT = {
             {
               "src": "images/un-batiment-une-semaine-04.jpeg",
               "alt": "Un bâtiment, une semaine — image 4",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/un-batiment-une-semaine-10.jpeg",
+              "alt": "Un bâtiment, une semaine — image 10",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/un-batiment-une-semaine-11.jpeg",
+              "alt": "Un bâtiment, une semaine — image 11",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/un-batiment-une-semaine-12.jpeg",
+              "alt": "Un bâtiment, une semaine — image 12",
               "width": "quarter",
               "fitContain": false
             },
@@ -1674,26 +1709,14 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
+              "src": "images/un-batiment-une-semaine-02.jpeg",
+              "alt": "Un bâtiment, une semaine — image 2",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
               "src": "images/un-batiment-une-semaine-09.jpeg",
               "alt": "Un bâtiment, une semaine — image 9",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/un-batiment-une-semaine-10.jpeg",
-              "alt": "Un bâtiment, une semaine — image 10",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/un-batiment-une-semaine-11.jpeg",
-              "alt": "Un bâtiment, une semaine — image 11",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/un-batiment-une-semaine-12.jpeg",
-              "alt": "Un bâtiment, une semaine — image 12",
               "width": "quarter",
               "fitContain": false
             },
@@ -1708,12 +1731,6 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Un bâtiment, une semaine — image 14",
               "width": "quarter",
               "fitContain": false
-            },
-            {
-              "src": "images/un-batiment-une-semaine-15.jpeg",
-              "alt": "Un bâtiment, une semaine — image 15",
-              "width": "quarter",
-              "fitContain": false
             }
           ]
         }
@@ -1721,6 +1738,7 @@ window.PORTFOLIO_CONTENT = {
       "category": "Architecture",
       "cardSize": "half",
       "cardImage": "projets/architecture/un-batiment-une-semaine/images/un-batiment-une-semaine-01.jpeg",
+      "cardRatio": "4736 / 3340",
       "cardAlt": "Un bâtiment, une semaine",
       "cardYear": "",
       "cardDescription": ""
@@ -1750,8 +1768,9 @@ window.PORTFOLIO_CONTENT = {
       ],
       "category": "Design",
       "cardSize": "third",
-      "cardAspect": "portrait",
+      "cardAspect": "portrait-tall",
       "cardImage": "projets/design/graphique/affiche-camping/images/affiche-camping-01.jpeg",
+      "cardRatio": "3340 / 4736",
       "cardAlt": "Affiche camping",
       "cardYear": "",
       "cardDescription": ""
@@ -1788,6 +1807,7 @@ window.PORTFOLIO_CONTENT = {
       "category": "Design",
       "cardSize": "half",
       "cardImage": "projets/design/produit/vehicule-sous-marin/images/vehicule-sous-marin-01.jpeg",
+      "cardRatio": "4736 / 3340",
       "cardAlt": "Véhicule sous-marin",
       "cardYear": "",
       "cardDescription": ""
@@ -1835,7 +1855,9 @@ window.PORTFOLIO_CONTENT = {
       ],
       "category": "Design",
       "cardSize": "square",
+      "cardAspect": "square",
       "cardImage": "projets/design/produit/vinyle-chanteur/images/vinyle-chanteur-01.jpeg",
+      "cardRatio": "809 / 806",
       "cardAlt": "Vinyle chanteur",
       "cardYear": "",
       "cardDescription": ""
@@ -1855,14 +1877,14 @@ window.PORTFOLIO_CONTENT = {
           "type": "grid",
           "items": [
             {
-              "src": "images/projets-personnels-01.jpeg",
-              "alt": "Projets personnels — image 1",
+              "src": "images/projets-personnels-02.jpeg",
+              "alt": "Projets personnels — image 2",
               "width": "quarter",
               "fitContain": false
             },
             {
-              "src": "images/projets-personnels-02.jpeg",
-              "alt": "Projets personnels — image 2",
+              "src": "images/projets-personnels-07.jpeg",
+              "alt": "Projets personnels — image 7",
               "width": "quarter",
               "fitContain": false
             },
@@ -1891,14 +1913,14 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/projets-personnels-07.jpeg",
-              "alt": "Projets personnels — image 7",
+              "src": "images/projets-personnels-08.jpeg",
+              "alt": "Projets personnels — image 8",
               "width": "quarter",
               "fitContain": false
             },
             {
-              "src": "images/projets-personnels-08.jpeg",
-              "alt": "Projets personnels — image 8",
+              "src": "images/projets-personnels-01.jpeg",
+              "alt": "Projets personnels — image 1",
               "width": "quarter",
               "fitContain": false
             }
@@ -1909,6 +1931,7 @@ window.PORTFOLIO_CONTENT = {
       "cardSize": "third",
       "cardAspect": "portrait",
       "cardImage": "projets/dessin/projets-personnels/images/projets-personnels-02.jpeg",
+      "cardRatio": "5924 / 8037",
       "cardAlt": "Projets personnels",
       "cardYear": "",
       "cardDescription": ""
@@ -1927,36 +1950,6 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "grid",
           "items": [
-            {
-              "src": "images/maquette-etude-01.jpeg",
-              "alt": "Maquette étude — image 1",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/maquette-etude-02.jpeg",
-              "alt": "Maquette étude — image 2",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/maquette-etude-03.jpeg",
-              "alt": "Maquette étude — image 3",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/maquette-etude-04.jpeg",
-              "alt": "Maquette étude — image 4",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/maquette-etude-05.jpeg",
-              "alt": "Maquette étude — image 5",
-              "width": "quarter",
-              "fitContain": false
-            },
             {
               "src": "images/maquette-etude-06.jpeg",
               "alt": "Maquette étude — image 6",
@@ -1986,14 +1979,45 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Maquette étude — image 10",
               "width": "quarter",
               "fitContain": false
+            },
+            {
+              "src": "images/maquette-etude-01.jpeg",
+              "alt": "Maquette étude — image 1",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/maquette-etude-02.jpeg",
+              "alt": "Maquette étude — image 2",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/maquette-etude-04.jpeg",
+              "alt": "Maquette étude — image 4",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/maquette-etude-05.jpeg",
+              "alt": "Maquette étude — image 5",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/maquette-etude-03.jpeg",
+              "alt": "Maquette étude — image 3",
+              "width": "quarter",
+              "fitContain": false
             }
           ]
         }
       ],
       "category": "Volume",
-      "cardSize": "third",
-      "cardAspect": "portrait",
-      "cardImage": "projets/volume/maquette-etude/images/maquette-etude-07.jpeg",
+      "cardSize": "half",
+      "cardAspect": "auto",
+      "cardImage": "projets/volume/maquette-etude/images/maquette-etude-06.jpeg",
+      "cardRatio": "7498 / 5800",
       "cardAlt": "Maquette étude",
       "cardYear": "",
       "cardDescription": ""
@@ -2013,20 +2037,8 @@ window.PORTFOLIO_CONTENT = {
           "type": "grid",
           "items": [
             {
-              "src": "images/sculpture-en-papier-01.jpeg",
-              "alt": "Sculpture en papier — image 1",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/sculpture-en-papier-02.jpeg",
-              "alt": "Sculpture en papier — image 2",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/sculpture-en-papier-03.jpeg",
-              "alt": "Sculpture en papier — image 3",
+              "src": "images/sculpture-en-papier-05.jpeg",
+              "alt": "Sculpture en papier — image 5",
               "width": "quarter",
               "fitContain": false
             },
@@ -2037,8 +2049,20 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/sculpture-en-papier-05.jpeg",
-              "alt": "Sculpture en papier — image 5",
+              "src": "images/sculpture-en-papier-03.jpeg",
+              "alt": "Sculpture en papier — image 3",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/sculpture-en-papier-02.jpeg",
+              "alt": "Sculpture en papier — image 2",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/sculpture-en-papier-01.jpeg",
+              "alt": "Sculpture en papier — image 1",
               "width": "quarter",
               "fitContain": false
             }
@@ -2049,6 +2073,7 @@ window.PORTFOLIO_CONTENT = {
       "cardSize": "third",
       "cardAspect": "portrait",
       "cardImage": "projets/volume/sculpture-en-papier/images/sculpture-en-papier-05.jpeg",
+      "cardRatio": "6048 / 8064",
       "cardAlt": "Sculpture en papier",
       "cardYear": "",
       "cardDescription": ""
@@ -2090,8 +2115,9 @@ window.PORTFOLIO_CONTENT = {
       ],
       "category": "Volume",
       "cardSize": "third",
-      "cardAspect": "portrait",
+      "cardAspect": "portrait-wide",
       "cardImage": "projets/volume/telephone-retro-fil-de-fer/images/telephone-retro-fil-de-fer-01.jpeg",
+      "cardRatio": "5376 / 6541",
       "cardAlt": "Téléphone rétro en fil de fer",
       "cardYear": "",
       "cardDescription": ""
