@@ -129,7 +129,6 @@ img {
 }
 
 #intro,
-#vision,
 #projets,
 #contact {
     scroll-margin-top: var(--header-height);
@@ -815,179 +814,6 @@ img {
     opacity: 0;
 }
 
-.page-home .manifesto-panel::before {
-    background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(165, 107, 69, 0.05));
-}
-
-.page-home .manifesto-panel .panel-inner {
-    grid-template-columns: minmax(280px, 0.7fr) minmax(0, 1.3fr);
-    gap: 2rem;
-}
-
-.page-home .manifesto-side {
-    padding: 2rem 0;
-}
-
-.page-home .manifesto-side strong {
-    display: block;
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(2.4rem, 5vw, 4rem);
-    line-height: 0.94;
-}
-
-.page-home .manifesto-side p {
-    max-width: 28ch;
-    margin-top: 1rem;
-    font-size: 0.96rem;
-    line-height: 1.8;
-    color: var(--muted);
-}
-
-.page-home .manifesto-side span {
-    display: block;
-    margin-top: 1.2rem;
-    font-size: 0.78rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-}
-
-.page-home .manifesto-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-.page-home .manifesto-card {
-    min-height: 220px;
-    padding: 1.5rem;
-    border-radius: 24px;
-    border: 1px solid rgba(31, 26, 22, 0.08);
-    background: rgba(255, 255, 255, 0.42);
-    box-shadow: 0 14px 48px rgba(35, 24, 17, 0.07);
-    transform: translateY(64px) scale(0.96);
-    opacity: 0;
-    transition: transform 0.85s cubic-bezier(0.2, 0.9, 0.2, 1), opacity 0.85s ease;
-}
-
-.page-home .page-panel.is-active .manifesto-card {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-}
-
-.page-home .page-panel.is-leaving .manifesto-card {
-    transform: translateY(-46px) scale(0.96);
-    opacity: 0;
-}
-
-.page-home .manifesto-card:nth-child(2) {
-    transition-delay: 0.08s;
-}
-
-.page-home .manifesto-card:nth-child(3) {
-    transition-delay: 0.16s;
-}
-
-.page-home .manifesto-card:nth-child(4) {
-    transition-delay: 0.24s;
-}
-
-.page-home .manifesto-card h3 {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 1.6rem;
-    line-height: 1.02;
-    margin-bottom: 0.8rem;
-}
-
-.page-home .manifesto-card p {
-    font-size: 0.95rem;
-    line-height: 1.8;
-    color: var(--muted);
-}
-
-.page-home .projets-panel {
-    background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(31, 26, 22, 0.02));
-}
-
-.page-home .projets-panel .panel-inner {
-    gap: 1.8rem;
-}
-
-.page-home .projets-head {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
-    gap: 1.5rem;
-    align-items: end;
-}
-
-.page-home .projets-title {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(3rem, 6vw, 5rem);
-    line-height: 0.93;
-    transform: translateY(60px);
-    opacity: 0;
-    transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.2, 1), opacity 0.8s ease;
-}
-
-.page-home .projets-panel.is-active .projets-title {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.page-home .projets-panel.is-leaving .projets-title {
-    transform: translateY(-40px);
-    opacity: 0;
-}
-
-.page-home .projets-link {
-    justify-self: end;
-    align-self: end;
-    font-size: 0.78rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--text);
-    transform: translateY(40px);
-    opacity: 0;
-    transition: transform 0.8s ease 0.16s, opacity 0.8s ease 0.16s;
-}
-
-.page-home .projets-link::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 1px;
-    margin-top: 0.4rem;
-    background: currentColor;
-    transform: scaleX(0.4);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-}
-
-.page-home .projets-link:hover::after {
-    transform: scaleX(1);
-}
-
-.page-home .projets-panel.is-active .projets-link {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.page-home .projets-panel.is-leaving .projets-link {
-    transform: translateY(-24px);
-    opacity: 0;
-}
-
-.page-home .portfolio-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    justify-content: center;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
 .page-home .portfolio-card {
     position: relative;
     width: 320px;
@@ -1009,24 +835,6 @@ img {
         transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
         opacity 0.85s ease,
         box-shadow 0.45s ease;
-}
-
-.page-home .projets-panel.is-active .portfolio-card {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-}
-
-.page-home .projets-panel.is-active .portfolio-card:nth-child(2) {
-    transition-delay: 0.1s;
-}
-
-.page-home .projets-panel.is-active .portfolio-card:nth-child(3) {
-    transition-delay: 0.2s;
-}
-
-.page-home .projets-panel.is-leaving .portfolio-card {
-    transform: translateY(-58px) scale(0.95);
-    opacity: 0;
 }
 
 .page-home .portfolio-card:focus,
@@ -1358,7 +1166,6 @@ img {
 
 @media (max-width: 1100px) {
     .page-home .hero-panel .panel-inner,
-    .page-home .manifesto-panel .panel-inner,
     .page-home .contact-panel .panel-inner {
         grid-template-columns: minmax(0, 1fr);
     }
@@ -1376,24 +1183,6 @@ img {
     .page-home .page-panel {
         min-height: auto;
         padding: 3.5rem 0;
-    }
-
-    .page-home .portfolio-grid {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .page-home .manifesto-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .page-home .projets-head {
-        grid-template-columns: 1fr;
-        display: grid;
-    }
-
-    .page-home .projets-link {
-        justify-self: start;
     }
 
     .page-home .panel-rail {
@@ -1705,6 +1494,58 @@ img {
     }
 
     .page-projets-continu .portfolio-card.card-square {
+        aspect-ratio: 1;
+    }
+}
+
+/* Catalogue complet intégré à l'accueil. */
+.page-home .home-projects-catalog {
+    min-height: auto;
+    align-items: flex-start;
+    padding: clamp(4rem, 8vw, 7rem) 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(31, 26, 22, 0.025));
+}
+
+.page-home .home-projects-heading {
+    margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.page-home .home-projects-heading .page-title {
+    max-width: 12ch;
+    font-size: clamp(3rem, 7vw, 5.6rem);
+    line-height: 0.92;
+}
+
+.page-home .home-projects-catalog .portfolio-card {
+    width: auto;
+    aspect-ratio: auto;
+    opacity: 1;
+    transform: none;
+}
+
+.projects-all-link {
+    width: max-content;
+    margin: 0 0 2rem auto;
+}
+
+@media (max-width: 760px) {
+    .page-home .home-projects-catalog {
+        padding: 3.5rem 0;
+    }
+
+    .page-home .home-projects-catalog .portfolio-card {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 7 / 10;
+    }
+
+    .page-home .home-projects-catalog .portfolio-card.card-half,
+    .page-home .home-projects-catalog .portfolio-card.card-six,
+    .page-home .home-projects-catalog .portfolio-card.card-eight {
+        aspect-ratio: 29 / 20;
+    }
+
+    .page-home .home-projects-catalog .portfolio-card.card-square {
         aspect-ratio: 1;
     }
 }

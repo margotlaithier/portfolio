@@ -28,39 +28,6 @@ window.PORTFOLIO_CONTENT = {
       ],
       "note": ""
     },
-    "about": {
-      "panelLabel": "À propos",
-      "lead": "Un travail entre dessin, espace et mise en oeuvre.",
-      "caption": "École, ateliers, recherches",
-      "cards": [
-        {
-          "title": "Plans",
-          "text": "Travailler la distribution, les seuils, les circulations et les rapports entre les pièces."
-        },
-        {
-          "title": "Maquettes",
-          "text": "Passer par le volume pour vérifier les proportions, les masses et la lumière."
-        },
-        {
-          "title": "Matières",
-          "text": "Observer ce que changent les textures, les assemblages et la couleur dans la perception d'un espace."
-        },
-        {
-          "title": "Détails",
-          "text": "Faire dialoguer structure, mobilier et usage sans séparer brutalement l'idée de sa mise en oeuvre."
-        }
-      ]
-    },
-    "featured": {
-      "panelLabel": "Sélection",
-      "title": "Quelques projets.",
-      "linkLabel": "Voir tous les projets",
-      "selectedSlugs": [
-        "chambre-parentale",
-        "quartier-maisons-roses",
-        "lampe-sur-pied"
-      ]
-    },
     "contact": {
       "panelLabel": "Contact",
       "title": "Échanger ?",
@@ -71,8 +38,7 @@ window.PORTFOLIO_CONTENT = {
   },
   "projectsPage": {
     "heroLabel": "Projets",
-    "heroTitle": "Projets et études.",
-    "categoryLinkLabel": "Voir tous les projets"
+    "heroTitle": "Projets et études."
   },
   "categories": [
     {

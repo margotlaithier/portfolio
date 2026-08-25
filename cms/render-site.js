@@ -55,7 +55,6 @@
 
                     <nav class="site-nav">
                         <a href="${current === 'home' ? '#intro' : `${toHome}#intro`}" data-nav="intro"${current === 'home' ? ' class="is-current"' : ''}>Accueil</a>
-                        <a href="${current === 'home' ? '#vision' : `${toHome}#vision`}" data-nav="vision">À propos</a>
                         <a href="${projetHref}" data-nav="projets"${current !== 'home' ? ' class="is-current"' : ''}>Projets</a>
                         <a href="${current === 'home' ? '#contact' : `${toHome}#contact`}" data-nav="contact">Contact</a>
                     </nav>
@@ -79,7 +78,6 @@
                             <span class="footer-heading">Navigation</span>
                             <div class="footer-list">
                                 <a href="${current === 'home' ? '#intro' : `${toHome}#intro`}">Accueil</a>
-                                <a href="${current === 'home' ? '#vision' : `${toHome}#vision`}">À propos</a>
                                 <a href="${current === 'home' ? '#projets' : `${toHome}#projets`}">Projets</a>
                                 <a href="${current === 'home' ? '#contact' : `${toHome}#contact`}">Contact</a>
                             </div>
@@ -116,6 +114,55 @@
         `;
     }
 
+    function projectsCatalog(rootPrefix, destination = 'projects') {
+        const requestedCategory = new URLSearchParams(window.location.search).get('category');
+        const categoryParam = content.categories.some((category) => category.title === requestedCategory)
+            ? requestedCategory
+            : '';
+        const destinationPath = destination === 'home' ? `${rootPrefix}index.html` : `${rootPrefix}projets.html`;
+        const categoryHash = destination === 'home' ? '#projets' : '';
+
+        const groupedMarkup = content.categories.map((category) => {
+            const items = projects.filter((project) => project.category === category.title);
+            return `
+                <div class="projets-group">
+                    <div class="group-head">
+                        <h2 class="group-title">${escapeHtml(category.title)}</h2>
+                    </div>
+                    <div class="projets-row">
+                        ${items.map((project, index) => renderProjectCard({ ...project, cardNumber: project.cardNumber || project.globalNumber || index + 1 }, rootPrefix)).join('')}
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        if (!categoryParam) {
+            return {
+                categoryParam,
+                pageTitle: content.projectsPage.heroTitle,
+                markup: `<div class="projets-grouped-view">${groupedMarkup}</div>`,
+            };
+        }
+
+        const filteredProjects = projects.filter((project) => project.category === categoryParam);
+        return {
+            categoryParam,
+            pageTitle: categoryParam,
+            markup: `
+                <div class="projets-flow-view">
+                    <a class="group-link projects-all-link" href="${destinationPath}${categoryHash}">Toutes les catégories</a>
+                    <div class="projets-flow">
+                        ${groupBy(filteredProjects, 3).map((row) => `
+                            <div class="projets-row">
+                                ${row.map((project) => renderProjectCard(project, rootPrefix)).join('')}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `,
+        };
+    }
+
     function enhanceHomeInteractions() {
         const panels = Array.from(document.querySelectorAll('.page-panel'));
         const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
@@ -135,16 +182,13 @@
 
         function updatePanelState() {
             const viewportCenter = window.innerHeight * 0.5;
-            let currentPanel = panels[0];
+            let currentPanel = panels.find((panel) => {
+                const rect = panel.getBoundingClientRect();
+                return rect.top <= viewportCenter && rect.bottom >= viewportCenter;
+            }) || panels[0];
 
             panels.forEach((panel) => {
                 const rect = panel.getBoundingClientRect();
-                const panelMiddle = rect.top + rect.height / 2;
-                const distanceToCenter = Math.abs(panelMiddle - viewportCenter);
-
-                if (!currentPanel || distanceToCenter < Math.abs((currentPanel.getBoundingClientRect().top + currentPanel.getBoundingClientRect().height / 2) - viewportCenter)) {
-                    currentPanel = panel;
-                }
 
                 const activeBandTop = window.innerHeight * 0.18;
                 const activeBandBottom = window.innerHeight * 0.82;
@@ -195,20 +239,17 @@
     }
 
     function renderHome(rootPrefix) {
-        const selectedProjects = content.home.featured.selectedSlugs
-            .map((slug) => projectsBySlug.get(slug))
-            .filter(Boolean)
-            .map((project, index) => ({ ...project, cardNumber: index + 1 }));
-
         const heroImages = content.home.hero.images || [];
         const [largeImage, smallImage] = heroImages;
+        const catalog = projectsCatalog(rootPrefix, 'home');
 
         document.title = content.site.portfolioTitle || 'Portfolio';
+        document.body.classList.add('page-projets');
+        document.body.classList.toggle('page-projets-continu', Boolean(catalog.categoryParam));
         document.body.innerHTML = `
             ${renderHeader(rootPrefix, 'home')}
             <div class="panel-rail" aria-hidden="true">
                 <span class="panel-dot" data-dot="intro"></span>
-                <span class="panel-dot" data-dot="vision"></span>
                 <span class="panel-dot" data-dot="projets"></span>
                 <span class="panel-dot" data-dot="contact"></span>
             </div>
@@ -236,38 +277,13 @@
                         </div>
                     </section>
 
-                    <section class="page-panel manifesto-panel" id="vision" data-panel="vision">
-                        <div class="panel-inner">
-                            <div class="manifesto-side">
-                                <span class="panel-label">${escapeHtml(content.home.about.panelLabel)}</span>
-                                <strong>${escapeHtml(content.home.about.lead)}</strong>
-                                <span>${escapeHtml(content.home.about.caption)}</span>
+                    <section class="page-panel home-projects-catalog projets-section" id="projets" data-panel="projets">
+                        <div class="container">
+                            <div class="home-projects-heading">
+                                <span class="section-label">${escapeHtml(content.projectsPage.heroLabel)}</span>
+                                <h2 class="page-title">${escapeHtml(catalog.pageTitle)}</h2>
                             </div>
-
-                            <div class="manifesto-grid">
-                                ${(content.home.about.cards || []).map((card) => `
-                                    <article class="manifesto-card">
-                                        <h3>${escapeHtml(card.title)}</h3>
-                                        <p>${escapeHtml(card.text)}</p>
-                                    </article>
-                                `).join('')}
-                            </div>
-                        </div>
-                    </section>
-
-                    <section class="page-panel projets-panel" id="projets" data-panel="projets">
-                        <div class="panel-inner">
-                            <div class="projets-head">
-                                <div>
-                                    <span class="panel-label">${escapeHtml(content.home.featured.panelLabel)}</span>
-                                    <h2 class="projets-title">${escapeHtml(content.home.featured.title)}</h2>
-                                </div>
-                                <a class="projets-link" href="${rootPrefix}projets.html">${escapeHtml(content.home.featured.linkLabel)}</a>
-                            </div>
-
-                            <div class="portfolio-grid">
-                                ${selectedProjects.map((project) => renderProjectCard(project, rootPrefix)).join('')}
-                            </div>
+                            ${catalog.markup}
                         </div>
                     </section>
 
@@ -302,43 +318,9 @@
     }
 
     function renderProjectsPage(rootPrefix) {
-        const categoryParam = new URLSearchParams(window.location.search).get('category');
+        const catalog = projectsCatalog(rootPrefix, 'projects');
         document.title = 'Projets';
-
-        const groupedMarkup = content.categories.map((category) => {
-            const items = projects.filter((project) => project.category === category.title);
-            return `
-                <div class="projets-group">
-                    <div class="group-head">
-                        <h2 class="group-title">${escapeHtml(category.title)}</h2>
-                        <a class="group-link" href="${rootPrefix}projets.html?category=${encodeURIComponent(category.title)}">${escapeHtml(content.projectsPage.categoryLinkLabel)}</a>
-                    </div>
-                    <div class="projets-row">
-                        ${items.map((project, index) => renderProjectCard({ ...project, cardNumber: project.cardNumber || project.globalNumber || index + 1 }, rootPrefix)).join('')}
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-        let flowMarkup = '';
-        let pageTitle = content.projectsPage.heroTitle;
-        if (categoryParam) {
-            const filteredProjects = projects.filter((project) => project.category === categoryParam);
-            pageTitle = categoryParam;
-            flowMarkup = `
-                <div class="projets-flow-view">
-                    <div class="projets-flow">
-                        ${groupBy(filteredProjects, 3).map((row, index) => `
-                            <div class="projets-row">
-                                ${row.map((project) => renderProjectCard({ ...project, cardNumber: index * 3 + 1 }, rootPrefix)).join('')}
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-        }
-
-        document.body.classList.toggle('page-projets-continu', Boolean(categoryParam));
+        document.body.classList.toggle('page-projets-continu', Boolean(catalog.categoryParam));
         document.body.innerHTML = `
             ${renderHeader(rootPrefix, 'projects')}
             <main>
@@ -346,14 +328,14 @@
                     <div class="container hero-grid">
                         <div>
                             <span class="section-label">${escapeHtml(content.projectsPage.heroLabel)}</span>
-                            <h1 class="page-title">${escapeHtml(pageTitle)}</h1>
+                            <h1 class="page-title">${escapeHtml(catalog.pageTitle)}</h1>
                         </div>
                     </div>
                 </section>
 
                 <section class="projets-section">
                     <div class="container">
-                        ${categoryParam ? flowMarkup : `<div class="projets-grouped-view">${groupedMarkup}</div>`}
+                        ${catalog.markup}
                     </div>
                 </section>
             </main>
@@ -474,7 +456,7 @@
             <main class="study-page">
                 <section class="study-hero">
                     <div class="container">
-                        <a class="project-back-link" href="${rootPrefix}projets.html" aria-label="Retour aux projets">
+                        <a class="project-back-link" href="${rootPrefix}index.html#projets" aria-label="Retour aux projets">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M19 12H5M11 6l-6 6 6 6" />
                             </svg>

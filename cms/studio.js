@@ -202,6 +202,14 @@
         console.warn('Impossible de charger le brouillon studio.', error);
     }
 
+    if (state.data.home) {
+        delete state.data.home.about;
+        delete state.data.home.featured;
+    }
+    if (state.data.projectsPage) {
+        delete state.data.projectsPage.categoryLinkLabel;
+    }
+
     try {
         const githubDraft = localStorage.getItem(GITHUB_CONFIG_KEY);
         if (githubDraft) {
@@ -1178,32 +1186,6 @@
         render();
     }
 
-    function addAboutCard() {
-        state.data.home.about.cards = state.data.home.about.cards || [];
-        state.data.home.about.cards.push({
-            title: 'Nouvelle carte',
-            text: '',
-        });
-        persist();
-        render();
-    }
-
-    function moveAboutCard(index, direction) {
-        const cards = state.data.home.about.cards || [];
-        const target = index + direction;
-        if (target < 0 || target >= cards.length) return;
-        const [card] = cards.splice(index, 1);
-        cards.splice(target, 0, card);
-        persist();
-        render();
-    }
-
-    function removeAboutCard(index) {
-        (state.data.home.about.cards || []).splice(index, 1);
-        persist();
-        render();
-    }
-
     function addBlock(type) {
         const project = projectBySlug(state.activeProjectSlug);
         if (!project) return;
@@ -1378,57 +1360,18 @@
                         </div>
                     </div>
                     <div class="studio-card">
-                        <h2>À propos</h2>
+                        <h2>Contact</h2>
                         <div class="studio-grid">
-                            <div class="studio-field"><label>Label</label><input data-path="home.about.panelLabel" value="${escapeHtml(state.data.home.about.panelLabel || '')}" /></div>
-                            <div class="studio-field"><label>Petit texte</label><input data-path="home.about.caption" value="${escapeHtml(state.data.home.about.caption || '')}" /></div>
-                        </div>
-                        <div class="studio-field"><label>Accroche</label><textarea data-path="home.about.lead">${escapeHtml(state.data.home.about.lead || '')}</textarea></div>
-                    </div>
-                    <div class="studio-card">
-                        <div class="studio-block-header">
-                            <h2>Cartes À propos</h2>
-                            <div class="studio-inline-actions">
-                                <button type="button" data-action="add-about-card">Ajouter une carte</button>
-                            </div>
-                        </div>
-                        <div class="studio-list">
-                            ${(state.data.home.about.cards || []).map((card, index) => `
-                                <div class="studio-block">
-                                    <div class="studio-block-header">
-                                        <span class="studio-subtle-label">Carte ${index + 1}</span>
-                                        <div class="studio-inline-actions">
-                                            <button type="button" data-move-about-card="${index}" data-direction="-1">Monter</button>
-                                            <button type="button" data-move-about-card="${index}" data-direction="1">Descendre</button>
-                                            <button type="button" data-remove-about-card="${index}">Supprimer</button>
-                                        </div>
-                                    </div>
-                                    <div class="studio-grid">
-                                        <div class="studio-field"><label>Titre</label><input data-about-card-field="${index}.title" value="${escapeHtml(card.title || '')}" /></div>
-                                        <div class="studio-field"><label>Texte</label><textarea data-about-card-field="${index}.text">${escapeHtml(card.text || '')}</textarea></div>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                    <div class="studio-card">
-                        <h2>Sélection et contact</h2>
-                        <div class="studio-grid">
-                            <div class="studio-field"><label>Label sélection</label><input data-path="home.featured.panelLabel" value="${escapeHtml(state.data.home.featured.panelLabel || '')}" /></div>
-                            <div class="studio-field"><label>Titre sélection</label><input data-path="home.featured.title" value="${escapeHtml(state.data.home.featured.title || '')}" /></div>
-                            <div class="studio-field"><label>Lien sélection</label><input data-path="home.featured.linkLabel" value="${escapeHtml(state.data.home.featured.linkLabel || '')}" /></div>
                             <div class="studio-field"><label>Label contact</label><input data-path="home.contact.panelLabel" value="${escapeHtml(state.data.home.contact.panelLabel || '')}" /></div>
                             <div class="studio-field"><label>Titre contact</label><input data-path="home.contact.title" value="${escapeHtml(state.data.home.contact.title || '')}" /></div>
                             <div class="studio-field"><label>Email contact</label><input data-path="home.contact.email" value="${escapeHtml(state.data.home.contact.email || '')}" /></div>
                             <div class="studio-field"><label>Localisation contact</label><input data-path="home.contact.location" value="${escapeHtml(state.data.home.contact.location || '')}" /></div>
                         </div>
-                        <div class="studio-field"><label>Projets mis en avant</label><textarea data-plain-list="home.featured.selectedSlugs">${escapeHtml((state.data.home.featured.selectedSlugs || []).join('\n'))}</textarea></div>
                         <div class="studio-field"><label>Texte contact</label><textarea data-path="home.contact.text">${escapeHtml(state.data.home.contact.text || '')}</textarea></div>
-                        <div class="studio-note">Utilise un slug par ligne pour la sélection, dans l'ordre d'affichage voulu.</div>
                     </div>
                     <div class="studio-card">
                         <h2>Référence du portfolio existant</h2>
-                        <div class="studio-note">Cette section pilote directement les blocs déjà rendus par le vrai index.html public : hero, manifeste, sélection et contact.</div>
+                        <div class="studio-note">Cette section pilote directement le hero et le contact de l’accueil. Le catalogue central reprend les catégories et projets configurés dans les autres onglets.</div>
                         <div class="studio-note">Les changements ici doivent donc se refléter sur la page d’accueil sans reprendre le code à la main.</div>
                     </div>
                 </div>
@@ -1439,18 +1382,17 @@
             return `
                 <div class="studio-panel">
                     <div class="studio-card">
-                        <h2>Page projets</h2>
+                        <h2>Catalogue de l’accueil</h2>
                         <div class="studio-grid">
                             <div class="studio-field"><label>Label hero</label><input data-path="projectsPage.heroLabel" value="${escapeHtml(state.data.projectsPage.heroLabel || '')}" /></div>
                             <div class="studio-field"><label>Titre hero</label><input data-path="projectsPage.heroTitle" value="${escapeHtml(state.data.projectsPage.heroTitle || '')}" /></div>
-                            <div class="studio-field"><label>Label du lien catégorie</label><input data-path="projectsPage.categoryLinkLabel" value="${escapeHtml(state.data.projectsPage.categoryLinkLabel || '')}" /></div>
                         </div>
                         <div class="studio-note">L'ordre d'affichage des groupes suit l'ordre des catégories défini dans l’onglet Site.</div>
                         <div class="studio-note">L'ordre des cartes dans une catégorie suit l'ordre des projets dans l’onglet Pages projet.</div>
                     </div>
                     <div class="studio-card">
                         <h2>Référence du portfolio existant</h2>
-                        <div class="studio-note">Cette section pilote la vue groupée de projets.html ainsi que la vue filtrée ?category=... déjà utilisée dans le portfolio.</div>
+                        <div class="studio-note">Cette section pilote le catalogue groupé et les vues filtrées affichés directement sur la page d’accueil, ainsi que la page projets conservée pour compatibilité.</div>
                     </div>
                 </div>
             `;
@@ -1609,7 +1551,7 @@
                     <div class="studio-nav">
                         <button type="button" data-section="site"${state.activeSection === 'site' ? ' class="is-active"' : ''}>Site</button>
                         <button type="button" data-section="home"${state.activeSection === 'home' ? ' class="is-active"' : ''}>Accueil</button>
-                        <button type="button" data-section="projects-page"${state.activeSection === 'projects-page' ? ' class="is-active"' : ''}>Page projets</button>
+                        <button type="button" data-section="projects-page"${state.activeSection === 'projects-page' ? ' class="is-active"' : ''}>Catalogue projets</button>
                         <button type="button" data-section="projects"${state.activeSection === 'projects' ? ' class="is-active"' : ''}>Pages projet</button>
                     </div>
 
@@ -1668,7 +1610,6 @@
         root.querySelector('[data-action="add-project"]')?.addEventListener('click', addProject);
         root.querySelector('[data-action="add-category"]')?.addEventListener('click', addCategory);
         root.querySelector('[data-action="add-hero-image"]')?.addEventListener('click', addHeroImage);
-        root.querySelector('[data-action="add-about-card"]')?.addEventListener('click', addAboutCard);
         root.querySelector('[data-action="test-github"]')?.addEventListener('click', testGitHubConnection);
         root.querySelector('[data-action="diagnostic-github"]')?.addEventListener('click', runGitHubApiDiagnostic);
         root.querySelector('[data-action="commit-github"]')?.addEventListener('click', commitStudioChanges);
@@ -1711,10 +1652,6 @@
             const values = input.value.split('\n').map((item) => item.trim()).filter(Boolean);
             if (key === 'home.hero.titleLines') {
                 state.data.home.hero.titleLines = values;
-                return;
-            }
-            if (key === 'home.featured.selectedSlugs') {
-                state.data.home.featured.selectedSlugs = values;
             }
         });
 
@@ -1742,10 +1679,6 @@
             state.data.home.hero.images[Number(index)][field] = input.value;
         });
 
-        bindInput('[data-about-card-field]', (input) => {
-            const [index, field] = input.dataset.aboutCardField.split('.');
-            state.data.home.about.cards[Number(index)][field] = input.value;
-        });
 
         bindInput('[data-project-field]', (input) => {
             const project = projectBySlug(state.activeProjectSlug);
@@ -1806,12 +1739,6 @@
         });
         root.querySelectorAll('[data-remove-hero-image]').forEach((button) => {
             button.addEventListener('click', () => removeHeroImage(Number(button.dataset.removeHeroImage)));
-        });
-        root.querySelectorAll('[data-move-about-card]').forEach((button) => {
-            button.addEventListener('click', () => moveAboutCard(Number(button.dataset.moveAboutCard), Number(button.dataset.direction)));
-        });
-        root.querySelectorAll('[data-remove-about-card]').forEach((button) => {
-            button.addEventListener('click', () => removeAboutCard(Number(button.dataset.removeAboutCard)));
         });
 
         if (isStudioLocked()) {
