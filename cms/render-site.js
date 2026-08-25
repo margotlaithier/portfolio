@@ -527,14 +527,29 @@
             const match = filename.match(/(?:^|[-_])(\d+)\.[^.]+$/);
             return match ? String(Number(match[1])) : '';
         };
-        const images = figures.map((figure) => {
+        const images = figures.map((figure, originalIndex) => {
             const src = figure.dataset.zoomableSrc;
             return {
+                figure,
                 src,
                 alt: figure.dataset.zoomableAlt || '',
                 number: imageNumberFromSource(src),
+                originalIndex,
             };
-        }).filter((image) => image.src);
+        }).filter((image) => image.src).sort((firstImage, secondImage) => {
+            const firstNumber = Number(firstImage.number);
+            const secondNumber = Number(secondImage.number);
+            const firstIsNumbered = Number.isFinite(firstNumber) && firstImage.number !== '';
+            const secondIsNumbered = Number.isFinite(secondNumber) && secondImage.number !== '';
+
+            if (firstIsNumbered && secondIsNumbered && firstNumber !== secondNumber) {
+                return firstNumber - secondNumber;
+            }
+            if (firstIsNumbered !== secondIsNumbered) {
+                return firstIsNumbered ? -1 : 1;
+            }
+            return firstImage.originalIndex - secondImage.originalIndex;
+        });
         let activeIndex = -1;
         let activeTrigger = null;
 
@@ -591,8 +606,9 @@
             }
         };
 
-        figures.forEach((figure, index) => {
-            const imageNumber = images[index]?.number || String(index + 1);
+        images.forEach((image, index) => {
+            const figure = image.figure;
+            const imageNumber = image.number || String(index + 1);
             figure.tabIndex = 0;
             figure.setAttribute('role', 'button');
             figure.setAttribute('aria-label', `Agrandir l’image ${imageNumber} sur ${images.length}`);
