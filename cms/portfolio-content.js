@@ -524,9 +524,21 @@ window.PORTFOLIO_CONTENT = {
         "Mobilier sur mesure",
         "Béton ciré",
         "Bois",
-        "Lumière naturelle"
+        "Lumière naturelle",
+        "Continuité"
       ],
       "blocks": [
+        {
+          "type": "image",
+          "src": "images/chambre-parentale-04.jpeg",
+          "alt": "Chambre parentale — image 4",
+          "fitContain": false
+        },
+        {
+          "type": "copy",
+          "kicker": "Intention",
+          "text": "J’ai choisi de travailler principalement avec trois matériaux : le bois, le béton ciré et le cuivre."
+        },
         {
           "type": "grid",
           "items": [
@@ -545,12 +557,6 @@ window.PORTFOLIO_CONTENT = {
             {
               "src": "images/chambre-parentale-03.jpeg",
               "alt": "Chambre parentale — image 3",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/chambre-parentale-04.jpeg",
-              "alt": "Chambre parentale — image 4",
               "width": "quarter",
               "fitContain": false
             },
@@ -591,11 +597,6 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             }
           ]
-        },
-        {
-          "type": "copy",
-          "kicker": "Intention",
-          "text": "Le projet recherche un équilibre entre intimité, fonctionnalité et respiration."
         }
       ],
       "category": "Architecture d'intérieur",
