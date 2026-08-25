@@ -1,6 +1,7 @@
 (function () {
     const STORAGE_KEY = 'portfolio-studio-draft-v1';
-    const STORAGE_VERSION = 2;
+    const STORAGE_VERSION = 3;
+    const SUPPORTED_STORAGE_VERSIONS = new Set([2, STORAGE_VERSION]);
     const GITHUB_CONFIG_KEY = 'portfolio-studio-github-v1';
     const DEPLOYMENT_STATE_KEY = 'portfolio-studio-deployment-v1';
     const REQUIRED_DEPLOY_CHECKS = [
@@ -170,14 +171,28 @@
         const draft = localStorage.getItem(STORAGE_KEY);
         if (draft) {
             const parsedDraft = JSON.parse(draft);
-            const isCurrentDraft =
-                parsedDraft?.version === STORAGE_VERSION &&
-                parsedDraft?.sourceSignature === sourceSignature &&
+            const hasSupportedDraft =
+                SUPPORTED_STORAGE_VERSIONS.has(parsedDraft?.version) &&
                 parsedDraft?.data;
 
-            if (isCurrentDraft) {
-                state.data = clone(parsedDraft.data);
-                restoredDraft = contentSignature(state.data) !== sourceSignature;
+            if (hasSupportedDraft) {
+                const draftSignature = contentSignature(parsedDraft.data);
+                const sourceMatchesDraft = draftSignature === sourceSignature;
+                const sourceMatchesDraftBase = parsedDraft.sourceSignature === sourceSignature;
+                const draftHasLocalChanges = parsedDraft.version >= 3
+                    ? parsedDraft.dirty === true
+                    : draftSignature !== parsedDraft.sourceSignature;
+
+                if (sourceMatchesDraft) {
+                    localStorage.removeItem(STORAGE_KEY);
+                } else if (sourceMatchesDraftBase || draftHasLocalChanges) {
+                    state.data = clone(parsedDraft.data);
+                    restoredDraft = draftHasLocalChanges;
+                    state.sourceRefreshDetected = !sourceMatchesDraftBase;
+                } else {
+                    localStorage.removeItem(STORAGE_KEY);
+                    state.sourceRefreshDetected = true;
+                }
             } else {
                 localStorage.removeItem(STORAGE_KEY);
                 state.sourceRefreshDetected = true;
@@ -245,7 +260,9 @@
 
     function activeSaveTargetLabel() {
         if (state.sourceRefreshDetected) {
-            return 'Nouvelle version du fichier chargée. Ancien brouillon local ignoré.';
+            return restoredDraft
+                ? 'Nouvelle version du fichier détectée. Brouillon local conservé.'
+                : 'Nouvelle version du fichier chargée.';
         }
         if (hasGitHubSync()) {
             if (state.saveInFlight || state.commitStatus === 'pending') {
@@ -982,6 +999,7 @@
             state.github.currentSha = payload?.content?.sha || state.github.currentSha;
             persistGitHubConfig();
             state.dirty = false;
+            persistLocalDraft();
             state.commitStatus = 'success';
             state.deployment.commitSha = payload?.commit?.sha || '';
             state.deployment.active = true;
@@ -1010,16 +1028,21 @@
         }
     }
 
-    function persist() {
-        state.sourceRefreshDetected = false;
+    function persistLocalDraft() {
         localStorage.setItem(STORAGE_KEY, JSON.stringify({
             version: STORAGE_VERSION,
             sourceSignature,
             savedAt: new Date().toISOString(),
+            dirty: state.dirty,
             data: state.data,
         }));
+    }
+
+    function persist() {
+        state.sourceRefreshDetected = false;
+        state.dirty = true;
+        persistLocalDraft();
         if (hasGitHubSync()) {
-            state.dirty = true;
             state.commitStatus = 'dirty';
             state.saveState = activeSaveTargetLabel();
             updateSaveState();
