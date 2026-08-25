@@ -35,6 +35,7 @@
             cardDescription: project.cardDescription || project.intro,
             cardSize: project.cardSize || 'third',
             cardImageFit: project.cardImageFit || 'cover',
+            cardAspect: project.cardAspect || 'auto',
             characteristics: project.characteristics || [],
             blocks: project.blocks || [],
         };
@@ -96,8 +97,11 @@
     }
 
     function renderProjectCard(project, rootPrefix) {
+        const aspectClass = project.cardAspect && project.cardAspect !== 'auto'
+            ? ` card-aspect-${escapeHtml(project.cardAspect)}`
+            : '';
         return `
-            <a class="portfolio-card card-${escapeHtml(project.cardSize)}${project.cardImageFit === 'contain' ? ' card-image-contain' : ''}" href="${rootPrefix}${project.path}">
+            <a class="portfolio-card card-${escapeHtml(project.cardSize)}${project.cardImageFit === 'contain' ? ' card-image-contain' : ''}${aspectClass}" href="${rootPrefix}${project.path}">
                 <img src="${linkAsset(rootPrefix, project.cardImage)}" alt="${escapeHtml(project.cardAlt || project.title)}" loading="lazy" decoding="async" />
                 <div class="corner-arrow">
                     <svg viewBox="0 0 24 24">
@@ -107,7 +111,7 @@
                 <div class="overlay">
                     <span class="overlay-tag">${escapeHtml(project.cardYear || '')}</span>
                     <h2 class="overlay-title">${project.cardTitleHtml}</h2>
-                    <p class="overlay-desc">${escapeHtml(project.cardDescription || '')}</p>
+                    ${project.cardDescription ? `<p class="overlay-desc">${escapeHtml(project.cardDescription)}</p>` : ''}
                     <span class="overlay-cta"><span class="cta-line"></span>Voir le projet</span>
                 </div>
             </a>
