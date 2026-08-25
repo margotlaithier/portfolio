@@ -1162,7 +1162,7 @@
     function addHeroImage() {
         state.data.home.hero.images = state.data.home.hero.images || [];
         state.data.home.hero.images.push({
-            size: 'small',
+            size: 'portrait',
             src: '',
             alt: '',
         });
@@ -1342,6 +1342,7 @@
                                         <div class="studio-field">
                                             <label>Taille</label>
                                             <select data-hero-image-field="${index}.size">
+                                                <option value="portrait"${image.size === 'portrait' ? ' selected' : ''}>portrait</option>
                                                 <option value="large"${image.size === 'large' ? ' selected' : ''}>large</option>
                                                 <option value="small"${image.size === 'small' ? ' selected' : ''}>small</option>
                                             </select>

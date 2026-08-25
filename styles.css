@@ -720,110 +720,44 @@ img {
 
 .page-home .hero-visual {
     position: relative;
-    min-height: 560px;
+    width: min(100%, 470px);
+    aspect-ratio: 4 / 5;
+    justify-self: end;
     border-radius: var(--radius-lg);
     overflow: hidden;
-    background:
-        radial-gradient(circle at top left, rgba(165, 107, 69, 0.18), transparent 26%),
-        linear-gradient(160deg, #f0e2d4, #e9ded1 54%, #dbd0c5 100%);
-    box-shadow: var(--shadow);
-    border: 1px solid rgba(31, 26, 22, 0.06);
+    background: #d8c6b5;
+    box-shadow: 0 28px 80px rgba(41, 28, 20, 0.2);
+    border: 1px solid rgba(31, 26, 22, 0.08);
 }
 
 .page-home .hero-visual::before {
     content: "";
     position: absolute;
-    width: 260px;
-    height: 260px;
-    top: -80px;
-    right: -60px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(165, 107, 69, 0.24), transparent 70%);
-    transition: transform 1.2s ease, opacity 0.8s ease;
+    inset: 14px;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    border-radius: calc(var(--radius-lg) - 10px);
+    pointer-events: none;
 }
 
-.page-home .page-panel.is-active .hero-visual::before {
-    transform: translate(-20px, 20px) scale(1.05);
-}
-
-.page-home .hero-stack {
-    position: absolute;
-    inset: 2rem;
-}
-
-.page-home .floating-card {
-    position: absolute;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(41, 28, 20, 0.16);
-    transition: transform 1s cubic-bezier(0.2, 0.9, 0.2, 1), opacity 0.7s ease;
-}
-
-.page-home .floating-card img {
+.page-home .hero-portrait {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center center;
+    display: block;
+    opacity: 0.68;
+    transform: scale(1.06);
+    transition: transform 1.15s cubic-bezier(0.2, 0.9, 0.2, 1), opacity 0.8s ease;
 }
 
-.page-home .floating-card.large {
-    width: min(100%, 350px);
-    height: 430px;
-    right: 0;
-    top: 0;
-    transform: translate(44px, 60px) rotate(7deg);
-}
-
-.page-home .floating-card.small {
-    width: 220px;
-    height: 250px;
-    left: 0;
-    bottom: 0;
-    transform: translate(-26px, 54px) rotate(-7deg);
-}
-
-.page-home .page-panel.is-active .floating-card.large {
-    transform: translate(0, 0) rotate(4deg);
-}
-
-.page-home .page-panel.is-active .floating-card.small {
-    transform: translate(0, 0) rotate(-4deg);
-}
-
-.page-home .page-panel.is-leaving .floating-card.large {
-    transform: translate(70px, -40px) rotate(9deg);
-    opacity: 0;
-}
-
-.page-home .page-panel.is-leaving .floating-card.small {
-    transform: translate(-60px, 90px) rotate(-10deg);
-    opacity: 0;
-}
-
-.page-home .floating-note {
-    position: absolute;
-    right: 2rem;
-    bottom: 1.5rem;
-    max-width: 220px;
-    padding: 1rem 1.15rem;
-    border: 1px solid rgba(31, 26, 22, 0.1);
-    border-radius: 18px;
-    backdrop-filter: blur(18px);
-    background: rgba(255, 252, 247, 0.54);
-    font-size: 0.85rem;
-    line-height: 1.7;
-    color: var(--text);
-    transform: translateY(24px);
-    opacity: 0;
-    transition: transform 0.7s ease 0.18s, opacity 0.7s ease 0.18s;
-}
-
-.page-home .page-panel.is-active .floating-note {
-    transform: translateY(0);
+.page-home .page-panel.is-active .hero-portrait {
     opacity: 1;
+    transform: scale(1);
 }
 
-.page-home .page-panel.is-leaving .floating-note {
-    transform: translateY(-18px);
+.page-home .page-panel.is-leaving .hero-portrait {
+    transform: scale(1.04) translateY(-1.5%);
     opacity: 0;
 }
 
@@ -1188,7 +1122,8 @@ img {
     }
 
     .page-home .hero-visual {
-        min-height: 460px;
+        width: min(100%, 560px);
+        justify-self: center;
     }
 }
 
@@ -1204,6 +1139,10 @@ img {
 
     .page-home .panel-rail {
         display: none;
+    }
+
+    .page-home .hero-visual {
+        width: min(78vw, 400px);
     }
 }
 
@@ -1224,24 +1163,15 @@ img {
     }
 
     .page-home .hero-visual {
-        min-height: 390px;
+        width: min(82vw, 320px);
+        border-radius: 22px;
     }
 
-    .page-home .hero-stack {
-        inset: 1rem;
+    .page-home .hero-visual::before {
+        inset: 10px;
+        border-radius: 14px;
     }
 
-    .page-home .floating-card.large {
-        width: 250px;
-        height: 300px;
-    }
-
-    .page-home .floating-card.small {
-        width: 160px;
-        height: 180px;
-    }
-
-    .page-home .floating-note,
     .page-home .contact-card {
         padding: 1.25rem;
     }

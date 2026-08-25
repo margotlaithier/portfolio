@@ -250,7 +250,7 @@
 
     function renderHome(rootPrefix) {
         const heroImages = content.home.hero.images || [];
-        const [largeImage, smallImage] = heroImages;
+        const [heroImage] = heroImages;
         const catalog = projectsCatalog(rootPrefix, 'home');
 
         document.title = content.site.portfolioTitle || 'Portfolio';
@@ -278,11 +278,7 @@
                             </div>
 
                             <div class="hero-visual">
-                                <div class="hero-stack">
-                                    ${largeImage ? `<div class="floating-card ${escapeHtml(largeImage.size)}"><img src="${linkAsset(rootPrefix, largeImage.src)}" alt="${escapeHtml(largeImage.alt)}" /></div>` : ''}
-                                    ${smallImage ? `<div class="floating-card ${escapeHtml(smallImage.size)}"><img src="${linkAsset(rootPrefix, smallImage.src)}" alt="${escapeHtml(smallImage.alt)}" /></div>` : ''}
-                                </div>
-                                <div class="floating-note">${escapeHtml(content.home.hero.note)}</div>
+                                ${heroImage ? `<img class="hero-portrait" src="${linkAsset(rootPrefix, heroImage.src)}" alt="${escapeHtml(heroImage.alt)}" />` : ''}
                             </div>
                         </div>
                     </section>

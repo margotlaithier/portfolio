@@ -16,14 +16,9 @@ window.PORTFOLIO_CONTENT = {
       "caption": "IFAT • Plescop, Morbihan",
       "images": [
         {
-          "size": "large",
-          "src": "projets/architecture/quartier-maisons-roses/images/quartier-maisons-roses-01.jpeg",
-          "alt": "Maquette du quartier de maisons roses"
-        },
-        {
-          "size": "small",
-          "src": "projets/architecture/facade-de-commerce/images/facade-de-commerce-03.jpeg",
-          "alt": "Étude de façade de commerce"
+          "size": "portrait",
+          "src": "images/portrait.jpeg",
+          "alt": "Portrait de Margot Laithier sur la plage"
         }
       ],
       "note": ""
