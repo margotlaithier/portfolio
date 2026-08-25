@@ -454,7 +454,7 @@ window.PORTFOLIO_CONTENT = {
       "title": "Projet final",
       "cardTitleHtml": "Projet final",
       "type": "Projet d'étude · Architecture d'intérieur",
-      "intro": "Aménagement d'un logement saisonnier conçu pour l'accueil, la polyvalence et la lisibilité immédiate des espaces par des occupants de passage.",
+      "intro": "Pour notre examen final, nous avions 8 heures pour repenser et aménager une maison complète à partir d’un plan existant. Certains murs étaient non porteurs et pouvaient être supprimés, ce qui nous permettait de modifier l’organisation des espaces selon nos choix.",
       "date": "2025",
       "layout": "detail",
       "characteristics": [
@@ -464,14 +464,19 @@ window.PORTFOLIO_CONTENT = {
       ],
       "blocks": [
         {
+          "type": "image",
+          "src": "images/projet-final-04.jpeg",
+          "alt": "Airbnb — image 4",
+          "fitContain": false
+        },
+        {
+          "type": "copy",
+          "kicker": "Intention",
+          "text": "Le programme devait comprendre une suite parentale avec salle de bain et dressing, une cuisine, une salle à manger, un salon, une arrière-cuisine, un garage ainsi que deux toilettes."
+        },
+        {
           "type": "grid",
           "items": [
-            {
-              "src": "images/projet-final-01.jpeg",
-              "alt": "Airbnb — image 1",
-              "width": "quarter",
-              "fitContain": false
-            },
             {
               "src": "images/projet-final-02.jpeg",
               "alt": "Airbnb — image 2",
@@ -483,25 +488,28 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Airbnb — image 3",
               "width": "quarter",
               "fitContain": false
-            },
-            {
-              "src": "images/projet-final-04.jpeg",
-              "alt": "Airbnb — image 4",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/projet-final-05.jpeg",
-              "alt": "Airbnb — image 5",
-              "width": "quarter",
-              "fitContain": false
             }
           ]
         },
         {
           "type": "copy",
-          "kicker": "Intention",
-          "text": "L'aménagement est pensé pour une appropriation immédiate du lieu, avec des repères clairs, des usages fluides et une ambiance capable d'accueillir différents profils d'occupants."
+          "kicker": "Explication",
+          "text": "Pour mon projet, j’ai choisi de revoir une partie du plan afin de créer des espaces plus ouverts et lumineux, avec de grandes ouvertures permettant de faire entrer un maximum de lumière naturelle.\n\nAu centre de l’espace de vie, j’ai créé une cheminée centrale qui permet d’organiser deux ambiances différentes : un espace salon d’un côté et un coin lecture plus calme de l’autre. Elle permet de séparer les deux espaces sans complètement les fermer.\n\nJ’ai également intégré une bibliothèque directement à la cheminée, afin que celle-ci ne soit pas seulement un élément décoratif mais qu’elle serve aussi de rangement et fasse partie de l’aménagement de la pièce.\n\nCe projet m’a permis de travailler sur la transformation d’un plan existant, l’organisation et la circulation entre les pièces, la lumière naturelle et la création d’un aménagement sur mesure, tout en respectant les contraintes du sujet et le temps limité de 8 heures."
+        },
+        {
+          "type": "pair",
+          "items": [
+            {
+              "src": "images/projet-final-05.jpeg",
+              "alt": "Airbnb — image 5",
+              "fitContain": false
+            },
+            {
+              "src": "images/projet-final-01.jpeg",
+              "alt": "Airbnb — image 1",
+              "fitContain": false
+            }
+          ]
         }
       ],
       "category": "Architecture d'intérieur",
