@@ -520,6 +520,7 @@
         const previousButton = document.querySelector('[data-study-lightbox-prev]');
         const nextButton = document.querySelector('[data-study-lightbox-next]');
         const counter = document.querySelector('[data-study-lightbox-counter]');
+        const dialog = lightbox?.querySelector('.study-lightbox-dialog');
         const figures = Array.from(document.querySelectorAll('.study-zoomable'));
         const imageNumberFromSource = (source) => {
             const cleanSource = String(source || '').split(/[?#]/, 1)[0];
@@ -628,6 +629,11 @@
             node.addEventListener('click', closeLightbox);
         });
         lightboxImage.addEventListener('click', closeLightbox);
+        dialog?.addEventListener('click', (event) => {
+            if (event.target === dialog || event.target === counter) {
+                closeLightbox();
+            }
+        });
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape' && !lightbox.hidden) {
                 closeLightbox();
