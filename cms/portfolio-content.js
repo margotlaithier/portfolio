@@ -517,8 +517,8 @@ window.PORTFOLIO_CONTENT = {
       "title": "Chambre parentale",
       "cardTitleHtml": "Chambre<br>parentale",
       "type": "Projet d'étude · Architecture d'intérieur",
-      "intro": "Projet d'aménagement d'une chambre pensée comme un espace de retrait calme, à la lisibilité simple et épuré. ",
-      "date": "2025",
+      "intro": "Pour ce projet, j’ai imaginé et aménagé une suite parentale composée d’une chambre, d’un dressing et d’une salle de bain.",
+      "date": "Décembre 2025",
       "layout": "detail",
       "characteristics": [
         "Mobilier sur mesure",
@@ -549,14 +549,14 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/chambre-parentale-02.jpeg",
-              "alt": "Chambre parentale — image 2",
+              "src": "images/chambre-parentale-06.jpeg",
+              "alt": "Chambre parentale — image 6",
               "width": "quarter",
               "fitContain": false
             },
             {
-              "src": "images/chambre-parentale-03.jpeg",
-              "alt": "Chambre parentale — image 3",
+              "src": "images/chambre-parentale-07.jpeg",
+              "alt": "Chambre parentale — image 7",
               "width": "quarter",
               "fitContain": false
             },
@@ -567,14 +567,14 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/chambre-parentale-06.jpeg",
-              "alt": "Chambre parentale — image 6",
+              "src": "images/chambre-parentale-02.jpeg",
+              "alt": "Chambre parentale — image 2",
               "width": "quarter",
               "fitContain": false
             },
             {
-              "src": "images/chambre-parentale-07.jpeg",
-              "alt": "Chambre parentale — image 7",
+              "src": "images/chambre-parentale-03.jpeg",
+              "alt": "Chambre parentale — image 3",
               "width": "quarter",
               "fitContain": false
             },
