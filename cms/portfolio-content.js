@@ -898,7 +898,7 @@ window.PORTFOLIO_CONTENT = {
       "cardTitleHtml": "Modèle vivant",
       "type": "Projet d'étude · Croquis, dessin",
       "intro": "",
-      "date": "",
+      "date": "2025/2026",
       "layout": "gallery",
       "characteristics": [],
       "blocks": [
@@ -938,8 +938,8 @@ window.PORTFOLIO_CONTENT = {
       "cardImage": "projets/dessin/modele-vivant/images/modele-vivant-02.jpeg",
       "cardRatio": "1704 / 2341",
       "cardAlt": "Dessin",
-      "cardYear": "2024",
-      "cardDescription": "Travaux de représentation plus posés autour du trait, du contraste et de la profondeur."
+      "cardYear": "2025/2026",
+      "cardDescription": "Travaux de représentation de modèles nus ."
     },
     {
       "slug": "oeuf-de-faberge",
@@ -1018,45 +1018,33 @@ window.PORTFOLIO_CONTENT = {
       "title": "Sculpture en fil de fer",
       "cardTitleHtml": "Sculpture en<br>fil de fer",
       "type": "Projet d'étude · Volume",
-      "intro": "Recherche plastique autour du trait dans l'espace, de la tension du matériau et de la manière dont le vide devient une partie active de la forme.",
-      "date": "2024",
+      "intro": "Pour ce projet, nous devions créer une structure en fil de fer autour du thème « Poiscaille », en travaillant sur les pleins, les vides et le mouvement.\nJ’ai choisi de représenter de manière abstraite des tentacules, en m’inspirant de leurs formes courbes et de leurs mouvements dans l’eau.",
+      "date": "Mai 2026",
       "layout": "detail",
       "characteristics": [
-        "Trait dans l'espace",
-        "Tension",
-        "Volume ajouré"
+        "Pleins et vides",
+        "Mouvement",
+        "Répétition",
+        "Fil de fer & métal"
       ],
       "blocks": [
+        {
+          "type": "image",
+          "src": "images/sculpture-fil-de-fer-04.jpeg",
+          "alt": "Sculpture en fil de fer — image 4",
+          "fitContain": false
+        },
+        {
+          "type": "copy",
+          "kicker": "Intention",
+          "text": "Pour les réaliser, j’ai utilisé du fil de fer, que j’ai courbé pour créer différentes formes et hauteurs. J’ai ensuite ajouté des rondelles métalliques le long des fils. Leur espacement permet de jouer avec les pleins et les vides tout en donnant du rythme à chaque tentacule."
+        },
         {
           "type": "grid",
           "items": [
             {
-              "src": "images/sculpture-fil-de-fer-05.jpeg",
-              "alt": "Sculpture en fil de fer — image 5",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
               "src": "images/sculpture-fil-de-fer-06.jpeg",
               "alt": "Sculpture en fil de fer — image 6",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/sculpture-fil-de-fer-04.jpeg",
-              "alt": "Sculpture en fil de fer — image 4",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/sculpture-fil-de-fer-02.jpeg",
-              "alt": "Sculpture en fil de fer — image 2",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/sculpture-fil-de-fer-03.jpeg",
-              "alt": "Sculpture en fil de fer — image 3",
               "width": "quarter",
               "fitContain": false
             },
@@ -1070,17 +1058,32 @@ window.PORTFOLIO_CONTENT = {
         },
         {
           "type": "copy",
-          "kicker": "Intention",
-          "text": "Le travail explore la manière dont une ligne matérielle peut dessiner un volume, suggérer une présence et construire une silhouette à partir du vide."
+          "kicker": "Explication ",
+          "text": "J’ai volontairement créé des formes différentes, certaines plus droites et d’autres beaucoup plus courbées, afin de donner l’impression que la structure est en mouvement\n. Selon l’endroit où l’on se place, les éléments se croisent, se rapprochent ou s’éloignent et donnent une nouvelle vision de l’ensemble.\nJ’ai enfin installé les différentes formes sur un socle en bois, qui contraste avec le métal et permet de maintenir toute la composition."
+        },
+        {
+          "type": "pair",
+          "items": [
+            {
+              "src": "images/sculpture-fil-de-fer-02.jpeg",
+              "alt": "Sculpture en fil de fer — image 2",
+              "fitContain": false
+            },
+            {
+              "src": "images/sculpture-fil-de-fer-03.jpeg",
+              "alt": "Sculpture en fil de fer — image 3",
+              "fitContain": false
+            }
+          ]
         }
       ],
       "category": "Volume",
       "cardSize": "half",
-      "cardImage": "projets/volume/sculpture-fil-de-fer/images/sculpture-fil-de-fer-05.jpeg",
+      "cardImage": "projets/volume/sculpture-fil-de-fer/images/sculpture-fil-de-fer-04.jpeg",
       "cardRatio": "6902 / 6007",
       "cardAlt": "Sculpture en fil de fer",
-      "cardYear": "2024",
-      "cardDescription": "Recherche sur le trait dans l'espace, la tension et les silhouettes construites par le vide."
+      "cardYear": "2026",
+      "cardDescription": "Donner du mouvement à une structure immobile"
     },
     {
       "slug": "charte-graphique-restaurant",
