@@ -1784,6 +1784,18 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Véhicule sous-marin — image 2",
               "width": "quarter",
               "fitContain": false
+            },
+            {
+              "src": "images/vehicule-sous-marin-03.jpeg",
+              "alt": "Véhicule sous-marin — image 3",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/vehicule-sous-marin-04.jpeg",
+              "alt": "Véhicule sous-marin — image 4",
+              "width": "quarter",
+              "fitContain": false
             }
           ]
         }
