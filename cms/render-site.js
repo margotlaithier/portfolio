@@ -23,14 +23,6 @@
         return `${rootPrefix}${assetPath}`.replace(/\/{2,}/g, '/').replace(/^([a-z]+:)\//i, '$1//');
     }
 
-    function groupBy(items, size) {
-        const groups = [];
-        for (let index = 0; index < items.length; index += size) {
-            groups.push(items.slice(index, index + size));
-        }
-        return groups;
-    }
-
     function normaliseProject(project) {
         return {
             ...project,
@@ -168,15 +160,56 @@
                 <div class="projets-flow-view">
                     <a class="group-link projects-all-link" href="${destinationPath}${categoryHash}">Toutes les catégories</a>
                     <div class="projets-flow">
-                        ${groupBy(filteredProjects, 3).map((row) => `
-                            <div class="projets-row">
-                                ${row.map((project) => renderProjectCard(project, rootPrefix)).join('')}
-                            </div>
-                        `).join('')}
+                        <div class="projets-row">
+                            ${filteredProjects.map((project) => renderProjectCard(project, rootPrefix)).join('')}
+                        </div>
                     </div>
                 </div>
             `,
         };
+    }
+
+    function enhanceProjectMasonry() {
+        const grids = Array.from(document.querySelectorAll('.page-projets .projets-row'));
+        const desktopQuery = window.matchMedia('(min-width: 761px)');
+        let frameId = 0;
+
+        function layoutGrid(grid) {
+            const cards = Array.from(grid.querySelectorAll('.portfolio-card'));
+
+            if (!desktopQuery.matches) {
+                grid.classList.remove('is-masonry-grid');
+                cards.forEach((card) => card.style.removeProperty('grid-row-end'));
+                return;
+            }
+
+            grid.classList.add('is-masonry-grid');
+            const styles = window.getComputedStyle(grid);
+            const rowHeight = parseFloat(styles.gridAutoRows) || 1;
+            const masonryGap = parseFloat(styles.getPropertyValue('--masonry-gap')) || 24;
+
+            cards.forEach((card) => {
+                card.style.removeProperty('grid-row-end');
+                const cardHeight = card.getBoundingClientRect().height;
+                const rowSpan = Math.ceil((cardHeight + masonryGap) / rowHeight);
+                card.style.gridRowEnd = `span ${rowSpan}`;
+            });
+        }
+
+        function scheduleLayout() {
+            window.cancelAnimationFrame(frameId);
+            frameId = window.requestAnimationFrame(() => grids.forEach(layoutGrid));
+        }
+
+        grids.forEach((grid) => {
+            grid.querySelectorAll('img').forEach((image) => {
+                if (!image.complete) image.addEventListener('load', scheduleLayout, { once: true });
+            });
+        });
+
+        window.addEventListener('resize', scheduleLayout, { passive: true });
+        desktopQuery.addEventListener('change', scheduleLayout);
+        scheduleLayout();
     }
 
     function enhanceProjectCardInteractions() {
@@ -332,6 +365,7 @@
             ${renderFooter(rootPrefix, 'home')}
         `;
 
+        enhanceProjectMasonry();
         enhanceHomeInteractions();
     }
 
@@ -360,6 +394,7 @@
             ${renderFooter(rootPrefix, 'projects')}
         `;
 
+        enhanceProjectMasonry();
         enhanceProjectCardInteractions();
     }
 

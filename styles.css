@@ -1285,6 +1285,17 @@ img {
     gap: 24px;
 }
 
+.page-projets .projets-row.is-masonry-grid {
+    --masonry-gap: 24px;
+    grid-auto-rows: 1px;
+    row-gap: 0;
+    align-items: start;
+}
+
+.page-projets .projets-row.is-masonry-grid .portfolio-card {
+    align-self: start;
+}
+
 .page-projets .portfolio-card {
     position: relative;
     height: 420px;
