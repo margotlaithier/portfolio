@@ -23,6 +23,24 @@ window.PORTFOLIO_CONTENT = {
       ],
       "note": ""
     },
+    "documents": {
+      "panelLabel": "Documents",
+      "title": "CV & Recommandations",
+      "cv": {
+        "title": "Curriculum vitae",
+        "eyebrow": "Parcours & expériences",
+        "file": "documents/cv-margot-laithier.pdf",
+        "openLabel": "Consulter le CV"
+      },
+      "recommendations": [
+        {
+          "title": "Lettre de recommandation",
+          "organization": "ICÔNES",
+          "date": "2025",
+          "file": "documents/lettre-recommandation-icones.pdf"
+        }
+      ]
+    },
     "contact": {
       "panelLabel": "Contact",
       "title": "Échanger ?",

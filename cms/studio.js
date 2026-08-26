@@ -1,7 +1,7 @@
 (function () {
     const STORAGE_KEY = 'portfolio-studio-draft-v1';
-    const STORAGE_VERSION = 3;
-    const SUPPORTED_STORAGE_VERSIONS = new Set([2, STORAGE_VERSION]);
+    const STORAGE_VERSION = 4;
+    const SUPPORTED_STORAGE_VERSIONS = new Set([2, 3, STORAGE_VERSION]);
     const GITHUB_CONFIG_KEY = 'portfolio-studio-github-v1';
     const DEPLOYMENT_STATE_KEY = 'portfolio-studio-deployment-v1';
     const REQUIRED_DEPLOY_CHECKS = [
@@ -205,6 +205,18 @@
     if (state.data.home) {
         delete state.data.home.about;
         delete state.data.home.featured;
+        const documents = state.data.home.documents || {};
+        state.data.home.documents = {
+            panelLabel: documents.panelLabel || 'Documents',
+            title: documents.title || 'CV & Recommandations',
+            cv: {
+                title: documents.cv?.title || 'Curriculum vitae',
+                eyebrow: documents.cv?.eyebrow || 'Parcours & expériences',
+                file: documents.cv?.file || 'documents/cv-margot-laithier.pdf',
+                openLabel: documents.cv?.openLabel || 'Consulter le CV',
+            },
+            recommendations: Array.isArray(documents.recommendations) ? documents.recommendations : [],
+        };
     }
     if (state.data.projectsPage) {
         delete state.data.projectsPage.categoryLinkLabel;
@@ -1186,6 +1198,34 @@
         render();
     }
 
+    function addRecommendation() {
+        const recommendations = state.data.home.documents.recommendations;
+        recommendations.push({
+            title: 'Lettre de recommandation',
+            organization: '',
+            date: '',
+            file: '',
+        });
+        persist();
+        render();
+    }
+
+    function moveRecommendation(index, direction) {
+        const recommendations = state.data.home.documents.recommendations;
+        const target = index + direction;
+        if (target < 0 || target >= recommendations.length) return;
+        const [recommendation] = recommendations.splice(index, 1);
+        recommendations.splice(target, 0, recommendation);
+        persist();
+        render();
+    }
+
+    function removeRecommendation(index) {
+        state.data.home.documents.recommendations.splice(index, 1);
+        persist();
+        render();
+    }
+
     function addBlock(type) {
         const project = projectBySlug(state.activeProjectSlug);
         if (!project) return;
@@ -1359,6 +1399,48 @@
                                 </div>
                             `).join('')}
                         </div>
+                    </div>
+                    <div class="studio-card">
+                        <div class="studio-block-header">
+                            <h2>CV & Recommandations</h2>
+                            <div class="studio-inline-actions">
+                                <button type="button" data-action="add-recommendation">Ajouter une lettre</button>
+                            </div>
+                        </div>
+                        <div class="studio-grid">
+                            <div class="studio-field"><label>Label</label><input data-path="home.documents.panelLabel" value="${escapeHtml(state.data.home.documents.panelLabel || '')}" /></div>
+                            <div class="studio-field"><label>Titre</label><input data-path="home.documents.title" value="${escapeHtml(state.data.home.documents.title || '')}" /></div>
+                        </div>
+                        <div class="studio-block">
+                            <div class="studio-block-header"><span class="studio-subtle-label">Curriculum vitae</span></div>
+                            <div class="studio-grid-3">
+                                <div class="studio-field"><label>Titre</label><input data-path="home.documents.cv.title" value="${escapeHtml(state.data.home.documents.cv.title || '')}" /></div>
+                                <div class="studio-field"><label>Surtitre</label><input data-path="home.documents.cv.eyebrow" value="${escapeHtml(state.data.home.documents.cv.eyebrow || '')}" /></div>
+                                <div class="studio-field"><label>Fichier PDF</label><input data-path="home.documents.cv.file" value="${escapeHtml(state.data.home.documents.cv.file || '')}" /></div>
+                                <div class="studio-field"><label>Libellé du lien</label><input data-path="home.documents.cv.openLabel" value="${escapeHtml(state.data.home.documents.cv.openLabel || '')}" /></div>
+                            </div>
+                        </div>
+                        <div class="studio-list">
+                            ${(state.data.home.documents.recommendations || []).map((recommendation, index) => `
+                                <div class="studio-block">
+                                    <div class="studio-block-header">
+                                        <span class="studio-subtle-label">Lettre ${index + 1}</span>
+                                        <div class="studio-inline-actions">
+                                            <button type="button" data-move-recommendation="${index}" data-direction="-1">Monter</button>
+                                            <button type="button" data-move-recommendation="${index}" data-direction="1">Descendre</button>
+                                            <button type="button" data-remove-recommendation="${index}">Supprimer</button>
+                                        </div>
+                                    </div>
+                                    <div class="studio-grid-3">
+                                        <div class="studio-field"><label>Titre</label><input data-recommendation-field="${index}.title" value="${escapeHtml(recommendation.title || '')}" /></div>
+                                        <div class="studio-field"><label>Organisation</label><input data-recommendation-field="${index}.organization" value="${escapeHtml(recommendation.organization || '')}" /></div>
+                                        <div class="studio-field"><label>Date</label><input data-recommendation-field="${index}.date" value="${escapeHtml(recommendation.date || '')}" /></div>
+                                        <div class="studio-field"><label>Fichier PDF</label><input data-recommendation-field="${index}.file" value="${escapeHtml(recommendation.file || '')}" /></div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="studio-note">Ajoute autant de lettres que nécessaire. Chaque entrée devient automatiquement une carte dans le portfolio.</div>
                     </div>
                     <div class="studio-card">
                         <h2>Contact</h2>
@@ -1614,6 +1696,7 @@
         root.querySelector('[data-action="add-project"]')?.addEventListener('click', addProject);
         root.querySelector('[data-action="add-category"]')?.addEventListener('click', addCategory);
         root.querySelector('[data-action="add-hero-image"]')?.addEventListener('click', addHeroImage);
+        root.querySelector('[data-action="add-recommendation"]')?.addEventListener('click', addRecommendation);
         root.querySelector('[data-action="test-github"]')?.addEventListener('click', testGitHubConnection);
         root.querySelector('[data-action="diagnostic-github"]')?.addEventListener('click', runGitHubApiDiagnostic);
         root.querySelector('[data-action="commit-github"]')?.addEventListener('click', commitStudioChanges);
@@ -1683,6 +1766,11 @@
             state.data.home.hero.images[Number(index)][field] = input.value;
         });
 
+        bindInput('[data-recommendation-field]', (input) => {
+            const [index, field] = input.dataset.recommendationField.split('.');
+            state.data.home.documents.recommendations[Number(index)][field] = input.value;
+        });
+
 
         bindInput('[data-project-field]', (input) => {
             const project = projectBySlug(state.activeProjectSlug);
@@ -1743,6 +1831,12 @@
         });
         root.querySelectorAll('[data-remove-hero-image]').forEach((button) => {
             button.addEventListener('click', () => removeHeroImage(Number(button.dataset.removeHeroImage)));
+        });
+        root.querySelectorAll('[data-move-recommendation]').forEach((button) => {
+            button.addEventListener('click', () => moveRecommendation(Number(button.dataset.moveRecommendation), Number(button.dataset.direction)));
+        });
+        root.querySelectorAll('[data-remove-recommendation]').forEach((button) => {
+            button.addEventListener('click', () => removeRecommendation(Number(button.dataset.removeRecommendation)));
         });
 
         if (isStudioLocked()) {

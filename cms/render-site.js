@@ -41,6 +41,7 @@
     function renderHeader(rootPrefix, current) {
         const toHome = `${rootPrefix}index.html`;
         const projetHref = current === 'home' ? '#projets' : `${toHome}#projets`;
+        const documentsHref = current === 'home' ? '#documents' : `${toHome}#documents`;
         return `
             <header class="site-header">
                 <div class="header-inner">
@@ -53,6 +54,7 @@
                     <nav class="site-nav">
                         <a href="${current === 'home' ? '#intro' : `${toHome}#intro`}" data-nav="intro"${current === 'home' ? ' class="is-current"' : ''}>Accueil</a>
                         <a href="${projetHref}" data-nav="projets"${current !== 'home' ? ' class="is-current"' : ''}>Projets</a>
+                        <a href="${documentsHref}" data-nav="documents">CV</a>
                         <a href="${current === 'home' ? '#contact' : `${toHome}#contact`}" data-nav="contact">Contact</a>
                     </nav>
                 </div>
@@ -76,6 +78,7 @@
                             <div class="footer-list">
                                 <a href="${current === 'home' ? '#intro' : `${toHome}#intro`}">Accueil</a>
                                 <a href="${current === 'home' ? '#projets' : `${toHome}#projets`}">Projets</a>
+                                <a href="${current === 'home' ? '#documents' : `${toHome}#documents`}">CV & Recommandations</a>
                                 <a href="${current === 'home' ? '#contact' : `${toHome}#contact`}">Contact</a>
                             </div>
                         </div>
@@ -292,6 +295,57 @@
         enhanceProjectCardInteractions();
     }
 
+    function renderDocumentsPanel(rootPrefix) {
+        const documents = content.home.documents || {};
+        const cv = documents.cv || {};
+        const recommendations = (documents.recommendations || []).filter((recommendation) => recommendation?.file);
+        const cvHref = linkAsset(rootPrefix, cv.file);
+
+        return `
+            <section class="page-panel documents-panel" id="documents" data-panel="documents">
+                <div class="panel-inner documents-layout">
+                    <div class="documents-intro">
+                        <span class="panel-label">${escapeHtml(documents.panelLabel || 'Documents')}</span>
+                        <h2 class="documents-title">${escapeHtml(documents.title || 'CV & Recommandations')}</h2>
+                    </div>
+
+                    <div class="documents-showcase" aria-label="Documents professionnels">
+                        <div class="recommendations-grid">
+                            ${cvHref ? `
+                                <a class="recommendation-card cv-document-card" href="${cvHref}" target="_blank" rel="noopener" aria-label="${escapeHtml(cv.openLabel || 'Consulter le CV')} — nouvel onglet">
+                                    <span class="recommendation-icon" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7zM14 3v5h5M10 12h5M10 16h5" /></svg>
+                                    </span>
+                                    <span class="recommendation-copy">
+                                        <strong>${escapeHtml(cv.title || 'Curriculum vitae')}</strong>
+                                        <span>${escapeHtml(cv.eyebrow || 'Parcours & expériences')}</span>
+                                    </span>
+                                    <svg class="recommendation-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10" /></svg>
+                                </a>
+                            ` : ''}
+                            ${recommendations.map((recommendation, index) => {
+                                const href = linkAsset(rootPrefix, recommendation.file);
+                                return `
+                                    <a class="recommendation-card" href="${href}" target="_blank" rel="noopener" aria-label="${escapeHtml(recommendation.title || `Lettre de recommandation ${index + 1}`)} — ${escapeHtml(recommendation.organization || '')} — nouvel onglet">
+                                        <span class="recommendation-icon" aria-hidden="true">
+                                            <svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7zM14 3v5h5M10 12h5M10 16h5" /></svg>
+                                        </span>
+                                        <span class="recommendation-copy">
+                                            <strong>${escapeHtml(recommendation.title || 'Lettre de recommandation')}</strong>
+                                            <span>${escapeHtml([recommendation.organization, recommendation.date].filter(Boolean).join(' · '))}</span>
+                                        </span>
+                                        <svg class="recommendation-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10" /></svg>
+                                    </a>
+                                `;
+                            }).join('')}
+                            ${!cvHref && !recommendations.length ? '<p class="recommendations-empty">Les documents seront ajoutés prochainement.</p>' : ''}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `;
+    }
+
     function renderHome(rootPrefix) {
         const heroImages = content.home.hero.images || [];
         const [heroImage] = heroImages;
@@ -305,6 +359,7 @@
             <div class="panel-rail" aria-hidden="true">
                 <span class="panel-dot" data-dot="intro"></span>
                 <span class="panel-dot" data-dot="projets"></span>
+                <span class="panel-dot" data-dot="documents"></span>
                 <span class="panel-dot" data-dot="contact"></span>
             </div>
 
@@ -335,6 +390,8 @@
                             ${catalog.markup}
                         </div>
                     </section>
+
+                    ${renderDocumentsPanel(rootPrefix)}
 
                     <section class="page-panel contact-panel" id="contact" data-panel="contact">
                         <div class="panel-inner">

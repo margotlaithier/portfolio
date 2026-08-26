@@ -7,6 +7,9 @@
     <link rel="icon" href="logo.svg" type="image/svg+xml" />
     <script>
         document.documentElement.classList.add('render-pending');
+        window.setTimeout(() => {
+            document.documentElement.classList.remove('render-pending');
+        }, 1800);
         window.addEventListener('load', () => {
             const reveal = () => requestAnimationFrame(() => {
                 document.documentElement.classList.remove('render-pending');
