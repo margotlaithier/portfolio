@@ -686,6 +686,84 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Cuisine — image 12",
               "width": "quarter",
               "fitContain": false
+            },
+            {
+              "src": "images/cuisine-13.jpeg",
+              "alt": "Cuisine — image 13",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/cuisine-14.jpeg",
+              "alt": "Cuisine — image 14",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/cuisine-15.jpeg",
+              "alt": "Cuisine — image 15",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/cuisine-16.jpeg",
+              "alt": "Cuisine — image 16",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/cuisine-17.jpeg",
+              "alt": "Cuisine — image 17",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/cuisine-18.jpeg",
+              "alt": "Cuisine — image 18",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/cuisine-19.jpeg",
+              "alt": "Cuisine — image 19",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/cuisine-20.jpeg",
+              "alt": "Cuisine — image 20",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/cuisine-21.jpeg",
+              "alt": "Cuisine — image 21",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/cuisine-22.jpeg",
+              "alt": "Cuisine — image 22",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/cuisine-23.jpeg",
+              "alt": "Cuisine — image 23",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/cuisine-24.jpeg",
+              "alt": "Cuisine — image 24",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/cuisine-25.jpeg",
+              "alt": "Cuisine — image 25",
+              "width": "quarter",
+              "fitContain": false
             }
           ]
         },
@@ -1082,118 +1160,6 @@ window.PORTFOLIO_CONTENT = {
       "cardAlt": "Dessin",
       "cardYear": "2024",
       "cardDescription": "Travaux de représentation plus posés autour du trait, du contraste et de la profondeur."
-    },
-    {
-      "slug": "maquette-coupe-maison-amenagement-interieur",
-      "path": "projets/volume/maquette-coupe-maison-amenagement-interieur/",
-      "title": "Maquette coupe de maison et aménagement intérieur",
-      "cardTitleHtml": "Maquette coupe de maison<br>et aménagement intérieur",
-      "type": "Projet d'étude · Volume",
-      "intro": "Maquette d'étude en coupe révélant la structure du volume, l'articulation des niveaux et l'organisation intérieure du projet.",
-      "date": "2025",
-      "layout": "detail",
-      "characteristics": [
-        "Coupe habitée",
-        "Volume",
-        "Organisation intérieure"
-      ],
-      "blocks": [
-        {
-          "type": "grid",
-          "items": [
-            {
-              "src": "images/maquette-coupe-maison-amenagement-interieur-01.jpeg",
-              "alt": "Maquette coupe de maison et aménagement intérieur — image 1",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/maquette-coupe-maison-amenagement-interieur-02.jpeg",
-              "alt": "Maquette coupe de maison et aménagement intérieur — image 2",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/maquette-coupe-maison-amenagement-interieur-03.jpeg",
-              "alt": "Maquette coupe de maison et aménagement intérieur — image 3",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/maquette-coupe-maison-amenagement-interieur-04.jpeg",
-              "alt": "Maquette coupe de maison et aménagement intérieur — image 4",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/maquette-coupe-maison-amenagement-interieur-05.jpeg",
-              "alt": "Maquette coupe de maison et aménagement intérieur — image 5",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/maquette-coupe-maison-amenagement-interieur-06.jpeg",
-              "alt": "Maquette coupe de maison et aménagement intérieur — image 6",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/maquette-coupe-maison-amenagement-interieur-07.jpeg",
-              "alt": "Maquette coupe de maison et aménagement intérieur — image 7",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/maquette-coupe-maison-amenagement-interieur-08.jpeg",
-              "alt": "Maquette coupe de maison et aménagement intérieur — image 8",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/maquette-coupe-maison-amenagement-interieur-09.jpeg",
-              "alt": "Maquette coupe de maison et aménagement intérieur — image 9",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/maquette-coupe-maison-amenagement-interieur-10.jpeg",
-              "alt": "Maquette coupe de maison et aménagement intérieur — image 10",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/maquette-coupe-maison-amenagement-interieur-11.jpeg",
-              "alt": "Maquette coupe de maison et aménagement intérieur — image 11",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/maquette-coupe-maison-amenagement-interieur-12.jpeg",
-              "alt": "Maquette coupe de maison et aménagement intérieur — image 12",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/maquette-coupe-maison-amenagement-interieur-13.jpeg",
-              "alt": "Maquette coupe de maison et aménagement intérieur — image 13",
-              "width": "quarter",
-              "fitContain": false
-            }
-          ]
-        },
-        {
-          "type": "copy",
-          "kicker": "Intention",
-          "text": "La maquette sert ici d'outil de lecture et de vérification, en rendant visible l'articulation entre structure, coupe et usages intérieurs."
-        }
-      ],
-      "category": "Volume",
-      "cardSize": "six",
-      "cardImage": "projets/volume/maquette-coupe-maison-amenagement-interieur/images/maquette-coupe-maison-amenagement-interieur-01.jpeg",
-      "cardRatio": "7611 / 5318",
-      "cardAlt": "Maquette coupe de maison et aménagement intérieur",
-      "cardYear": "2025",
-      "cardDescription": "Maquette analytique révélant structure, coupe habitée et organisation spatiale intérieure."
     },
     {
       "slug": "oeuf-de-faberge",
