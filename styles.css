@@ -2471,19 +2471,18 @@ body.study-lightbox-open {
 
 @media (max-width: 1180px), (hover: none) and (pointer: coarse) {
     .page-projet-detail .study-gallery-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 24px;
-        column-count: initial;
+        display: block;
+        column-count: 2;
+        column-gap: 24px;
     }
 
     .page-projet-detail .study-thumb,
     .page-projet-detail .study-thumb.study-thumb-half,
     .page-projet-detail .study-thumb.study-thumb-third,
     .page-projet-detail .study-thumb.study-thumb-wide {
-        display: block;
+        display: inline-block;
         width: 100%;
-        margin: 0;
+        margin: 0 0 24px;
     }
 }
 
@@ -2518,7 +2517,8 @@ body.study-lightbox-open {
     }
 
     .page-projet-detail .study-gallery-grid {
-        grid-template-columns: 1fr;
+        column-count: 1;
+        column-gap: 0;
     }
 
     .page-projet-detail .study-thumb,
