@@ -503,9 +503,11 @@
         }
 
         if (block.type === 'grid') {
+            const items = block.items || [];
+            const preloadWholeGallery = items.length <= 8;
             return `
                 <div class="study-gallery-grid">
-                    ${(block.items || []).map((item, itemIndex) => {
+                    ${items.map((item, itemIndex) => {
                         const widthClass = item.width && item.width !== 'quarter' ? ` study-thumb-${item.width}` : '';
                         const fitClass = item.fitContain ? ' study-fit-contain' : '';
                         return renderZoomableFigure({
@@ -513,7 +515,7 @@
                             alt: item.alt,
                             figureClass: `study-thumb${widthClass}${fitClass}`,
                             imgClass: fitClass ? 'study-fit-contain' : '',
-                            loading: itemIndex < 2 ? 'eager' : 'lazy',
+                            loading: preloadWholeGallery || itemIndex < 2 ? 'eager' : 'lazy',
                         });
                     }).join('')}
                 </div>
