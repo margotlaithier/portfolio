@@ -45,7 +45,6 @@
             <header class="site-header">
                 <div class="header-inner">
                     <a class="brand" href="${current === 'home' ? '#intro' : `${toHome}#intro`}">
-                        <span class="brand-kicker">${escapeHtml(content.site.brandKicker)}</span>
                         <span class="brand-name brand-name-static" data-brand-static="true">
                             <img class="brand-logo-complete" src="${rootPrefix}logo-complet.svg" alt="Margot Laithier" />
                         </span>
