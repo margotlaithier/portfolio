@@ -330,7 +330,6 @@
                     <section class="page-panel home-projects-catalog projets-section" id="projets" data-panel="projets">
                         <div class="container">
                             <div class="home-projects-heading">
-                                <span class="section-label">${escapeHtml(content.projectsPage.heroLabel)}</span>
                                 <h2 class="page-title">${escapeHtml(catalog.pageTitle)}</h2>
                             </div>
                             ${catalog.markup}
@@ -378,7 +377,6 @@
                 <section class="hero">
                     <div class="container hero-grid">
                         <div>
-                            <span class="section-label">${escapeHtml(content.projectsPage.heroLabel)}</span>
                             <h1 class="page-title">${escapeHtml(catalog.pageTitle)}</h1>
                         </div>
                     </div>

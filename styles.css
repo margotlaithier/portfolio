@@ -246,15 +246,6 @@ img {
     transform: scaleX(1);
 }
 
-.section-label {
-    display: inline-block;
-    margin-bottom: 1rem;
-    font-size: 0.76rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-}
-
 .portfolio-card {
     position: relative;
     border-radius: 4px;
