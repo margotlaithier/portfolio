@@ -786,7 +786,7 @@ window.PORTFOLIO_CONTENT = {
       "path": "projets/architecture/facade-de-commerce/",
       "title": "Façade de commerce",
       "cardTitleHtml": "Façade<br>de commerce",
-      "type": "Projet d'étude · Architecture d'intérieur",
+      "type": "Projet d'étude · Architecture",
       "intro": "Réécriture d'une devanture commerciale autour du rythme, de la visibilité et de l'identité urbaine du lieu.",
       "date": "2024",
       "layout": "detail",
@@ -855,7 +855,7 @@ window.PORTFOLIO_CONTENT = {
           "text": "Le projet travaille la façade comme un seuil actif entre rue et commerce, avec une composition lisible qui renforce la présence du lieu sans rompre son inscription dans le contexte urbain."
         }
       ],
-      "category": "Architecture d'intérieur",
+      "category": "Architecture",
       "cardSize": "half",
       "cardAspect": "auto",
       "cardImage": "projets/architecture/facade-de-commerce/images/facade-de-commerce-06.jpeg",
