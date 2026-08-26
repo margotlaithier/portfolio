@@ -216,11 +216,11 @@
 
     function enhanceProjectCardInteractions() {
         const cards = document.querySelectorAll('.portfolio-card');
-        const touchQuery = window.matchMedia('(hover: none), (pointer: coarse)');
+        const hoverQuery = window.matchMedia('(any-hover: hover)');
 
         cards.forEach((card) => {
             card.addEventListener('click', (event) => {
-                const isTouchClick = touchQuery.matches || event.pointerType === 'touch';
+                const isTouchClick = event.pointerType === 'touch' || (!event.pointerType && !hoverQuery.matches);
 
                 if (!isTouchClick || card.classList.contains('active')) {
                     return;

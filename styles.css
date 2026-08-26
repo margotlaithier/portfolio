@@ -769,10 +769,14 @@ img {
         box-shadow 0.45s ease;
 }
 
-.page-home .portfolio-card:focus,
 .page-home .portfolio-card:active {
     outline: none;
     background: #ddd;
+}
+
+.page-home .portfolio-card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
 }
 
 .page-home .portfolio-card img {
@@ -789,7 +793,7 @@ img {
     object-fit: contain;
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (any-hover: hover) {
     .page-home .portfolio-card:hover {
         box-shadow: 0 32px 90px rgba(24, 17, 13, 0.26);
     }
@@ -816,7 +820,7 @@ img {
     transition: opacity 0.45s ease;
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (any-hover: hover) {
     .page-home .portfolio-card:hover .overlay {
         opacity: 1;
     }
@@ -837,7 +841,7 @@ img {
     transition: transform 0.45s ease 0.04s;
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (any-hover: hover) {
     .page-home .portfolio-card:hover .overlay-tag {
         transform: translateY(0);
     }
@@ -866,7 +870,7 @@ img {
     font-style: normal;
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (any-hover: hover) {
     .page-home .portfolio-card:hover .overlay-title {
         transform: translateY(0);
     }
@@ -890,7 +894,7 @@ img {
     transition: transform 0.45s ease 0.12s;
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (any-hover: hover) {
     .page-home .portfolio-card:hover .overlay-desc {
         transform: translateY(0);
     }
@@ -913,7 +917,7 @@ img {
     transition: transform 0.45s ease 0.16s;
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (any-hover: hover) {
     .page-home .portfolio-card:hover .overlay-cta {
         transform: translateY(0);
     }
@@ -930,7 +934,7 @@ img {
     transition: width 0.35s ease;
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (any-hover: hover) {
     .page-home .portfolio-card:hover .cta-line {
         width: 46px;
     }
@@ -956,7 +960,7 @@ img {
     transition: opacity 0.4s ease 0.18s, transform 0.4s ease 0.18s;
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (any-hover: hover) {
     .page-home .portfolio-card:hover .corner-arrow {
         opacity: 1;
         transform: scale(1) rotate(0deg);
@@ -989,13 +993,42 @@ img {
     transition: color 0.4s ease;
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (any-hover: hover) {
     .page-home .portfolio-card:hover .card-number {
         color: rgba(255, 255, 255, 0.35);
     }
 }
 
 .page-home .portfolio-card.active .card-number {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.page-home .portfolio-card:focus-visible img {
+    transform: scale(1.06);
+    filter: brightness(0.28) saturate(0.5);
+}
+
+.page-home .portfolio-card:focus-visible .overlay {
+    opacity: 1;
+}
+
+.page-home .portfolio-card:focus-visible .overlay-tag,
+.page-home .portfolio-card:focus-visible .overlay-title,
+.page-home .portfolio-card:focus-visible .overlay-desc,
+.page-home .portfolio-card:focus-visible .overlay-cta {
+    transform: translateY(0);
+}
+
+.page-home .portfolio-card:focus-visible .cta-line {
+    width: 46px;
+}
+
+.page-home .portfolio-card:focus-visible .corner-arrow {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+.page-home .portfolio-card:focus-visible .card-number {
     color: rgba(255, 255, 255, 0.35);
 }
 
@@ -1150,7 +1183,7 @@ img {
     font-size: 0.9rem;
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (any-hover: hover) {
     .page-home .recommendation-card:hover {
         transform: translateY(-4px);
         border-color: rgba(165, 107, 69, 0.26);
