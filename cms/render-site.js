@@ -743,6 +743,26 @@
     const projects = (content.projects || []).map((project, index) => normaliseProject({ ...project, globalNumber: index + 1 }));
     const projectsBySlug = new Map(projects.map((project) => [project.slug, project]));
 
+    function refreshFixedHeaderAfterHistoryRestore(event) {
+        if (!event.persisted) return;
+
+        window.requestAnimationFrame(() => {
+            const header = document.querySelector('.site-header');
+            if (!header) return;
+
+            const inlineWidth = header.style.width;
+            header.style.width = `${header.offsetWidth + 1}px`;
+            void header.offsetWidth;
+
+            window.requestAnimationFrame(() => {
+                header.style.width = inlineWidth;
+                void header.offsetWidth;
+            });
+        });
+    }
+
+    window.addEventListener('pageshow', refreshFixedHeaderAfterHistoryRestore);
+
     document.addEventListener('DOMContentLoaded', () => {
         const body = document.body;
         const rootPrefix = body.dataset.rootPrefix || '';

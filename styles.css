@@ -109,7 +109,9 @@ img {
     left: 0;
     width: 100%;
     z-index: 30;
+    -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
+    transform: translateZ(0);
     background: rgba(244, 241, 236, 0.64);
     border-bottom: 1px solid rgba(31, 26, 22, 0.08);
 }
