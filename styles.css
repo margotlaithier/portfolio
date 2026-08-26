@@ -9,32 +9,6 @@
     --header-height: 78px;
 }
 
-/* Scénographie : masonry sur quatre colonnes pour conserver une vue d'ensemble dense. */
-body[data-project-slug="scenographie-theatre"] .study-gallery-grid {
-    display: block;
-    column-count: 4;
-    column-gap: 18px;
-}
-
-body[data-project-slug="scenographie-theatre"] .study-thumb {
-    display: inline-block;
-    width: 100%;
-    margin: 0 0 18px;
-    break-inside: avoid;
-}
-
-@media (max-width: 900px) {
-    body[data-project-slug="scenographie-theatre"] .study-gallery-grid {
-        column-count: 2;
-    }
-}
-
-@media (max-width: 600px) {
-    body[data-project-slug="scenographie-theatre"] .study-gallery-grid {
-        column-count: 1;
-    }
-}
-
 *,
 *::before,
 *::after {
