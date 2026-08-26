@@ -3,7 +3,7 @@ window.PORTFOLIO_CONTENT = {
     "portfolioTitle": "Portfolio",
     "brandKicker": "Architecture d'intérieur",
     "email": "margot.laithier22@gmail.com",
-    "location": "Morbihan, Bretagne",
+    "location": "Bretagne – Loire-Atlantique",
     "footerTitle": "PORTFOLIO"
   },
   "home": {
@@ -28,7 +28,7 @@ window.PORTFOLIO_CONTENT = {
       "title": "Échanger ?",
       "text": "Vous pouvez me joindre ici pour toute prise de contact.",
       "email": "margot.laithier22@gmail.com",
-      "location": "Morbihan, Bretagne"
+      "location": "Bretagne – Loire-Atlantique"
     }
   },
   "projectsPage": {
