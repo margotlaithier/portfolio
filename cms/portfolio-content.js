@@ -947,24 +947,31 @@ window.PORTFOLIO_CONTENT = {
       "title": "Oeuf de Fabergé",
       "cardTitleHtml": "Oeuf de<br>Fabergé",
       "type": "Projet d'étude · Volume",
-      "intro": "Exercice de détail et de composition autour d'un petit volume précieux, articulant symétrie, ornement et perception de l'objet.",
-      "date": "2024",
+      "intro": "Pour ce projet, nous devions créer un œuf inspiré des œufs de Fabergé, à partir d’un univers littéraire. J’ai choisi de travailler autour du livre Arsène Lupin et de son univers fait de mystères, de secrets et d’objets précieux.\nJe voulais que l’œuf ne soit pas seulement un objet à regarder, mais qu’il demande au spectateur de chercher comment l’ouvrir et découvrir ce qu’il cache.",
+      "date": "Mars 2026",
       "layout": "detail",
       "characteristics": [
         "Ornement",
         "Symétrie",
-        "Objet précieux"
+        "Découpe laser",
+        "Mécanisme",
+        "Objet interactif"
       ],
       "blocks": [
         {
+          "type": "image",
+          "src": "images/oeuf-de-faberge-01.jpeg",
+          "alt": "Oeuf de Fabergé — image 1",
+          "fitContain": false
+        },
+        {
+          "type": "copy",
+          "kicker": "Explication",
+          "text": "L’œuf est composé de deux parties qui s’ouvrent pour révéler son intérieur. Une fois ouvert, le spectateur découvre une manivelle qu’il doit tourner. Celle-ci actionne un mécanisme qui fait monter progressivement un demi-cercle placé au centre de l’œuf, jusqu’à faire apparaître le collier caché à l’intérieur.\n\nL’œuf est composé de deux parties qui s’ouvrent pour révéler son intérieur. Une fois ouvert, le spectateur découvre une manivelle qu’il doit tourner. Celle-ci actionne un mécanisme qui fait monter progressivement un demi-cercle placé au centre de l’œuf, jusqu’à faire apparaître le collier caché à l’intérieur. \nCette ouverture en plusieurs étapes permet de créer un petit moment de surprise et de rappeler l’univers d’Arsène Lupin, où il faut chercher, manipuler et découvrir pour arriver jusqu’à l’objet précieux."
+        },
+        {
           "type": "grid",
           "items": [
-            {
-              "src": "images/oeuf-de-faberge-01.jpeg",
-              "alt": "Oeuf de Fabergé — image 1",
-              "width": "quarter",
-              "fitContain": false
-            },
             {
               "src": "images/oeuf-de-faberge-02.jpeg",
               "alt": "Oeuf de Fabergé — image 2",
@@ -976,19 +983,24 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Oeuf de Fabergé — image 3",
               "width": "quarter",
               "fitContain": false
-            },
-            {
-              "src": "images/oeuf-de-faberge-04.jpeg",
-              "alt": "Oeuf de Fabergé — image 4",
-              "width": "quarter",
-              "fitContain": false
             }
           ]
         },
         {
           "type": "copy",
           "kicker": "Intention",
-          "text": "Le projet travaille l'équilibre entre rigueur géométrique, richesse du détail et perception d'un volume précieux à petite échelle."
+          "text": "Cette ouverture en plusieurs étapes permet de créer un petit moment de surprise et de rappeler l’univers d’Arsène Lupin, où il faut chercher, manipuler et découvrir pour arriver jusqu’à l’objet précieux."
+        },
+        {
+          "type": "image",
+          "src": "images/oeuf-de-faberge-04.jpeg",
+          "alt": "Oeuf de Fabergé — image 4",
+          "fitContain": false
+        },
+        {
+          "type": "copy",
+          "kicker": "",
+          "text": "Pour réaliser la structure et les différentes pièces de l’œuf, j’ai notamment travaillé avec la découpeuse laser, ce qui m’a permis de créer les formes, les motifs et les différentes parties nécessaires au mécanisme\\.\n\nCe projet m’a permis de travailler à une échelle différente de mes projets d’aménagement, en réfléchissant à la fois à l’apparence d’un objet, à sa fabrication et à la manière dont une personne interagit avec lui."
         }
       ],
       "category": "Volume",
@@ -997,8 +1009,8 @@ window.PORTFOLIO_CONTENT = {
       "cardImage": "projets/volume/oeuf-de-faberge/images/oeuf-de-faberge-01.jpeg",
       "cardRatio": "3967 / 5451",
       "cardAlt": "Oeuf de Fabergé",
-      "cardYear": "2024",
-      "cardDescription": "Exercice de détail, de symétrie et d'ornement autour d'un petit volume précieux."
+      "cardYear": "2026",
+      "cardDescription": "L’Œuf de Lupin — Objet à mécanisme"
     },
     {
       "slug": "sculpture-fil-de-fer",
