@@ -1609,10 +1609,15 @@ window.PORTFOLIO_CONTENT = {
       "title": "Vinyle chanteur",
       "cardTitleHtml": "Vinyle chanteur",
       "type": "",
-      "intro": "",
-      "date": "",
+      "intro": "Pour ce projet, j’ai voulu créer une pochette de vinyle pour Eddy de Pretto, en m’inspirant de son univers et surtout des sujets qu’il aborde dans ses chansons.\nJ’ai choisi de créer un contraste avec ses pochettes habituelles, qui sont souvent très colorées et pop. Ici, j’ai voulu partir sur quelque chose de plus calme, plus simple et plus intime.",
+      "date": "Mai 2026",
       "layout": "gallery",
-      "characteristics": [],
+      "characteristics": [
+        "Identité visuelle",
+        "Dualité",
+        "Ombre & lumière",
+        "Minimalisme"
+      ],
       "blocks": [
         {
           "type": "grid",
@@ -1628,20 +1633,33 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Vinyle chanteur — image 2",
               "width": "quarter",
               "fitContain": false
-            },
+            }
+          ]
+        },
+        {
+          "type": "copy",
+          "kicker": "Explication",
+          "text": "Sur la pochette, le chanteur est seul face à un grand mur vide. Cela représente l’introspection, la solitude et la difficulté à trouver sa place, des sujets que l’on retrouve souvent dans ses musiques. Le mur garde aussi un côté assez brut, qui rappelle la manière directe dont il parle de ses expériences dans ses textes.\n\nJ’ai également beaucoup travaillé sur l’ombre et la lumière. Sur l’avant du vinyle, le personnage est dans l’ombre, alors qu’au dos il passe dans la lumière. Je voulais montrer une sorte d’entre-deux et d’évolution, mais aussi représenter la dualité entre la force et la fragilité, l’image que l’on montre aux autres et ce que l’on ressent réellement."
+        },
+        {
+          "type": "pair",
+          "items": [
             {
               "src": "images/vinyle-chanteur-03.jpeg",
               "alt": "Vinyle chanteur — image 3",
-              "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/vinyle-chanteur-04.jpeg",
               "alt": "Vinyle chanteur — image 4",
-              "width": "quarter",
               "fitContain": false
             }
           ]
+        },
+        {
+          "type": "copy",
+          "kicker": "",
+          "text": "Enfin, j’ai choisi des couleurs chaudes et assez douces pour apporter un côté nostalgique à l’image. La typographie manuscrite donne quelque chose de plus personnel, comme si Eddy de Pretto avait lui-même écrit sur la pochette, à la manière d’un journal intime dans lequel il raconterait ses expériences et ses émotions."
         }
       ],
       "category": "Design",
@@ -1650,8 +1668,8 @@ window.PORTFOLIO_CONTENT = {
       "cardImage": "projets/design/produit/vinyle-chanteur/images/vinyle-chanteur-01.jpeg",
       "cardRatio": "809 / 806",
       "cardAlt": "Vinyle chanteur",
-      "cardYear": "",
-      "cardDescription": ""
+      "cardYear": "2026",
+      "cardDescription": "Création d’une pochette de vinyle — Eddy de Pretto"
     },
     {
       "slug": "projets-personnels",
