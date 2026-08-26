@@ -78,7 +78,7 @@ window.PORTFOLIO_CONTENT = {
       "cardTitleHtml": "Quartier de maisons roses",
       "type": "Projet d'étude · Architecture",
       "intro": "Ce projet a été réalisé en groupe de huit étudiants avec pour objectif de concevoir un ensemble de maisons présentant une identité architecturale commune. Afin d’assurer une cohérence visuelle entre les différentes réalisations, nous avons défini collectivement une ligne directrice portant sur la palette de couleurs, les matériaux utilisés ainsi que le langage architectural et les formes des bâtiments.\n",
-      "date": "2025",
+      "date": "Janvier 2026",
       "layout": "detail",
       "characteristics": [
         "Travail collaboratif",
@@ -89,89 +89,44 @@ window.PORTFOLIO_CONTENT = {
       ],
       "blocks": [
         {
-          "type": "grid",
+          "type": "pair",
           "items": [
             {
-              "src": "images/quartier-maisons-roses-14.jpeg",
-              "alt": "Quartier de maisons roses — image 14",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-13.jpeg",
-              "alt": "Quartier de maisons roses — image 13",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
               "src": "images/quartier-maisons-roses-01.jpeg",
-              "alt": "Quartier de maisons roses — image 1",
-              "width": "quarter",
+              "alt": "Quartier de maisons roses — image 01",
               "fitContain": false
             },
             {
               "src": "images/quartier-maisons-roses-02.jpeg",
-              "alt": "Quartier de maisons roses — image 2",
-              "width": "quarter",
+              "alt": "Quartier de maisons roses — image 02",
               "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-03.jpeg",
-              "alt": "Quartier de maisons roses — image 3",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-04.jpeg",
-              "alt": "Quartier de maisons roses — image 4",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-10.jpeg",
-              "alt": "Quartier de maisons roses — image 10",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-11.jpeg",
-              "alt": "Quartier de maisons roses — image 11",
-              "width": "quarter",
-              "fitContain": false
-            },
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "items": [
             {
               "src": "images/quartier-maisons-roses-07.jpeg",
-              "alt": "Quartier de maisons roses — image 7",
+              "alt": "Quartier de maisons roses — image 07",
               "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/quartier-maisons-roses-08.jpeg",
-              "alt": "Quartier de maisons roses — image 8",
+              "alt": "Quartier de maisons roses — image 08",
               "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/quartier-maisons-roses-09.jpeg",
-              "alt": "Quartier de maisons roses — image 9",
+              "alt": "Quartier de maisons roses — image 09",
               "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/quartier-maisons-roses-12.jpeg",
               "alt": "Quartier de maisons roses — image 12",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-05.jpeg",
-              "alt": "Quartier de maisons roses — image 5",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/quartier-maisons-roses-06.jpeg",
-              "alt": "Quartier de maisons roses — image 6",
               "width": "quarter",
               "fitContain": false
             }
@@ -181,14 +136,74 @@ window.PORTFOLIO_CONTENT = {
           "type": "copy",
           "kicker": "",
           "text": "Chaque étudiant devait ensuite développer sa propre maison tout en respectant plusieurs contraintes techniques. Le projet imposait une emprise au sol limitée à 20 m² au rez-de-chaussée. Les surfaces supplémentaires devaient être créées par un développement vertical, en concevant des étages. Une autre contrainte majeure consistait à concevoir la structure sans recourir à des piliers porteurs, ce qui nécessitait une réflexion approfondie sur la stabilité du bâtiment et la répartition des charges. Enfin, les porte-à-faux devaient respecter une limite maximale de 5 mètres, intégrant ainsi des notions d’équilibre structurel et de faisabilité constructive."
+        },
+        {
+          "type": "pair",
+          "items": [
+            {
+              "src": "images/quartier-maisons-roses-10.jpeg",
+              "alt": "Quartier de maisons roses — image 10",
+              "fitContain": false
+            },
+            {
+              "src": "images/quartier-maisons-roses-11.jpeg",
+              "alt": "Quartier de maisons roses — image 11",
+              "fitContain": false
+            }
+          ]
+        },
+        {
+          "type": "pair",
+          "items": [
+            {
+              "src": "images/quartier-maisons-roses-03.jpeg",
+              "alt": "Quartier de maisons roses — image 03",
+              "fitContain": false
+            },
+            {
+              "src": "images/quartier-maisons-roses-04.jpeg",
+              "alt": "Quartier de maisons roses — image 07",
+              "fitContain": false
+            }
+          ]
+        },
+        {
+          "type": "pair",
+          "items": [
+            {
+              "src": "images/quartier-maisons-roses-05.jpeg",
+              "alt": "Quartier de maisons roses — image 05",
+              "fitContain": false
+            },
+            {
+              "src": "images/quartier-maisons-roses-06.jpeg",
+              "alt": "Quartier de maisons roses — image 06",
+              "fitContain": false
+            }
+          ]
+        },
+        {
+          "type": "pair",
+          "items": [
+            {
+              "src": "images/quartier-maisons-roses-13.jpeg",
+              "alt": "Quartier de maisons roses — image 13",
+              "fitContain": false
+            },
+            {
+              "src": "images/quartier-maisons-roses-14.jpeg",
+              "alt": "Quartier de maisons roses — image 14",
+              "fitContain": false
+            }
+          ]
         }
       ],
       "category": "Architecture",
       "cardSize": "half",
-      "cardImage": "projets/architecture/quartier-maisons-roses/images/quartier-maisons-roses-14.jpeg",
+      "cardImage": "projets/architecture/quartier-maisons-roses/images/quartier-maisons-roses-02.jpeg",
       "cardRatio": "8064 / 6048",
       "cardAlt": "Quartier de maisons roses",
-      "cardYear": "2025",
+      "cardYear": "2026",
       "cardDescription": "Création d’une habitation contemporaine répondant à des exigences de structure, de porte-à-faux et d’harmonie architecturale."
     },
     {
@@ -198,12 +213,15 @@ window.PORTFOLIO_CONTENT = {
       "cardTitleHtml": "Projet final",
       "type": "Projet d'étude · Architecture d'intérieur",
       "intro": "Pour notre examen final, nous avions 8 heures pour repenser et aménager une maison complète à partir d’un plan existant. Certains murs étaient non porteurs et pouvaient être supprimés, ce qui nous permettait de modifier l’organisation des espaces selon nos choix.",
-      "date": "2025",
+      "date": "Juin 2026",
       "layout": "detail",
       "characteristics": [
-        "Hospitalité",
-        "Polyvalence",
-        "Logement saisonnier"
+        "Réaménagement",
+        "Lumière naturelle",
+        "Espaces ouverts",
+        "Mobilier intégré",
+        "Circulation",
+        "Conception en temps limité"
       ],
       "blocks": [
         {
@@ -260,8 +278,8 @@ window.PORTFOLIO_CONTENT = {
       "cardImage": "projets/architecture-interieure/projet-final/images/projet-final-04.jpeg",
       "cardRatio": "4736 / 3340",
       "cardAlt": "Airbnb",
-      "cardYear": "2025",
-      "cardDescription": "Mise en scène d'un logement saisonnier pensée pour la flexibilité, l'accueil et la lisibilité des usages."
+      "cardYear": "2026",
+      "cardDescription": "Conception d’une maison — Examen final 8h"
     },
     {
       "slug": "chambre-parentale",
