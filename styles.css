@@ -9,28 +9,29 @@
     --header-height: 78px;
 }
 
-/* Scénographie : quatre étapes par ligne pour lire l'évolution du projet. */
+/* Scénographie : masonry sur quatre colonnes pour conserver une vue d'ensemble dense. */
 body[data-project-slug="scenographie-theatre"] .study-gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 18px;
-    column-count: initial;
+    display: block;
+    column-count: 4;
+    column-gap: 18px;
 }
 
 body[data-project-slug="scenographie-theatre"] .study-thumb {
-    display: block;
-    margin: 0;
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 18px;
+    break-inside: avoid;
 }
 
 @media (max-width: 900px) {
     body[data-project-slug="scenographie-theatre"] .study-gallery-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-count: 2;
     }
 }
 
 @media (max-width: 600px) {
     body[data-project-slug="scenographie-theatre"] .study-gallery-grid {
-        grid-template-columns: 1fr;
+        column-count: 1;
     }
 }
 
