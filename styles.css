@@ -582,7 +582,7 @@ img {
     height: 10px;
     border-radius: 999px;
     background: rgba(31, 26, 22, 0.18);
-    transition: transform 0.35s ease, background-color 0.35s ease;
+    transition: transform 0.22s ease;
 }
 
 .page-home .panel-dot.is-current {

@@ -284,8 +284,7 @@
 
         navLinks.forEach((link) => {
             link.addEventListener('click', () => {
-                navLinks.forEach((item) => item.classList.remove('is-current'));
-                link.classList.add('is-current');
+                setCurrentPanel(link.dataset.nav);
             });
         });
 
