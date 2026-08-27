@@ -1608,38 +1608,6 @@ window.PORTFOLIO_CONTENT = {
       "cardDescription": "Un même programme, trois façons de l’imaginer"
     },
     {
-      "slug": "affiche-camping",
-      "path": "projets/design/graphique/affiche-camping/",
-      "title": "Affiche camping",
-      "cardTitleHtml": "Affiche camping",
-      "type": "",
-      "intro": "",
-      "date": "",
-      "layout": "gallery",
-      "characteristics": [],
-      "blocks": [
-        {
-          "type": "grid",
-          "items": [
-            {
-              "src": "images/affiche-camping-01.jpeg",
-              "alt": "Affiche camping — image 1",
-              "width": "quarter",
-              "fitContain": false
-            }
-          ]
-        }
-      ],
-      "category": "Design",
-      "cardSize": "third",
-      "cardAspect": "portrait-tall",
-      "cardImage": "projets/design/graphique/affiche-camping/images/affiche-camping-01.jpeg",
-      "cardRatio": "3340 / 4736",
-      "cardAlt": "Affiche camping",
-      "cardYear": "",
-      "cardDescription": ""
-    },
-    {
       "slug": "vehicule-sous-marin",
       "path": "projets/design/produit/vehicule-sous-marin/",
       "title": "Véhicule sous-marin",
@@ -1695,7 +1663,7 @@ window.PORTFOLIO_CONTENT = {
       ],
       "category": "Design",
       "cardSize": "half",
-      "cardImage": "projets/design/produit/vehicule-sous-marin/images/vehicule-sous-marin-01.jpeg",
+      "cardImage": "projets/design/produit/vehicule-sous-marin/images/vehicule-sous-marin-03.jpeg",
       "cardRatio": "4736 / 3340",
       "cardAlt": "Véhicule sous-marin",
       "cardYear": "2026",
@@ -1935,10 +1903,17 @@ window.PORTFOLIO_CONTENT = {
       "title": "Sculpture en papier",
       "cardTitleHtml": "Sculpture en papier",
       "type": "",
-      "intro": "",
-      "date": "",
+      "intro": "Pour ce projet, nous devions réaliser une sculpture autour du thème « Grandir ». J’ai choisi de représenter cette idée à travers une structure qui évolue progressivement vers le haut et qui semble se développer.",
+      "date": "Mai 2025",
       "layout": "gallery",
-      "characteristics": [],
+      "characteristics": [
+        "Sculpture en papier",
+        "Fait main",
+        "Croissance",
+        "Légèreté",
+        "Mouvement",
+        "Travail du volume"
+      ],
       "blocks": [
         {
           "type": "grid",
@@ -1974,6 +1949,11 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             }
           ]
+        },
+        {
+          "type": "copy",
+          "kicker": "",
+          "text": "Le choix de réaliser l’ensemble en papier blanc permet de mettre davantage en avant les formes, les découpes, les détails et les jeux d’ombre plutôt que la couleur.\n\nCe projet m’a permis de travailler la précision du découpage et de l’assemblage, mais aussi de réfléchir à la manière de traduire un mot et une idée abstraite en volume."
         }
       ],
       "category": "Volume",
@@ -1982,8 +1962,8 @@ window.PORTFOLIO_CONTENT = {
       "cardImage": "projets/volume/sculpture-en-papier/images/sculpture-en-papier-05.jpeg",
       "cardRatio": "6048 / 8064",
       "cardAlt": "Sculpture en papier",
-      "cardYear": "",
-      "cardDescription": ""
+      "cardYear": "2025",
+      "cardDescription": "Une sculpture autour de la croissance "
     },
     {
       "slug": "telephone-retro-fil-de-fer",
@@ -1991,11 +1971,23 @@ window.PORTFOLIO_CONTENT = {
       "title": "Téléphone rétro en fil de fer",
       "cardTitleHtml": "Téléphone rétro en fil de fer",
       "type": "",
-      "intro": "",
-      "date": "",
+      "intro": "Pour ce projet, nous devions reproduire un objet du quotidien entièrement en fil de fer. J’ai choisi un ancien téléphone à cadran, car sa forme et ses nombreux détails étaient intéressants à travailler.",
+      "date": "Février 2025",
       "layout": "gallery",
-      "characteristics": [],
+      "characteristics": [
+        "Fil de fer",
+        "Objet du quotidien",
+        "Transparence",
+        "Volume",
+        "Précision",
+        "Travail de la ligne"
+      ],
       "blocks": [
+        {
+          "type": "copy",
+          "kicker": "Intention",
+          "text": "J’ai utilisé le fil de fer pour dessiner les différentes parties du téléphone directement dans l’espace : la base, le combiné, le cadran et même le fil en spirale.\n\nLe but était de réussir à faire reconnaître l’objet sans créer de surfaces pleines, uniquement grâce aux lignes et aux contours. J’ai donc dû réfléchir à la forme générale du téléphone, mais aussi aux détails qui permettent de l’identifier facilement."
+        },
         {
           "type": "grid",
           "items": [
@@ -2018,6 +2010,11 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             }
           ]
+        },
+        {
+          "type": "copy",
+          "kicker": "",
+          "text": "Ce projet m’a permis de travailler le volume, les proportions et la précision, tout en découvrant une autre manière de représenter un objet en trois dimensions."
         }
       ],
       "category": "Volume",
@@ -2026,7 +2023,7 @@ window.PORTFOLIO_CONTENT = {
       "cardImage": "projets/volume/telephone-retro-fil-de-fer/images/telephone-retro-fil-de-fer-01.jpeg",
       "cardRatio": "5376 / 6541",
       "cardAlt": "Téléphone rétro en fil de fer",
-      "cardYear": "",
+      "cardYear": "2025",
       "cardDescription": ""
     }
   ]
