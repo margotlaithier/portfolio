@@ -1483,7 +1483,7 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/un-batiment-une-semaine-01.jpeg",
+              "src": "images/un-batiment-une-semaine-02.jpeg",
               "alt": "un-batiment-une-semaine-01",
               "fitContain": false
             }
