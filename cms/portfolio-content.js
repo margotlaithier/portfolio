@@ -1631,11 +1631,19 @@ window.PORTFOLIO_CONTENT = {
       "title": "Véhicule sous-marin",
       "cardTitleHtml": "Véhicule sous-marin",
       "type": "",
-      "intro": "",
-      "date": "",
+      "intro": "Pour ce projet, nous devions imaginer un sous-marin à partir de la forme d’un ustensile de cuisine. J’ai choisi de travailler avec une louche.",
+      "date": "Février 2026",
       "layout": "gallery",
-      "characteristics": [],
+      "characteristics": [
+        "Détournement d’objet",
+        "Recherche de formes"
+      ],
       "blocks": [
+        {
+          "type": "copy",
+          "kicker": "Intention",
+          "text": "J’ai commencé par observer sa forme arrondie et son long manche pour chercher comment les transformer en différentes parties du sous-marin. La partie creuse de la louche m’a servi de base pour créer l’habitacle, tandis que son manche m’a inspirée pour la partie arrière du véhicule.\n\nPour aller plus loin dans la forme, je me suis également inspirée d’un poisson. J’ai donc ajouté des éléments rappelant ses nageoires et sa silhouette, tout en gardant la forme principale de la louche reconnaissable."
+        },
         {
           "type": "grid",
           "items": [
@@ -1664,6 +1672,11 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             }
           ]
+        },
+        {
+          "type": "copy",
+          "kicker": "",
+          "text": "J’ai ensuite travaillé plusieurs croquis pour faire évoluer mon idée avant d’arriver à la forme finale. J’ai aussi imaginé le sous-marin dans son environnement, sous l’eau, afin de montrer son fonctionnement et son éclairage.\n\nCe projet m’a permis de travailler sur la transformation d’un objet du quotidien et de voir comment une forme existante peut devenir le point de départ d’un objet complètement différent."
         }
       ],
       "category": "Design",
@@ -1671,8 +1684,8 @@ window.PORTFOLIO_CONTENT = {
       "cardImage": "projets/design/produit/vehicule-sous-marin/images/vehicule-sous-marin-01.jpeg",
       "cardRatio": "4736 / 3340",
       "cardAlt": "Véhicule sous-marin",
-      "cardYear": "",
-      "cardDescription": ""
+      "cardYear": "2026",
+      "cardDescription": "De la louche au sous-marin "
     },
     {
       "slug": "vinyle-chanteur",
