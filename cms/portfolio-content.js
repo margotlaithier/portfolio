@@ -2046,7 +2046,7 @@ window.PORTFOLIO_CONTENT = {
       "cardRatio": "5376 / 6541",
       "cardAlt": "Téléphone rétro en fil de fer",
       "cardYear": "2025",
-      "cardDescription": ""
+      "cardDescription": "Représenter un objet par la ligne"
     }
   ]
 };
