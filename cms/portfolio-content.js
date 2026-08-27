@@ -204,7 +204,7 @@ window.PORTFOLIO_CONTENT = {
       "cardRatio": "8064 / 6048",
       "cardAlt": "Quartier de maisons roses",
       "cardYear": "2026",
-      "cardDescription": "Création d’une habitation contemporaine. "
+      "cardDescription": "Création d’une habitation contemporaine"
     },
     {
       "slug": "projet-final",
@@ -480,7 +480,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "",
-          "text": "J’ai aussi réfléchi aux équipements : le réfrigérateur est sous forme de tiroirs et le lave-vaisselle se relève, ce qui permet de le charger et de le vider plus facilement. "
+          "text": "J’ai aussi réfléchi aux équipements : le réfrigérateur est sous forme de tiroirs et le lave-vaisselle se relève, ce qui permet de le charger et de le vider plus facilement."
         },
         {
           "type": "pair",
@@ -526,7 +526,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "Maquette ",
-          "text": "J’ai également dû réaliser une maquette en papier blanc avec  un éléments en couleur. "
+          "text": "J’ai également dû réaliser une maquette en papier blanc avec un élément coloré."
         },
         {
           "type": "grid",
@@ -1136,7 +1136,7 @@ window.PORTFOLIO_CONTENT = {
       "title": "Charte graphique restaurant",
       "cardTitleHtml": "Charte graphique<br>restaurant",
       "type": "Projet d'étude · Design graphique",
-      "intro": "Développement d’une chartres graphique pour créer une identité visuel au restaurant. ",
+      "intro": "Développement d’une chartres graphique pour créer une identité visuel au restaurant.",
       "date": "2025",
       "layout": "detail",
       "characteristics": [
@@ -1523,7 +1523,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "",
-          "text": "J’ai ensuite regroupé les 20 réalisations sous forme de petits échantillons afin de créer mon propre nuancier de matériaux.\nCet exercice m’a permis de travailler mon observation et ma représentation des matières. "
+          "text": "J’ai ensuite regroupé les 20 réalisations sous forme de petits échantillons afin de créer mon propre nuancier de matériaux.\nCet exercice m’a permis de travailler mon observation et ma représentation des matières."
         },
         {
           "type": "pair",
