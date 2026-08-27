@@ -3,7 +3,12 @@
     const BRAND_LOGO_PATH = 'M.2.2v760h151l1-418,191,200,192-200,1,254h150V.2h-46l-296,329L47.2.2H.2Z';
     const BRAND_LOGO_DOT = { cx: 611.2, cy: 700.2, r: 75 };
     const BRAND_LOGO_BOX = { xMin: 0.2, xMax: 611.2, yMin: 0.2, yMax: 760.2 };
+    const scriptUrl = document.currentScript?.src || window.location.href;
     const FONT_URLS = {
+        regular: new URL('assets/fonts/playfair-display-400.ttf', scriptUrl).href,
+        bold: new URL('assets/fonts/playfair-display-700.ttf', scriptUrl).href
+    };
+    const FALLBACK_FONT_URLS = {
         regular: 'https://fonts.gstatic.com/s/playfairdisplay/v40/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKdFvUDQ.ttf',
         bold: 'https://fonts.gstatic.com/s/playfairdisplay/v40/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKeiukDQ.ttf'
     };
@@ -43,7 +48,7 @@
             return false;
         }
 
-        if (element.querySelector('img, svg')) {
+        if (element.querySelector('img') || (element.querySelector('svg') && !element.classList.contains('playfair-points-ready'))) {
             return false;
         }
 
@@ -109,14 +114,24 @@
             throw new Error('opentype.js unavailable');
         }
 
-        const promise = fetch(FONT_URLS[weightKey])
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`Playfair font unavailable: ${response.status}`);
+        const promise = (async () => {
+            const sources = [FONT_URLS[weightKey], FALLBACK_FONT_URLS[weightKey]];
+            let lastError = null;
+
+            for (const source of sources) {
+                try {
+                    const response = await fetch(source);
+                    if (!response.ok) {
+                        throw new Error(`Playfair font unavailable: ${response.status}`);
+                    }
+                    return window.opentype.parse(await response.arrayBuffer());
+                } catch (error) {
+                    lastError = error;
                 }
-                return response.arrayBuffer();
-            })
-            .then((buffer) => window.opentype.parse(buffer));
+            }
+
+            throw lastError || new Error('Playfair font unavailable');
+        })();
 
         fontCache.set(weightKey, promise);
         return promise;
@@ -278,10 +293,6 @@
         return Number.isFinite(weight) && weight >= 600 ? 'bold' : 'regular';
     }
 
-    function getFontWeightValue(element) {
-        return window.getComputedStyle(element).fontWeight || '400';
-    }
-
     function getExplicitLines(element) {
         return extractSourceText(element)
             .split('\n')
@@ -322,6 +333,7 @@
         textNode.setAttribute('font-family', 'Georgia, serif');
         textNode.setAttribute('font-size', fontSize);
         textNode.setAttribute('font-weight', fontWeight);
+        textNode.setAttribute('class', 'playfair-ampersand');
         textNode.textContent = character;
         svg.appendChild(textNode);
 
@@ -357,6 +369,11 @@
 
     function buildLines(element, font, fontSize, letterSpacing, maxWidth) {
         const explicitLines = getExplicitLines(element);
+        const whiteSpace = window.getComputedStyle(element).whiteSpace;
+
+        if (whiteSpace === 'nowrap') {
+            return [explicitLines.join(' ').replace(/[ \t]{2,}/g, ' ').trim()];
+        }
 
         if (explicitLines.length > 1) {
             const compactLine = explicitLines.join(' ').replace(/[ \t]{2,}/g, ' ').trim();
@@ -380,7 +397,7 @@
         const fontSize = getFontSize(element);
         const lineHeight = getLineHeight(element, fontSize);
         const letterSpacing = getLetterSpacing(element);
-        const fontWeight = getFontWeightValue(element);
+        const fontWeight = window.getComputedStyle(element).fontWeight || '400';
         const font = await loadFont(getWeightKey(element));
         const rect = element.getBoundingClientRect();
         // Keep a small tolerance because the SVG font metrics are not perfectly
@@ -440,6 +457,7 @@
                     const dotPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                     dotPath.setAttribute('d', dotContours.join(' '));
                     dotPath.setAttribute('fill', DOT_COLOR);
+                    dotPath.setAttribute('class', 'playfair-dot');
                     svg.appendChild(dotPath);
                 }
 
@@ -457,7 +475,7 @@
         svg.setAttribute('width', width);
         svg.setAttribute('height', totalHeight);
         svg.style.width = `${width}px`;
-        svg.style.height = `${totalHeight}px`;
+        svg.style.height = 'auto';
         svg.style.maxWidth = '100%';
         svg.style.display = 'block';
 
@@ -478,11 +496,7 @@
         return element.dataset.brandText;
     }
 
-    function appendGlyphPaths(svg, character, font, fontSize, baseline, x, dotColor, fontWeight) {
-        if (character === '&') {
-            return appendGeorgiaCharacter(svg, character, fontSize, baseline, x, fontWeight);
-        }
-
+    function appendGlyphPaths(svg, character, font, fontSize, baseline, x, dotColor) {
         const glyph = font.charToGlyph(character);
         const path = glyph.getPath(x, baseline, fontSize);
         const contours = splitContours(path.commands);
@@ -509,6 +523,7 @@
             const dotPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             dotPath.setAttribute('d', dotContours.join(' '));
             dotPath.setAttribute('fill', dotColor);
+            dotPath.setAttribute('class', 'playfair-dot');
             svg.appendChild(dotPath);
         }
 
@@ -530,7 +545,6 @@
         const fontSource = textElement || element;
         const fontSize = getFontSize(fontSource);
         const letterSpacing = getLetterSpacing(fontSource);
-        const fontWeight = getFontWeightValue(fontSource);
         const font = await loadFont(getWeightKey(fontSource));
         const ascender = font.ascender * fontSize / font.unitsPerEm;
         const descender = Math.abs(font.descender) * fontSize / font.unitsPerEm;
@@ -566,13 +580,14 @@
         logoDot.setAttribute('cy', BRAND_LOGO_DOT.cy);
         logoDot.setAttribute('r', BRAND_LOGO_DOT.r);
         logoDot.setAttribute('fill', DOT_COLOR);
+        logoDot.setAttribute('class', 'playfair-dot');
         logoGroup.appendChild(logoDot);
         svg.appendChild(logoGroup);
 
         let x = textX;
         for (let index = 0; index < text.length; index += 1) {
             const character = text[index];
-            x += appendGlyphPaths(svg, character, font, fontSize, baseline, x, DOT_COLOR, fontWeight);
+            x += appendGlyphPaths(svg, character, font, fontSize, baseline, x, DOT_COLOR);
             if (index < text.length - 1) {
                 x += letterSpacing;
             }
@@ -632,10 +647,19 @@
 
     document.addEventListener('DOMContentLoaded', async () => {
         try {
+            if (document.fonts?.load) {
+                await Promise.all([
+                    document.fonts.load('400 1em "Playfair Display"'),
+                    document.fonts.load('700 1em "Playfair Display"'),
+                    document.fonts.load('400 1em "DM Sans"')
+                ]);
+            }
             await renderAll();
             window.addEventListener('resize', scheduleRerender);
         } catch (error) {
             console.error('Playfair points setup failed', error);
+        } finally {
+            document.documentElement.classList.remove('render-pending');
         }
     });
 })();

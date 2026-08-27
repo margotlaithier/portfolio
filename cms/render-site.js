@@ -356,7 +356,7 @@
         document.body.innerHTML = `
             ${renderHeader(rootPrefix, 'home')}
             <div class="panel-rail" aria-hidden="true">
-                <span class="panel-dot" data-dot="intro"></span>
+                <span class="panel-dot is-current" data-dot="intro"></span>
                 <span class="panel-dot" data-dot="projets"></span>
                 <span class="panel-dot" data-dot="documents"></span>
                 <span class="panel-dot" data-dot="contact"></span>
@@ -454,7 +454,7 @@
     function renderZoomableFigure({ src, alt, figureClass = '', imgClass = '', loading = 'lazy' }) {
         return `
             <figure class="${figureClass} study-zoomable" data-zoomable-src="${escapeHtml(src)}" data-zoomable-alt="${escapeHtml(alt)}">
-                <img${imgClass ? ` class="${imgClass}"` : ''} src="${src}" alt="${escapeHtml(alt)}" loading="${loading}" decoding="async" />
+                <img${imgClass ? ` class="${imgClass}"` : ''} src="${src}" alt="${escapeHtml(alt)}" loading="${loading}" />
             </figure>
         `;
     }
@@ -603,7 +603,62 @@
             </div>
             ${renderFooter(rootPrefix, 'projects')}
         `;
+        enhanceStudyGalleryMasonry();
         enhanceProjectImageZoom();
+    }
+
+    function enhanceStudyGalleryMasonry() {
+        const grids = Array.from(document.querySelectorAll('.study-gallery-grid'));
+        if (!grids.length) return;
+
+        let frameId = 0;
+
+        const layoutGrid = (grid) => {
+            const styles = window.getComputedStyle(grid);
+            const rowHeight = parseFloat(styles.gridAutoRows) || 1;
+            const gap = parseFloat(styles.getPropertyValue('--study-gallery-gap')) || 24;
+
+            grid.querySelectorAll('.study-thumb').forEach((figure) => {
+                figure.style.removeProperty('grid-row-end');
+                const height = figure.getBoundingClientRect().height;
+                if (height > 0) {
+                    figure.style.gridRowEnd = `span ${Math.ceil((height + gap) / rowHeight)}`;
+                }
+            });
+        };
+
+        const scheduleLayout = () => {
+            window.cancelAnimationFrame(frameId);
+            frameId = window.requestAnimationFrame(() => grids.forEach(layoutGrid));
+        };
+
+        grids.forEach((grid) => {
+            grid.querySelectorAll('img').forEach((image) => {
+                const settleImage = () => {
+                    if (typeof image.decode === 'function') {
+                        image.decode().catch(() => {}).finally(scheduleLayout);
+                    } else {
+                        scheduleLayout();
+                    }
+                };
+
+                if (image.complete) {
+                    settleImage();
+                } else {
+                    image.addEventListener('load', settleImage, { once: true });
+                    image.addEventListener('error', scheduleLayout, { once: true });
+                }
+            });
+        });
+
+        if ('ResizeObserver' in window) {
+            const observer = new ResizeObserver(scheduleLayout);
+            grids.forEach((grid) => grid.querySelectorAll('.study-thumb').forEach((figure) => observer.observe(figure)));
+        }
+
+        window.addEventListener('resize', scheduleLayout, { passive: true });
+        window.addEventListener('pageshow', scheduleLayout);
+        scheduleLayout();
     }
 
     function enhanceProjectImageZoom() {
@@ -742,26 +797,6 @@
     const content = clone(window.PORTFOLIO_CONTENT || {});
     const projects = (content.projects || []).map((project, index) => normaliseProject({ ...project, globalNumber: index + 1 }));
     const projectsBySlug = new Map(projects.map((project) => [project.slug, project]));
-
-    function refreshFixedHeaderAfterHistoryRestore(event) {
-        if (!event.persisted) return;
-
-        window.requestAnimationFrame(() => {
-            const header = document.querySelector('.site-header');
-            if (!header) return;
-
-            const inlineWidth = header.style.width;
-            header.style.width = `${header.offsetWidth + 1}px`;
-            void header.offsetWidth;
-
-            window.requestAnimationFrame(() => {
-                header.style.width = inlineWidth;
-                void header.offsetWidth;
-            });
-        });
-    }
-
-    window.addEventListener('pageshow', refreshFixedHeaderAfterHistoryRestore);
 
     document.addEventListener('DOMContentLoaded', () => {
         const body = document.body;

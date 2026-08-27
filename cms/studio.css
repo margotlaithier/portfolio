@@ -1,3 +1,51 @@
+@font-face {
+    font-family: 'DM Sans';
+    src: url('../assets/fonts/dm-sans-300.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DM Sans';
+    src: url('../assets/fonts/dm-sans-400.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DM Sans';
+    src: url('../assets/fonts/dm-sans-500.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DM Sans';
+    src: url('../assets/fonts/dm-sans-700.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('../assets/fonts/playfair-display-400.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('../assets/fonts/playfair-display-700.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+}
+
 :root {
     --studio-bg: #f4efe8;
     --studio-panel: #fffaf4;
