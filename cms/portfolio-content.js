@@ -1112,13 +1112,14 @@ window.PORTFOLIO_CONTENT = {
       "title": "Charte graphique restaurant",
       "cardTitleHtml": "Charte graphique<br>restaurant",
       "type": "Projet d'étude · Design graphique",
-      "intro": "Développement d'un système visuel pensé pour articuler typographie, hiérarchie, couleur et déclinaisons sur plusieurs supports.",
+      "intro": "Développement d'un système visuel pensé pour articuler typographie, hiérarchie, couleur et logo ",
       "date": "2025",
       "layout": "detail",
       "characteristics": [
         "Système visuel",
         "Typographie",
-        "Hiérarchie"
+        "Hiérarchie",
+        "Création de Logo"
       ],
       "blocks": [
         {
@@ -1202,11 +1203,11 @@ window.PORTFOLIO_CONTENT = {
       "cardSize": "half",
       "cardImageFit": "contain",
       "cardAspect": "widescreen",
-      "cardImage": "projets/design/graphique/charte-graphique-restaurant/images/charte-graphique-restaurant-01.jpeg",
+      "cardImage": "projets/design/graphique/charte-graphique-restaurant/images/charte-graphique-restaurant-04.jpeg",
       "cardRatio": "1920 / 1080",
       "cardAlt": "Charte graphique",
       "cardYear": "2025",
-      "cardDescription": "Système visuel autour de la hiérarchie, des contrastes et d'une palette structurante."
+      "cardDescription": "Chartres graphique d’un restaurant inventé "
     },
     {
       "slug": "lampe-sur-pied",
@@ -1587,7 +1588,7 @@ window.PORTFOLIO_CONTENT = {
       ],
       "category": "Architecture",
       "cardSize": "half",
-      "cardImage": "projets/architecture/un-batiment-une-semaine/images/un-batiment-une-semaine-01.jpeg",
+      "cardImage": "projets/architecture/un-batiment-une-semaine/images/un-batiment-une-semaine-14.jpeg",
       "cardRatio": "4736 / 3340",
       "cardAlt": "Un bâtiment, une semaine",
       "cardYear": "2026",
