@@ -1295,7 +1295,78 @@ window.PORTFOLIO_CONTENT = {
         },
         {
           "type": "heading",
-          "title": "Resultats"
+          "title": "Résultats"
+        },
+        {
+          "type": "grid",
+          "items": [
+            {
+              "src": "images/lampe-sur-pied-resultat-01.png",
+              "alt": "Lampe Ambre — page 1 sur 11",
+              "width": "quarter",
+              "fitContain": true
+            },
+            {
+              "src": "images/lampe-sur-pied-resultat-02.png",
+              "alt": "Lampe Ambre — page 2 sur 11",
+              "width": "quarter",
+              "fitContain": true
+            },
+            {
+              "src": "images/lampe-sur-pied-resultat-03.png",
+              "alt": "Lampe Ambre — page 3 sur 11",
+              "width": "quarter",
+              "fitContain": true
+            },
+            {
+              "src": "images/lampe-sur-pied-resultat-04.png",
+              "alt": "Lampe Ambre — page 4 sur 11",
+              "width": "quarter",
+              "fitContain": true
+            },
+            {
+              "src": "images/lampe-sur-pied-resultat-05.png",
+              "alt": "Lampe Ambre — page 5 sur 11",
+              "width": "quarter",
+              "fitContain": true
+            },
+            {
+              "src": "images/lampe-sur-pied-resultat-06.png",
+              "alt": "Lampe Ambre — page 6 sur 11",
+              "width": "quarter",
+              "fitContain": true
+            },
+            {
+              "src": "images/lampe-sur-pied-resultat-07.png",
+              "alt": "Lampe Ambre — page 7 sur 11",
+              "width": "quarter",
+              "fitContain": true
+            },
+            {
+              "src": "images/lampe-sur-pied-resultat-08.png",
+              "alt": "Lampe Ambre — page 8 sur 11",
+              "width": "quarter",
+              "fitContain": true
+            },
+            {
+              "src": "images/lampe-sur-pied-resultat-09.png",
+              "alt": "Lampe Ambre — page 9 sur 11",
+              "width": "quarter",
+              "fitContain": true
+            },
+            {
+              "src": "images/lampe-sur-pied-resultat-10.png",
+              "alt": "Lampe Ambre — page 10 sur 11",
+              "width": "quarter",
+              "fitContain": true
+            },
+            {
+              "src": "images/lampe-sur-pied-resultat-11.png",
+              "alt": "Lampe Ambre — page 11 sur 11",
+              "width": "quarter",
+              "fitContain": true
+            }
+          ]
         }
       ],
       "category": "Design",
