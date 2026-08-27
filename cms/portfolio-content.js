@@ -307,7 +307,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "Intention",
-          "text": "J’ai choisi de travailler principalement avec trois matériaux : le bois, le béton ciré et le cuivre."
+          "text": "J’ai choisi de travailler principalement avec trois matériaux : le bois, le béton ciré et le cuivre.\n L’aménagement s’articule autour d’une palette de matériaux bruts et naturels : le bois apporte chaleur et douceur, tandis que le béton ciré crée une atmosphère minérale et contemporaine. Des finitions et éléments en cuivre viennent ponctuer l’ensemble et apporter du contraste ainsi qu’une touche plus raffinée."
         },
         {
           "type": "grid",
@@ -323,50 +323,74 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Chambre parentale — image 6",
               "width": "quarter",
               "fitContain": false
-            },
+            }
+          ]
+        },
+        {
+          "type": "copy",
+          "kicker": "",
+          "text": "Dans la chambre, j’ai choisi d’installer une grande baie vitrée afin de faire entrer un maximum de lumière naturelle. Le bois est repris au niveau de la tête de lit pour rappeler le dressing et créer un lien entre les différents espaces."
+        },
+        {
+          "type": "pair",
+          "items": [
             {
               "src": "images/chambre-parentale-07.jpeg",
               "alt": "Chambre parentale — image 7",
-              "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/chambre-parentale-05.jpeg",
               "alt": "Chambre parentale — image 5",
-              "width": "quarter",
               "fitContain": false
-            },
+            }
+          ]
+        },
+        {
+          "type": "copy",
+          "kicker": "",
+          "text": "Dans la salle de bain, j’ai principalement utilisé du béton ciré, associé à des détails en cuivre pour la robinetterie et les accessoires. J’ai également créé des niches directement dans les murs pour ajouter des rangements sans prendre trop de place."
+        },
+        {
+          "type": "pair",
+          "items": [
             {
               "src": "images/chambre-parentale-02.jpeg",
               "alt": "Chambre parentale — image 2",
-              "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/chambre-parentale-03.jpeg",
               "alt": "Chambre parentale — image 3",
-              "width": "quarter",
               "fitContain": false
-            },
+            }
+          ]
+        },
+        {
+          "type": "pair",
+          "items": [
             {
               "src": "images/chambre-parentale-08.jpeg",
               "alt": "Chambre parentale — image 8",
-              "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/chambre-parentale-09.jpeg",
               "alt": "Chambre parentale — image 9",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/chambre-parentale-10.jpeg",
-              "alt": "Chambre parentale — image 10",
-              "width": "quarter",
               "fitContain": false
             }
           ]
+        },
+        {
+          "type": "copy",
+          "kicker": "Intention",
+          "text": "Pour le dressing, j’ai imaginé un meuble entièrement sur mesure et ouvert. Il est composé de plusieurs rangements, penderies et niches afin de profiter au maximum de l’espace disponible. Le bois permet aussi de rendre cet espace plus chaleureux."
+        },
+        {
+          "type": "image",
+          "src": "images/chambre-parentale-10.jpeg",
+          "alt": "Chambre parentale — image 10",
+          "fitContain": false
         }
       ],
       "category": "Architecture d'intérieur",
@@ -375,7 +399,7 @@ window.PORTFOLIO_CONTENT = {
       "cardRatio": "4736 / 3340",
       "cardAlt": "Chambre parentale",
       "cardYear": "2025",
-      "cardDescription": "Création d’une suite parentale avec dressing et salle de bain. "
+      "cardDescription": "Création d’une suite parentale avec dressing et salle de bain"
     },
     {
       "slug": "cuisine",
