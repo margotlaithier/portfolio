@@ -1295,83 +1295,96 @@ window.PORTFOLIO_CONTENT = {
       "title": "Poste radio",
       "cardTitleHtml": "Poste<br>radio",
       "type": "Projet d'étude · Design produit",
-      "intro": "Réinterprétation d'un poste radio dans une version compacte qui interroge la mémoire de l'objet, son interface et sa prise en main.",
-      "date": "2024",
+      "intro": "Pour ce projet de design produit, nous devions imaginer une radio adaptée à un type de personnalité. Pour ma part, je devais travailler pour une personne rigoriste, qui aime l’ordre, la simplicité et les objets faciles à comprendre et à utiliser.",
+      "date": "Janvier 2026",
       "layout": "detail",
       "characteristics": [
         "Objet du quotidien",
         "Interface simple",
-        "Ergonomie"
+        "Ergonomie",
+        "Simplicité"
       ],
       "blocks": [
         {
-          "type": "grid",
+          "type": "copy",
+          "kicker": "Intention",
+          "text": "J’ai donc imaginé une radio avec une forme ronde et assez simple, organisée autour de formes géométriques. Les différentes parties de la façade sont bien séparées pour donner un aspect ordonné et équilibré.\n\nJe voulais également que son utilisation reste très simple. J’ai donc limité le nombre de commandes et utilisé des molettes sur les côtés pour régler le son et changer de fréquence facilement.\n\nPour les matériaux et les couleurs, j’ai choisi de rester assez sobre avec principalement du bois et différentes nuances de brun, afin de créer un objet simple et chaleureux.\n\nJ’ai appelé cette radio AXIS, en référence à son organisation autour d’un axe et à son côté structuré. J’ai également imaginé son logo et une affiche publicitaire pour accompagner le produit."
+        },
+        {
+          "type": "pair",
           "items": [
-            {
-              "src": "images/poste-radio-07.jpeg",
-              "alt": "Poste radio — image 7",
-              "width": "quarter",
-              "fitContain": false
-            },
             {
               "src": "images/poste-radio-01.jpeg",
               "alt": "Poste radio — image 1",
-              "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/poste-radio-02.jpeg",
               "alt": "Poste radio — image 2",
-              "width": "quarter",
               "fitContain": false
-            },
+            }
+          ]
+        },
+        {
+          "type": "pair",
+          "items": [
             {
               "src": "images/poste-radio-03.jpeg",
               "alt": "Poste radio — image 3",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/poste-radio-04.jpeg",
-              "alt": "Poste radio — image 4",
-              "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/poste-radio-05.jpeg",
               "alt": "Poste radio — image 5",
-              "width": "quarter",
+              "fitContain": false
+            }
+          ]
+        },
+        {
+          "type": "pair",
+          "items": [
+            {
+              "src": "images/poste-radio-04.jpeg",
+              "alt": "Poste radio — image 4",
               "fitContain": false
             },
             {
               "src": "images/poste-radio-06.jpeg",
               "alt": "Poste radio — image 6",
-              "width": "quarter",
+              "fitContain": false
+            }
+          ]
+        },
+        {
+          "type": "pair",
+          "items": [
+            {
+              "src": "images/poste-radio-07.jpeg",
+              "alt": "Poste radio — image 7",
               "fitContain": false
             },
             {
               "src": "images/poste-radio-08.jpeg",
               "alt": "Poste radio — image 8",
-              "width": "quarter",
               "fitContain": false
             }
           ]
         },
         {
           "type": "copy",
-          "kicker": "Intention",
-          "text": "Le dessin de l'objet cherche à condenser les usages en façade tout en préservant une lecture familière et accessible des fonctions principales."
+          "kicker": "",
+          "text": "Ce projet m’a permis de comprendre comment le design d’un objet peut être pensé en fonction de la personnalité, des habitudes et des besoins de son utilisateur."
         }
       ],
       "category": "Design",
       "cardSize": "half",
       "cardImageFit": "contain",
       "cardAspect": "landscape-wide",
-      "cardImage": "projets/design/produit/poste-radio/images/poste-radio-07.jpeg",
+      "cardImage": "projets/design/produit/poste-radio/images/poste-radio-03.jpeg",
       "cardRatio": "1050 / 600",
       "cardAlt": "Poste radio",
-      "cardYear": "2024",
-      "cardDescription": "Réinterprétation compacte d'un objet familier en travaillant la prise en main et la face avant."
+      "cardYear": "2026",
+      "cardDescription": "Concevoir un objet selon son utilisateur"
     },
     {
       "slug": "dessins-textures",
