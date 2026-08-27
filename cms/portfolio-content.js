@@ -1453,105 +1453,137 @@ window.PORTFOLIO_CONTENT = {
       "title": "Un bâtiment, une semaine",
       "cardTitleHtml": "Un bâtiment, une semaine",
       "type": "",
-      "intro": "",
-      "date": "",
+      "intro": "Pour ce projet réalisé sur trois semaines, nous devions imaginer chaque semaine une nouvelle version d’une recyclerie accompagnée d’un logement.\nLe programme restait le même : la recyclerie devait comprendre une zone de stockage, un espace de repos et des toilettes. Le logement était destiné à une jeune fille et sa grand-mère, avec leurs espaces personnels ainsi qu’une chambre d’amis.\nChaque semaine, nous recevions deux nouveaux mots-clés qui devaient complètement changer notre façon d’imaginer le projet. L’objectif était donc de partir du même programme mais de proposer trois architectures très différentes.",
+      "date": "Avril 2026",
       "layout": "gallery",
-      "characteristics": [],
+      "characteristics": [
+        "3 concepts",
+        "Expérimentation",
+        "Formes & couleurs",
+        "Même programme"
+      ],
       "blocks": [
         {
-          "type": "grid",
+          "type": "image",
+          "src": "images/un-batiment-une-semaine-15.jpeg",
+          "alt": "un-batiment-une-semaine-15",
+          "fitContain": false
+        },
+        {
+          "type": "copy",
+          "kicker": "Explication",
+          "text": "Semaine 1 — « Cube & chiffre »\n\nPour cette première proposition, j’ai travaillé autour de formes carrées et géométriques. J’ai séparé les différents espaces en plusieurs volumes carrés afin de rappeler l’idée du cube.\nPour faire apparaître la notion de chiffre dans l’architecture, je me suis inspirée des dés. J’ai imaginé de grandes plaques en béton avec des éléments circulaires sur les façades qui rappellent les points présents sur leurs faces."
+        },
+        {
+          "type": "pair",
           "items": [
             {
-              "src": "images/un-batiment-une-semaine-01.jpeg",
-              "alt": "Un bâtiment, une semaine — image 1",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/un-batiment-une-semaine-15.jpeg",
-              "alt": "Un bâtiment, une semaine — image 15",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/un-batiment-une-semaine-03.jpeg",
-              "alt": "Un bâtiment, une semaine — image 3",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/un-batiment-une-semaine-04.jpeg",
-              "alt": "Un bâtiment, une semaine — image 4",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/un-batiment-une-semaine-10.jpeg",
-              "alt": "Un bâtiment, une semaine — image 10",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/un-batiment-une-semaine-11.jpeg",
-              "alt": "Un bâtiment, une semaine — image 11",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/un-batiment-une-semaine-12.jpeg",
-              "alt": "Un bâtiment, une semaine — image 12",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/un-batiment-une-semaine-05.jpeg",
-              "alt": "Un bâtiment, une semaine — image 5",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/un-batiment-une-semaine-06.jpeg",
-              "alt": "Un bâtiment, une semaine — image 6",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/un-batiment-une-semaine-07.jpeg",
-              "alt": "Un bâtiment, une semaine — image 7",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/un-batiment-une-semaine-08.jpeg",
-              "alt": "Un bâtiment, une semaine — image 8",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/un-batiment-une-semaine-02.jpeg",
-              "alt": "Un bâtiment, une semaine — image 2",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
               "src": "images/un-batiment-une-semaine-09.jpeg",
-              "alt": "Un bâtiment, une semaine — image 9",
-              "width": "quarter",
+              "alt": "un-batiment-une-semaine-09",
               "fitContain": false
             },
+            {
+              "src": "images/un-batiment-une-semaine-01.jpeg",
+              "alt": "un-batiment-une-semaine-01",
+              "fitContain": false
+            }
+          ]
+        },
+        {
+          "type": "pair",
+          "items": [
             {
               "src": "images/un-batiment-une-semaine-13.jpeg",
-              "alt": "Un bâtiment, une semaine — image 13",
-              "width": "quarter",
+              "alt": "un-batiment-une-semaine-13",
               "fitContain": false
             },
             {
               "src": "images/un-batiment-une-semaine-14.jpeg",
-              "alt": "Un bâtiment, une semaine — image 14",
-              "width": "quarter",
+              "alt": "un-batiment-une-semaine-14",
               "fitContain": false
             }
           ]
+        },
+        {
+          "type": "image",
+          "src": "images/un-batiment-une-semaine-04.jpeg",
+          "alt": "un-batiment-une-semaine-04",
+          "fitContain": false
+        },
+        {
+          "type": "copy",
+          "kicker": "Explication",
+          "text": "Semaine 2 — « Orange & pop »\n\nPour cette deuxième semaine, j’ai complètement changé d’ambiance en travaillant avec des formes courbes et beaucoup de couleur.\nL’orange devient une couleur importante du projet et permet de créer une architecture plus dynamique. J’ai également travaillé avec de grandes ouvertures, des espaces arrondis et des lignes qui se suivent pour donner un aspect plus libre et vivant au bâtiment."
+        },
+        {
+          "type": "pair",
+          "items": [
+            {
+              "src": "images/un-batiment-une-semaine-08.jpeg",
+              "alt": "un-batiment-une-semaine-08",
+              "fitContain": false
+            },
+            {
+              "src": "images/un-batiment-une-semaine-06.jpeg",
+              "alt": "un-batiment-une-semaine-06",
+              "fitContain": false
+            }
+          ]
+        },
+        {
+          "type": "pair",
+          "items": [
+            {
+              "src": "images/un-batiment-une-semaine-07.jpeg",
+              "alt": "un-batiment-une-semaine-07",
+              "fitContain": false
+            },
+            {
+              "src": "images/un-batiment-une-semaine-05.jpeg",
+              "alt": "un-batiment-une-semaine-05",
+              "fitContain": false
+            }
+          ]
+        },
+        {
+          "type": "copy",
+          "kicker": "Explication",
+          "text": "Semaine 3 — « Mexique & Oscar Niemeyer »\n\nPour la dernière proposition, je me suis inspirée de l’architecture d’Oscar Niemeyer, notamment de son utilisation des courbes et des formes circulaires.\nJ’ai associé cette inspiration à des éléments que j’avais repérés dans l’architecture mexicaine, notamment les couleurs et la présence de patios. Ces espaces extérieurs permettent d’apporter de la lumière et de créer des respirations entre les différentes parties du bâtiment."
+        },
+        {
+          "type": "pair",
+          "items": [
+            {
+              "src": "images/un-batiment-une-semaine-03.jpeg",
+              "alt": "un-batiment-une-semaine-03",
+              "fitContain": false
+            },
+            {
+              "src": "images/un-batiment-une-semaine-12.jpeg",
+              "alt": "un-batiment-une-semaine-12",
+              "fitContain": false
+            }
+          ]
+        },
+        {
+          "type": "pair",
+          "items": [
+            {
+              "src": "images/un-batiment-une-semaine-10.jpeg",
+              "alt": "un-batiment-une-semaine-10",
+              "fitContain": false
+            },
+            {
+              "src": "images/un-batiment-une-semaine-11.jpeg",
+              "alt": "un-batiment-une-semaine-11",
+              "fitContain": false
+            }
+          ]
+        },
+        {
+          "type": "copy",
+          "kicker": "",
+          "text": "Ces trois semaines m’ont permis de comprendre comment, à partir d’un même programme, on peut arriver à des projets très différents simplement en changeant le point de départ et les inspirations."
         }
       ],
       "category": "Architecture",
@@ -1559,8 +1591,8 @@ window.PORTFOLIO_CONTENT = {
       "cardImage": "projets/architecture/un-batiment-une-semaine/images/un-batiment-une-semaine-01.jpeg",
       "cardRatio": "4736 / 3340",
       "cardAlt": "Un bâtiment, une semaine",
-      "cardYear": "",
-      "cardDescription": ""
+      "cardYear": "2026",
+      "cardDescription": "Un même programme, trois façons de l’imaginer"
     },
     {
       "slug": "affiche-camping",
