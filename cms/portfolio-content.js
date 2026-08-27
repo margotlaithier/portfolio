@@ -204,7 +204,7 @@ window.PORTFOLIO_CONTENT = {
       "cardRatio": "8064 / 6048",
       "cardAlt": "Quartier de maisons roses",
       "cardYear": "2026",
-      "cardDescription": "Création d’une habitation contemporaine répondant à des exigences de structure, de porte-à-faux et d’harmonie architecturale."
+      "cardDescription": "Création d’une habitation contemporaine. "
     },
     {
       "slug": "projet-final",
@@ -233,7 +233,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "Intention",
-          "text": "Le programme devait comprendre une suite parentale avec salle de bain et dressing, une cuisine, une salle à manger, un salon, une arrière-cuisine, un garage ainsi que deux toilettes."
+          "text": "La maison devait comprendre une suite parentale avec salle de bain et dressing, une cuisine, une salle à manger, un salon, une arrière-cuisine, un garage ainsi que deux toilettes."
         },
         {
           "type": "grid",
@@ -460,7 +460,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "Explication ",
-          "text": "Les plans de travail sont placés à un mètre de hauteur et j’ai choisi de ne mettre aucun rangement en hauteur. Les placards bas classiques ont également été remplacés par des tiroirs, plus faciles à ouvrir et permettant d’accéder directement à leur contenu.\nAu centre, j’ai ajouté un îlot qui permet à la fois de cuisiner et de prendre les repas. J’ai également privilégié de grandes ouvertures vers le jardin, pour apporter de la lumière naturelle et faciliter l’accès vers l’extérieur."
+          "text": "Les plans de travail sont placés à un mètre de hauteur et j’ai choisi de ne mettre aucun rangement en hauteur. Les placards bas classiques ont également été remplacés par des tiroirs, plus faciles à ouvrir et permettant d’accéder directement à leur contenu.\nAu centre, j’ai ajouté un îlot qui permet à la fois de cuisiner et de manger. J’ai également privilégié de grandes ouvertures vers le jardin, pour apporter de la lumière naturelle et faciliter l’accès vers l’extérieur."
         },
         {
           "type": "pair",
@@ -480,7 +480,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "",
-          "text": "J’ai aussi réfléchi aux équipements : le réfrigérateur est sous forme de tiroirs et le lave-vaisselle se relève, ce qui permet de le charger et de le vider en limitant le besoin de se baisser"
+          "text": "J’ai aussi réfléchi aux équipements : le réfrigérateur est sous forme de tiroirs et le lave-vaisselle se relève, ce qui permet de le charger et de le vider plus facilement. "
         },
         {
           "type": "pair",
@@ -526,7 +526,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "Maquette ",
-          "text": "J’ai également dû réaliser une maquette en papier blanc avec 1 éléments en couleur. "
+          "text": "J’ai également dû réaliser une maquette en papier blanc avec  un éléments en couleur. "
         },
         {
           "type": "grid",
@@ -934,7 +934,7 @@ window.PORTFOLIO_CONTENT = {
       "cardRatio": "6941 / 4919",
       "cardAlt": "Croquis",
       "cardYear": "2025",
-      "cardDescription": "Série de recherches rapides pour saisir atmosphères, proportions et rapports de matières."
+      "cardDescription": "Série de recherches rapides"
     },
     {
       "slug": "modele-vivant",
@@ -984,7 +984,7 @@ window.PORTFOLIO_CONTENT = {
       "cardRatio": "1704 / 2341",
       "cardAlt": "Dessin",
       "cardYear": "2025/2026",
-      "cardDescription": "Travaux de représentation de modèles nus ."
+      "cardDescription": "Travaux de représentation de modèles nus"
     },
     {
       "slug": "oeuf-de-faberge",
@@ -1012,7 +1012,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "Explication",
-          "text": "L’œuf est composé de deux parties qui s’ouvrent pour révéler son intérieur. Une fois ouvert, le spectateur découvre une manivelle qu’il doit tourner. Celle-ci actionne un mécanisme qui fait monter progressivement un demi-cercle placé au centre de l’œuf, jusqu’à faire apparaître le collier caché à l’intérieur.\n\nL’œuf est composé de deux parties qui s’ouvrent pour révéler son intérieur. Une fois ouvert, le spectateur découvre une manivelle qu’il doit tourner. Celle-ci actionne un mécanisme qui fait monter progressivement un demi-cercle placé au centre de l’œuf, jusqu’à faire apparaître le collier caché à l’intérieur. \nCette ouverture en plusieurs étapes permet de créer un petit moment de surprise et de rappeler l’univers d’Arsène Lupin, où il faut chercher, manipuler et découvrir pour arriver jusqu’à l’objet précieux."
+          "text": "L’œuf est composé de deux parties qui s’ouvrent pour révéler son intérieur. Une fois ouvert, le spectateur découvre une manivelle qu’il doit tourner. Celle-ci actionne un mécanisme qui fait monter progressivement un demi-cercle placé au centre de l’œuf, jusqu’à faire apparaître le collier caché à l’intérieur."
         },
         {
           "type": "grid",
@@ -1045,7 +1045,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "",
-          "text": "Pour réaliser la structure et les différentes pièces de l’œuf, j’ai notamment travaillé avec la découpeuse laser, ce qui m’a permis de créer les formes, les motifs et les différentes parties nécessaires au mécanisme\\.\n\nCe projet m’a permis de travailler à une échelle différente de mes projets d’aménagement, en réfléchissant à la fois à l’apparence d’un objet, à sa fabrication et à la manière dont une personne interagit avec lui."
+          "text": "Pour réaliser la structure et les différentes pièces de l’œuf, j’ai notamment travaillé avec la découpeuse laser, ce qui m’a permis de créer les formes, les motifs et les différentes parties nécessaires au mécanisme.\n\nCe projet m’a permis de travailler à une échelle différente de mes projets d’aménagement, en réfléchissant à la fois à l’apparence d’un objet, à sa fabrication et à la manière dont une personne interagit avec lui."
         }
       ],
       "category": "Volume",
@@ -1104,7 +1104,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "Explication ",
-          "text": "J’ai volontairement créé des formes différentes, certaines plus droites et d’autres beaucoup plus courbées, afin de donner l’impression que la structure est en mouvement\n. Selon l’endroit où l’on se place, les éléments se croisent, se rapprochent ou s’éloignent et donnent une nouvelle vision de l’ensemble.\nJ’ai enfin installé les différentes formes sur un socle en bois, qui contraste avec le métal et permet de maintenir toute la composition."
+          "text": "J’ai volontairement créé des formes différentes, certaines plus droites et d’autres beaucoup plus courbées, afin de donner l’impression que la structure est en mouvement. \nSelon l’endroit où l’on se place, les éléments se croisent, se rapprochent ou s’éloignent et donnent une nouvelle vision de l’ensemble.\nJ’ai enfin installé les différentes formes sur un socle en bois, qui contraste avec le métal et permet de maintenir toute la composition."
         },
         {
           "type": "pair",
@@ -1136,7 +1136,7 @@ window.PORTFOLIO_CONTENT = {
       "title": "Charte graphique restaurant",
       "cardTitleHtml": "Charte graphique<br>restaurant",
       "type": "Projet d'étude · Design graphique",
-      "intro": "Développement d'un système visuel pensé pour articuler typographie, hiérarchie, couleur et logo ",
+      "intro": "Développement d’une chartres graphique pour créer une identité visuel au restaurant. ",
       "date": "2025",
       "layout": "detail",
       "characteristics": [
@@ -1216,11 +1216,6 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             }
           ]
-        },
-        {
-          "type": "copy",
-          "kicker": "Intention",
-          "text": "Le projet met en place une structure visuelle stable capable d'ordonner les informations tout en donnant une personnalité claire aux supports."
         }
       ],
       "category": "Design",
@@ -1457,7 +1452,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "",
-          "text": "J’ai ensuite regroupé les 20 réalisations sous forme de petits échantillons afin de créer mon propre nuancier de matériaux.\nCet exercice m’a permis de travailler mon observation et ma représentation des matières"
+          "text": "J’ai ensuite regroupé les 20 réalisations sous forme de petits échantillons afin de créer mon propre nuancier de matériaux.\nCet exercice m’a permis de travailler mon observation et ma représentation des matières. "
         },
         {
           "type": "pair",
@@ -1550,7 +1545,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "Explication",
-          "text": "Semaine 2 — « Orange & pop »\n\nPour cette deuxième semaine, j’ai complètement changé d’ambiance en travaillant avec des formes courbes et beaucoup de couleur.\nL’orange devient une couleur importante du projet et permet de créer une architecture plus dynamique. J’ai également travaillé avec de grandes ouvertures, des espaces arrondis et des lignes qui se suivent pour donner un aspect plus libre et vivant au bâtiment."
+          "text": "Semaine 2 — « Orange & pop »\n\nPour cette deuxième semaine, j’ai complètement changé d’ambiance en travaillant avec des formes courbes et beaucoup de couleurs. \nLe orange devient une couleur importante du projet et permet de créer une architecture plus dynamique. J’ai également travaillé avec de grandes ouvertures, des espaces arrondis et des lignes qui se suivent pour donner un aspect plus libre et vivant au bâtiment."
         },
         {
           "type": "pair",
@@ -1620,7 +1615,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "",
-          "text": "Ces trois semaines m’ont permis de comprendre comment, à partir d’un même programme, on peut arriver à des projets très différents simplement en changeant le point de départ et les inspirations."
+          "text": "Ces trois semaines m’ont permis de comprendre comment, à partir d’un même bâtiment ,on peut arriver à des projets très différents simplement en changeant le point de départ et les inspirations."
         }
       ],
       "category": "Architecture",
@@ -1629,7 +1624,7 @@ window.PORTFOLIO_CONTENT = {
       "cardRatio": "4736 / 3340",
       "cardAlt": "Un bâtiment, une semaine",
       "cardYear": "2026",
-      "cardDescription": "Un même programme, trois façons de l’imaginer"
+      "cardDescription": "Un même bâtiment,trois façons de l’imaginer"
     },
     {
       "slug": "vehicule-sous-marin",
