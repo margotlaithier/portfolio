@@ -1357,26 +1357,30 @@ window.PORTFOLIO_CONTENT = {
       "title": "Dessins et textures",
       "cardTitleHtml": "Dessins et textures",
       "type": "",
-      "intro": "",
-      "date": "",
+      "intro": "Pour ce projet, nous devions réaliser à la main un nuancier composé de 20 matériaux et textures de notre choix.",
+      "date": "Février 2026",
       "layout": "gallery",
-      "characteristics": [],
+      "characteristics": [
+        "Textures",
+        "Matières",
+        "Dessin à la main",
+        "Observation"
+      ],
       "blocks": [
+        {
+          "type": "image",
+          "src": "images/dessins-textures-05.jpeg",
+          "alt": "",
+          "fitContain": false
+        },
+        {
+          "type": "copy",
+          "kicker": "Explication ",
+          "text": "J’ai choisi des matières assez différentes comme le bois, le métal, la pierre, le marbre, le carrelage, le terrazzo, le cuir ou encore le textile, afin de travailler plusieurs façons de représenter une matière.\nPour chaque dessin, j’ai essayé d’observer les couleurs, les motifs, les ombres et les détails qui permettent de reconnaître le matériau. Le but était de réussir à donner une impression de texture et de relief uniquement grâce au dessin."
+        },
         {
           "type": "grid",
           "items": [
-            {
-              "src": "images/dessins-textures-02.jpeg",
-              "alt": "Dessins et textures — image 2",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/dessins-textures-01.jpeg",
-              "alt": "Dessins et textures — image 1",
-              "width": "quarter",
-              "fitContain": false
-            },
             {
               "src": "images/dessins-textures-03.jpeg",
               "alt": "Dessins et textures — image 3",
@@ -1388,11 +1392,25 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Dessins et textures — image 4",
               "width": "quarter",
               "fitContain": false
+            }
+          ]
+        },
+        {
+          "type": "copy",
+          "kicker": "",
+          "text": "J’ai ensuite regroupé les 20 réalisations sous forme de petits échantillons afin de créer mon propre nuancier de matériaux.\nCet exercice m’a permis de travailler mon observation et ma représentation des matières"
+        },
+        {
+          "type": "pair",
+          "items": [
+            {
+              "src": "images/dessins-textures-02.jpeg",
+              "alt": "",
+              "fitContain": false
             },
             {
-              "src": "images/dessins-textures-05.jpeg",
-              "alt": "Dessins et textures — image 5",
-              "width": "quarter",
+              "src": "images/dessins-textures-01.jpeg",
+              "alt": "",
               "fitContain": false
             }
           ]
@@ -1401,11 +1419,11 @@ window.PORTFOLIO_CONTENT = {
       "category": "Architecture d'intérieur",
       "cardSize": "third",
       "cardAspect": "portrait-wide",
-      "cardImage": "projets/architecture-interieure/dessins-textures/images/dessins-textures-02.jpeg",
+      "cardImage": "projets/architecture-interieure/dessins-textures/images/dessins-textures-05.jpeg",
       "cardRatio": "5175 / 6344",
       "cardAlt": "Dessins et textures",
-      "cardYear": "",
-      "cardDescription": ""
+      "cardYear": "2026",
+      "cardDescription": " Représenter la matière par le dessin"
     },
     {
       "slug": "un-batiment-une-semaine",
