@@ -567,82 +567,104 @@ window.PORTFOLIO_CONTENT = {
       "title": "Façade de commerce",
       "cardTitleHtml": "Façade<br>de commerce",
       "type": "Projet d'étude · Architecture",
-      "intro": "Réécriture d'une devanture commerciale autour du rythme, de la visibilité et de l'identité urbaine du lieu.",
-      "date": "2024",
+      "intro": "Pour ce projet, nous devions travailler sur la rénovation d’une façade de commerce existante. J’ai choisi de transformer une ancienne auto-école en espace de coworking, avec l’objectif de donner une nouvelle identité au lieu et de rendre la façade plus attractive.",
+      "date": "Juin 2026",
       "layout": "detail",
       "characteristics": [
         "Façade commerciale",
         "Identité visuelle",
-        "Insertion urbaine"
+        "Insertion urbaine",
+        "Rénovation",
+        "Art nouveau",
+        "Vitraux",
+        "Maquette 1/20"
       ],
       "blocks": [
+        {
+          "type": "image",
+          "src": "images/facade-de-commerce-07.jpeg",
+          "alt": "Rénovation façade de magasin — image 07",
+          "fitContain": false
+        },
+        {
+          "type": "image",
+          "src": "images/facade-de-commerce-02.jpeg",
+          "alt": "Rénovation façade de magasin — image 02",
+          "fitContain": false
+        },
+        {
+          "type": "copy",
+          "kicker": "Intention",
+          "text": "Pour imaginer cette nouvelle façade, je me suis inspirée du mouvement Art nouveau, notamment de ses formes courbes et inspirées de la nature. J’ai repris ces formes autour des ouvertures et sur l’ensemble de la façade afin de créer un dessin continu."
+        },
+        {
+          "type": "image",
+          "src": "images/facade-de-commerce-08.jpeg",
+          "alt": "Rénovation façade de magasin — image 8",
+          "fitContain": false
+        },
+        {
+          "type": "copy",
+          "kicker": "Intention",
+          "text": "Je voulais cependant apporter un côté plus actuel à ce style. J’ai donc choisi un bleu assez marqué associé à des détails dorés, ainsi que des vitraux aux formes plus modernes. Les grandes ouvertures permettent également de faire entrer de la lumière dans l’espace de coworking."
+        },
+        {
+          "type": "image",
+          "src": "images/facade-de-commerce-06.jpeg",
+          "alt": "Rénovation façade de magasin — image 06",
+          "fitContain": false
+        },
+        {
+          "type": "copy",
+          "kicker": "",
+          "text": "Pour développer le projet, j’ai réalisé plusieurs documents : un plan de construction de la façade, une coupe, une élévation et une perspective de mise en situation. J’ai ensuite réalisé une maquette à l’échelle 1/20, afin de représenter la façade en volume et de mieux comprendre sa construction."
+        },
         {
           "type": "grid",
           "items": [
             {
-              "src": "images/facade-de-commerce-06.jpeg",
-              "alt": "Rénovation façade de magasin — image 6",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/facade-de-commerce-03.jpeg",
-              "alt": "Rénovation façade de magasin — image 3",
+              "src": "images/facade-de-commerce-05.jpeg",
+              "alt": "Rénovation façade de magasin — image 05",
               "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/facade-de-commerce-04.jpeg",
-              "alt": "Rénovation façade de magasin — image 4",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/facade-de-commerce-05.jpeg",
-              "alt": "Rénovation façade de magasin — image 5",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/facade-de-commerce-08.jpeg",
-              "alt": "Rénovation façade de magasin — image 8",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/facade-de-commerce-07.jpeg",
-              "alt": "Rénovation façade de magasin — image 7",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/facade-de-commerce-02.jpeg",
-              "alt": "Rénovation façade de magasin — image 2",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/facade-de-commerce-01.jpeg",
-              "alt": "Rénovation façade de magasin — image 1",
+              "alt": "Rénovation façade de magasin — image 04",
               "width": "quarter",
               "fitContain": false
             }
           ]
         },
         {
+          "type": "pair",
+          "items": [
+            {
+              "src": "images/facade-de-commerce-03.jpeg",
+              "alt": "Rénovation façade de magasin — image 03",
+              "fitContain": false
+            },
+            {
+              "src": "images/facade-de-commerce-01.jpeg",
+              "alt": "Rénovation façade de magasin — image 01",
+              "fitContain": false
+            }
+          ]
+        },
+        {
           "type": "copy",
-          "kicker": "Intention",
-          "text": "Le projet travaille la façade comme un seuil actif entre rue et commerce, avec une composition lisible qui renforce la présence du lieu sans rompre son inscription dans le contexte urbain."
+          "kicker": "",
+          "text": "Ce projet m’a permis de travailler à la fois sur l’apparence d’une façade, son intégration sur un bâtiment existant et sa construction, tout en réinterprétant l’Art nouveau de manière plus actuelle."
         }
       ],
       "category": "Architecture",
       "cardSize": "half",
       "cardAspect": "auto",
-      "cardImage": "projets/architecture/facade-de-commerce/images/facade-de-commerce-06.jpeg",
+      "cardImage": "projets/architecture/facade-de-commerce/images/facade-de-commerce-08.jpeg",
       "cardRatio": "7646 / 4137",
       "cardAlt": "Rénovation façade de magasin",
-      "cardYear": "2024",
-      "cardDescription": "Réécriture d'une devanture commerciale entre visibilité, rythme des pleins et identité urbaine."
+      "cardYear": "2026",
+      "cardDescription": "Réinterpréter l’Art nouveau pour une façade actuelle"
     },
     {
       "slug": "croquis",
