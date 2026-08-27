@@ -534,8 +534,8 @@
         }
 
         document.title = project.title;
-        const hasAside = project.layout === 'detail' && project.characteristics.length > 0;
-        const layoutInner = project.layout === 'gallery'
+        const hasCharacteristics = project.characteristics.length > 0;
+        const layoutInner = project.layout === 'gallery' && !hasCharacteristics
             ? `
                 <section class="study-layout">
                     <div class="container">
@@ -546,7 +546,7 @@
             : `
                 <section class="study-layout">
                     <div class="container study-layout-grid">
-                        ${hasAside ? `
+                        ${hasCharacteristics ? `
                             <aside class="study-side">
                                 <p class="study-side-text">Caractéristiques</p>
                                 <ul class="study-side-list">
