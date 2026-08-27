@@ -383,123 +383,133 @@ window.PORTFOLIO_CONTENT = {
       "title": "Cuisine",
       "cardTitleHtml": "Cuisine",
       "type": "Projet d'étude · Architecture d'intérieur",
-      "intro": "Réagencement d'une cuisine compacte autour d'un linéaire clair, d'un plan de travail continu et d'une meilleure articulation entre préparation, rangement et circulation.",
-      "date": "2024",
+      "intro": "Pour ce projet, je devais imaginer une cuisine adaptée à une personne ayant subi une opération du dos. L’objectif était donc de créer un espace agréable à utiliser au quotidien, en limitant au maximum les mouvements qui demandent de se baisser.",
+      "date": "Janvier 2026",
       "layout": "detail",
       "characteristics": [
-        "Aménagement compact",
-        "Plan de travail continu",
-        "Usage quotidien"
+        "Cuisine adaptée",
+        "Gestes simplifiés",
+        "Rangements accessibles",
+        "Ouverture sur le jardin"
       ],
       "blocks": [
+        {
+          "type": "image",
+          "src": "images/cuisine-11.jpeg",
+          "alt": "Cuisine — image 11",
+          "fitContain": false
+        },
+        {
+          "type": "copy",
+          "kicker": "Intention",
+          "text": "J’ai commencé par réfléchir aux déplacements dans la cuisine et à la position des différents équipements pour que leur utilisation soit la plus simple possible."
+        },
         {
           "type": "grid",
           "items": [
             {
-              "src": "images/cuisine-01.jpeg",
-              "alt": "Cuisine — image 1",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/cuisine-02.jpeg",
-              "alt": "Cuisine — image 2",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/cuisine-03.jpeg",
-              "alt": "Cuisine — image 3",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
               "src": "images/cuisine-04.jpeg",
-              "alt": "Cuisine — image 4",
+              "alt": "Cuisine — image 04",
               "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/cuisine-05.jpeg",
-              "alt": "Cuisine — image 5",
+              "alt": "Cuisine — image 05",
               "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/cuisine-06.jpeg",
-              "alt": "Cuisine — image 6",
+              "alt": "Cuisine — image 06",
               "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/cuisine-07.jpeg",
-              "alt": "Cuisine — image 7",
+              "alt": "Cuisine — image 07",
               "width": "quarter",
               "fitContain": false
-            },
+            }
+          ]
+        },
+        {
+          "type": "copy",
+          "kicker": "Explication ",
+          "text": "Les plans de travail sont placés à un mètre de hauteur et j’ai choisi de ne mettre aucun rangement en hauteur. Les placards bas classiques ont également été remplacés par des tiroirs, plus faciles à ouvrir et permettant d’accéder directement à leur contenu.\nAu centre, j’ai ajouté un îlot qui permet à la fois de cuisiner et de prendre les repas. J’ai également privilégié de grandes ouvertures vers le jardin, pour apporter de la lumière naturelle et faciliter l’accès vers l’extérieur."
+        },
+        {
+          "type": "pair",
+          "items": [
             {
               "src": "images/cuisine-08.jpeg",
-              "alt": "Cuisine — image 8",
-              "width": "quarter",
+              "alt": "Cuisine — image 08",
               "fitContain": false
             },
             {
               "src": "images/cuisine-09.jpeg",
-              "alt": "Cuisine — image 9",
-              "width": "quarter",
+              "alt": "Cuisine — image 09",
+              "fitContain": false
+            }
+          ]
+        },
+        {
+          "type": "copy",
+          "kicker": "",
+          "text": "J’ai aussi réfléchi aux équipements : le réfrigérateur est sous forme de tiroirs et le lave-vaisselle se relève, ce qui permet de le charger et de le vider en limitant le besoin de se baisser"
+        },
+        {
+          "type": "pair",
+          "items": [
+            {
+              "src": "images/cuisine-02.jpeg",
+              "alt": "Cuisine — image 02",
               "fitContain": false
             },
+            {
+              "src": "images/cuisine-03.jpeg",
+              "alt": "Cuisine — image 03",
+              "fitContain": false
+            }
+          ]
+        },
+        {
+          "type": "copy",
+          "kicker": "",
+          "text": "La cuisine est complétée par une arrière-cuisine / buanderie. Contrairement à la cuisine principale, j’ai utilisé toute la hauteur disponible pour créer davantage de rangements et regrouper les équipements qui n’ont pas besoin d’être utilisés aussi régulièrement."
+        },
+        {
+          "type": "pair",
+          "items": [
             {
               "src": "images/cuisine-10.jpeg",
               "alt": "Cuisine — image 10",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/cuisine-11.jpeg",
-              "alt": "Cuisine — image 11",
-              "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/cuisine-12.jpeg",
               "alt": "Cuisine — image 12",
-              "width": "quarter",
               "fitContain": false
-            },
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "src": "images/cuisine-01.jpeg",
+          "alt": "Cuisine — image 01",
+          "fitContain": false
+        },
+        {
+          "type": "copy",
+          "kicker": "Maquette ",
+          "text": "J’ai également dû réaliser une maquette en papier blanc avec 1 éléments en couleur. "
+        },
+        {
+          "type": "grid",
+          "items": [
             {
               "src": "images/cuisine-13.jpeg",
               "alt": "Cuisine — image 13",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/cuisine-14.jpeg",
-              "alt": "Cuisine — image 14",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/cuisine-15.jpeg",
-              "alt": "Cuisine — image 15",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/cuisine-16.jpeg",
-              "alt": "Cuisine — image 16",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/cuisine-17.jpeg",
-              "alt": "Cuisine — image 17",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/cuisine-18.jpeg",
-              "alt": "Cuisine — image 18",
               "width": "quarter",
               "fitContain": false
             },
@@ -510,26 +520,26 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             },
             {
-              "src": "images/cuisine-20.jpeg",
-              "alt": "Cuisine — image 20",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
-              "src": "images/cuisine-21.jpeg",
-              "alt": "Cuisine — image 21",
-              "width": "quarter",
-              "fitContain": false
-            },
-            {
               "src": "images/cuisine-22.jpeg",
               "alt": "Cuisine — image 22",
               "width": "quarter",
               "fitContain": false
             },
             {
-              "src": "images/cuisine-23.jpeg",
-              "alt": "Cuisine — image 23",
+              "src": "images/cuisine-15.jpeg",
+              "alt": "Cuisine — image 15",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/cuisine-18.jpeg",
+              "alt": "Cuisine — image 18",
+              "width": "quarter",
+              "fitContain": false
+            },
+            {
+              "src": "images/cuisine-16.jpeg",
+              "alt": "Cuisine — image 16",
               "width": "quarter",
               "fitContain": false
             },
@@ -538,19 +548,8 @@ window.PORTFOLIO_CONTENT = {
               "alt": "Cuisine — image 24",
               "width": "quarter",
               "fitContain": false
-            },
-            {
-              "src": "images/cuisine-25.jpeg",
-              "alt": "Cuisine — image 25",
-              "width": "quarter",
-              "fitContain": false
             }
           ]
-        },
-        {
-          "type": "copy",
-          "kicker": "Intention",
-          "text": "Le projet clarifie les séquences d'usage et cherche une cuisine lisible, compacte et agréable à pratiquer au quotidien, sans surcharge visuelle."
         }
       ],
       "category": "Architecture d'intérieur",
@@ -558,8 +557,8 @@ window.PORTFOLIO_CONTENT = {
       "cardImage": "projets/architecture-interieure/cuisine/images/cuisine-01.jpeg",
       "cardRatio": "6656 / 4992",
       "cardAlt": "Cuisine",
-      "cardYear": "2024",
-      "cardDescription": "Réagencement fonctionnel d'un espace compact avec plan de travail continu et mobilier intégré."
+      "cardYear": "2026",
+      "cardDescription": "Une cuisine pensée autour des gestes du quotidien"
     },
     {
       "slug": "facade-de-commerce",
