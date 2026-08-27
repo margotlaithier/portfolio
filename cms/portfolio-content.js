@@ -77,7 +77,7 @@ window.PORTFOLIO_CONTENT = {
       "title": "Quartier de maisons roses",
       "cardTitleHtml": "Quartier de maisons roses",
       "type": "Projet d'étude · Architecture",
-      "intro": "Ce projet a été réalisé en groupe de huit étudiants avec pour objectif de concevoir un ensemble de maisons présentant une identité architecturale commune. Afin d’assurer une cohérence visuelle entre les différentes réalisations, nous avons défini collectivement une ligne directrice portant sur la palette de couleurs, les matériaux utilisés ainsi que le langage architectural et les formes des bâtiments.\n",
+      "intro": "Ce projet a été réalisé en groupe de huit étudiants avec pour objectif de concevoir un ensemble de maisons présentant une identité architecturale commune. Afin d’assurer une cohérence visuelle entre les différentes réalisations, nous avons défini collectivement une ligne directrice portant sur la palette de couleurs, les matériaux utilisés ainsi que le langage architectural et les formes des bâtiments.",
       "date": "Janvier 2026",
       "layout": "detail",
       "characteristics": [
@@ -162,7 +162,7 @@ window.PORTFOLIO_CONTENT = {
             },
             {
               "src": "images/quartier-maisons-roses-04.jpeg",
-              "alt": "Quartier de maisons roses — image 07",
+              "alt": "Quartier de maisons roses — image 04",
               "fitContain": false
             }
           ]
@@ -227,7 +227,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "image",
           "src": "images/projet-final-04.jpeg",
-          "alt": "Airbnb — image 4",
+          "alt": "Projet final — image 4",
           "fitContain": false
         },
         {
@@ -240,13 +240,13 @@ window.PORTFOLIO_CONTENT = {
           "items": [
             {
               "src": "images/projet-final-02.jpeg",
-              "alt": "Airbnb — image 2",
+              "alt": "Projet final — image 2",
               "width": "quarter",
               "fitContain": false
             },
             {
               "src": "images/projet-final-03.jpeg",
-              "alt": "Airbnb — image 3",
+              "alt": "Projet final — image 3",
               "width": "quarter",
               "fitContain": false
             }
@@ -262,12 +262,12 @@ window.PORTFOLIO_CONTENT = {
           "items": [
             {
               "src": "images/projet-final-05.jpeg",
-              "alt": "Airbnb — image 5",
+              "alt": "Projet final — image 5",
               "fitContain": false
             },
             {
               "src": "images/projet-final-01.jpeg",
-              "alt": "Airbnb — image 1",
+              "alt": "Projet final — image 1",
               "fitContain": false
             }
           ]
@@ -277,7 +277,7 @@ window.PORTFOLIO_CONTENT = {
       "cardSize": "half",
       "cardImage": "projets/architecture-interieure/projet-final/images/projet-final-04.jpeg",
       "cardRatio": "4736 / 3340",
-      "cardAlt": "Airbnb",
+      "cardAlt": "Projet final",
       "cardYear": "2026",
       "cardDescription": "Conception d’une maison — Examen final 8h"
     },
@@ -307,7 +307,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "Intention",
-          "text": "J’ai choisi de travailler principalement avec trois matériaux : le bois, le béton ciré et le cuivre.\n L’aménagement s’articule autour d’une palette de matériaux bruts et naturels : le bois apporte chaleur et douceur, tandis que le béton ciré crée une atmosphère minérale et contemporaine. Des finitions et éléments en cuivre viennent ponctuer l’ensemble et apporter du contraste ainsi qu’une touche plus raffinée."
+          "text": "J’ai choisi de travailler principalement avec trois matériaux : le bois, le béton ciré et le cuivre.\nL’aménagement s’articule autour d’une palette de matériaux bruts et naturels : le bois apporte chaleur et douceur, tandis que le béton ciré crée une atmosphère minérale et contemporaine. Des finitions et éléments en cuivre viennent ponctuer l’ensemble et apporter du contraste ainsi qu’une touche plus raffinée."
         },
         {
           "type": "grid",
@@ -459,7 +459,7 @@ window.PORTFOLIO_CONTENT = {
         },
         {
           "type": "copy",
-          "kicker": "Explication ",
+          "kicker": "Explication",
           "text": "Les plans de travail sont placés à un mètre de hauteur et j’ai choisi de ne mettre aucun rangement en hauteur. Les placards bas classiques ont également été remplacés par des tiroirs, plus faciles à ouvrir et permettant d’accéder directement à leur contenu.\nAu centre, j’ai ajouté un îlot qui permet à la fois de cuisiner et de manger. J’ai également privilégié de grandes ouvertures vers le jardin, pour apporter de la lumière naturelle et faciliter l’accès vers l’extérieur."
         },
         {
@@ -525,7 +525,7 @@ window.PORTFOLIO_CONTENT = {
         },
         {
           "type": "copy",
-          "kicker": "Maquette ",
+          "kicker": "Maquette",
           "text": "J’ai également dû réaliser une maquette en papier blanc avec un élément coloré."
         },
         {
@@ -1104,7 +1104,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "Explication ",
-          "text": "J’ai volontairement créé des formes différentes, certaines plus droites et d’autres beaucoup plus courbées, afin de donner l’impression que la structure est en mouvement. \nSelon l’endroit où l’on se place, les éléments se croisent, se rapprochent ou s’éloignent et donnent une nouvelle vision de l’ensemble.\nJ’ai enfin installé les différentes formes sur un socle en bois, qui contraste avec le métal et permet de maintenir toute la composition."
+          "text": "J’ai volontairement créé des formes différentes, certaines plus droites et d’autres beaucoup plus courbées, afin de donner l’impression que la structure est en mouvement.\nSelon l’endroit où l’on se place, les éléments se croisent, se rapprochent ou s’éloignent et donnent une nouvelle vision de l’ensemble.\nJ’ai enfin installé les différentes formes sur un socle en bois, qui contraste avec le métal et permet de maintenir toute la composition."
         },
         {
           "type": "pair",
@@ -1136,14 +1136,14 @@ window.PORTFOLIO_CONTENT = {
       "title": "Charte graphique restaurant",
       "cardTitleHtml": "Charte graphique<br>restaurant",
       "type": "Projet d'étude · Design graphique",
-      "intro": "Développement d’une chartres graphique pour créer une identité visuel au restaurant.",
+      "intro": "Développement d’une charte graphique pour créer une identité visuelle au restaurant.",
       "date": "2025",
       "layout": "detail",
       "characteristics": [
         "Système visuel",
         "Typographie",
         "Hiérarchie",
-        "Création de Logo"
+        "Création de logo"
       ],
       "blocks": [
         {
@@ -1226,7 +1226,7 @@ window.PORTFOLIO_CONTENT = {
       "cardRatio": "1920 / 1080",
       "cardAlt": "Charte graphique",
       "cardYear": "2025",
-      "cardDescription": "Chartres graphique d’un restaurant inventé "
+      "cardDescription": "Charte graphique d’un restaurant inventé"
     },
     {
       "slug": "lampe-sur-pied",
@@ -1377,7 +1377,7 @@ window.PORTFOLIO_CONTENT = {
       "cardRatio": "4736 / 3340",
       "cardAlt": "Lampe sur pied",
       "cardYear": "2025",
-      "cardDescription": "Objet lumineux conçu comme une ligne verticale, entre présence discrète et diffusion chaude."
+      "cardDescription": "Objet lumineux conçu comme une ligne verticale, entre présence discrète et diffusion chaude"
     },
     {
       "slug": "poste-radio",
@@ -1548,7 +1548,7 @@ window.PORTFOLIO_CONTENT = {
       "cardRatio": "5175 / 6344",
       "cardAlt": "Dessins et textures",
       "cardYear": "2026",
-      "cardDescription": " Représenter la matière par le dessin"
+      "cardDescription": "Représenter la matière par le dessin"
     },
     {
       "slug": "un-batiment-une-semaine",
@@ -1616,7 +1616,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "Explication",
-          "text": "Semaine 2 — « Orange & pop »\n\nPour cette deuxième semaine, j’ai complètement changé d’ambiance en travaillant avec des formes courbes et beaucoup de couleurs. \nLe orange devient une couleur importante du projet et permet de créer une architecture plus dynamique. J’ai également travaillé avec de grandes ouvertures, des espaces arrondis et des lignes qui se suivent pour donner un aspect plus libre et vivant au bâtiment."
+          "text": "Semaine 2 — « Orange & pop »\n\nPour cette deuxième semaine, j’ai complètement changé d’ambiance en travaillant avec des formes courbes et beaucoup de couleurs.\nLe orange devient une couleur importante du projet et permet de créer une architecture plus dynamique. J’ai également travaillé avec de grandes ouvertures, des espaces arrondis et des lignes qui se suivent pour donner un aspect plus libre et vivant au bâtiment."
         },
         {
           "type": "pair",
@@ -1686,7 +1686,7 @@ window.PORTFOLIO_CONTENT = {
         {
           "type": "copy",
           "kicker": "",
-          "text": "Ces trois semaines m’ont permis de comprendre comment, à partir d’un même bâtiment ,on peut arriver à des projets très différents simplement en changeant le point de départ et les inspirations."
+          "text": "Ces trois semaines m’ont permis de comprendre comment, à partir d’un même bâtiment, on peut arriver à des projets très différents simplement en changeant le point de départ et les inspirations."
         }
       ],
       "category": "Architecture",
@@ -1695,7 +1695,7 @@ window.PORTFOLIO_CONTENT = {
       "cardRatio": "4736 / 3340",
       "cardAlt": "Un bâtiment, une semaine",
       "cardYear": "2026",
-      "cardDescription": "Un même bâtiment,trois façons de l’imaginer"
+      "cardDescription": "Un même bâtiment, trois façons de l’imaginer"
     },
     {
       "slug": "vehicule-sous-marin",
@@ -1757,7 +1757,7 @@ window.PORTFOLIO_CONTENT = {
       "cardRatio": "4736 / 3340",
       "cardAlt": "Véhicule sous-marin",
       "cardYear": "2026",
-      "cardDescription": "De la louche au sous-marin "
+      "cardDescription": "De la louche au sous-marin"
     },
     {
       "slug": "vinyle-chanteur",
@@ -2075,7 +2075,7 @@ window.PORTFOLIO_CONTENT = {
       "cardRatio": "6048 / 8064",
       "cardAlt": "Sculpture en papier",
       "cardYear": "2025",
-      "cardDescription": "Une sculpture autour de la croissance "
+      "cardDescription": "Une sculpture autour de la croissance"
     },
     {
       "slug": "telephone-retro-fil-de-fer",
