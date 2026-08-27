@@ -1743,11 +1743,16 @@ window.PORTFOLIO_CONTENT = {
       "title": "Projets personnels",
       "cardTitleHtml": "Projets personnels",
       "type": "",
-      "intro": "",
-      "date": "",
+      "intro": "En dehors de mes projets d’école, j’aime aussi prendre du temps pour dessiner et peindre à la main. Je réalise notamment des peintures directement sur des plaques de MDF, un support que j’apprécie pour sa couleur et sa texture.",
+      "date": "2026",
       "layout": "gallery",
       "characteristics": [],
       "blocks": [
+        {
+          "type": "copy",
+          "kicker": "",
+          "text": "Je travaille principalement autour des animaux et de la nature, en essayant de représenter les formes, les mouvements et les petits détails. Pour ces réalisations, j’ai choisi de rester dans des tons bruns et naturels, qui se mélangent avec la couleur du MDF et donnent un aspect assez doux aux dessins.\n\nCes projets personnels me permettent surtout de dessiner librement, de tester différentes techniques et de continuer à travailler ma précision et mon sens de l’observation."
+        },
         {
           "type": "grid",
           "items": [
@@ -1808,8 +1813,8 @@ window.PORTFOLIO_CONTENT = {
       "cardImage": "projets/dessin/projets-personnels/images/projets-personnels-02.jpeg",
       "cardRatio": "5924 / 8037",
       "cardAlt": "Projets personnels",
-      "cardYear": "",
-      "cardDescription": ""
+      "cardYear": "2026",
+      "cardDescription": "Observer, dessiner et expérimenter"
     },
     {
       "slug": "maquette-etude",
@@ -1817,11 +1822,23 @@ window.PORTFOLIO_CONTENT = {
       "title": "Maquette étude",
       "cardTitleHtml": "Maquette étude",
       "type": "",
-      "intro": "",
-      "date": "",
+      "intro": "Pour ce projet, nous devions réaliser une maquette en coupe d’une maison à ossature bois afin de mieux comprendre les différentes étapes et éléments qui composent sa construction.",
+      "date": "Septembre 2025",
       "layout": "gallery",
-      "characteristics": [],
+      "characteristics": [
+        "Ossature bois",
+        "Détails constructifs",
+        "Travail des textures",
+        "Précision",
+        "Réalisme",
+        "Fabrication manuelle"
+      ],
       "blocks": [
+        {
+          "type": "copy",
+          "kicker": "Explication ",
+          "text": "J’ai représenté la structure des murs avec l’ossature en bois et la laine de verre pour l’isolation. J’ai également laissé une partie de la toiture ouverte pour rendre visible la charpente et comprendre comment les différents éléments s’assemblent.\n\nLa maquette devait aussi présenter plusieurs matériaux et finitions : un sol en parquet, un sol en carrelage, un mur en pierre, un bardage extérieur en bois ainsi qu’une fenêtre ouverte."
+        },
         {
           "type": "grid",
           "items": [
@@ -1886,6 +1903,11 @@ window.PORTFOLIO_CONTENT = {
               "fitContain": false
             }
           ]
+        },
+        {
+          "type": "copy",
+          "kicker": "",
+          "text": "Une grande partie du travail consistait à trouver des techniques et des matériaux permettant de reproduire les textures le plus fidèlement possible à petite échelle. Ce projet m’a permis de mieux comprendre la construction d’une maison, mais aussi de travailler la précision, la propreté et les détails dans la réalisation d’une maquette."
         }
       ],
       "category": "Volume",
@@ -1894,8 +1916,8 @@ window.PORTFOLIO_CONTENT = {
       "cardImage": "projets/volume/maquette-etude/images/maquette-etude-06.jpeg",
       "cardRatio": "7498 / 5800",
       "cardAlt": "Maquette étude",
-      "cardYear": "",
-      "cardDescription": ""
+      "cardYear": "2025",
+      "cardDescription": "Comprendre la construction par la maquette"
     },
     {
       "slug": "sculpture-en-papier",
