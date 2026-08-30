@@ -90,9 +90,157 @@
                             </div>
                         </div>
                     </div>
+
+                    <section class="footer-location" data-location-consent aria-labelledby="location-consent-title">
+                        <div class="footer-location-copy">
+                            <span class="footer-heading" id="location-consent-title">Statistiques de provenance</span>
+                            <p>
+                                Avec votre accord, votre position arrondie est transmise une seule fois au service public de géocodage de l’IGN afin d’obtenir votre commune. Le portfolio ne conserve pas les coordonnées et ne les envoie jamais à Umami. Seules la ville et la région sont ajoutées aux statistiques de visite.
+                            </p>
+                            <small>
+                                Ce partage est facultatif. Géocodage :
+                                <a href="https://cartes.gouv.fr/aide/fr/guides-utilisateur/utiliser-les-services-de-la-geoplateforme/geocodage/" target="_blank" rel="noreferrer">Géoplateforme / IGN</a>.
+                            </small>
+                        </div>
+                        <div class="footer-location-action">
+                            <button type="button" data-share-location>Partager ma ville</button>
+                            <p class="footer-location-status" data-location-status role="status" aria-live="polite"></p>
+                        </div>
+                    </section>
                 </div>
             </footer>
         `;
+    }
+
+    function requestRoundedPosition() {
+        return new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    // Environ 100 m de précision suffisent pour identifier une commune.
+                    resolve({
+                        latitude: Number(position.coords.latitude.toFixed(3)),
+                        longitude: Number(position.coords.longitude.toFixed(3)),
+                    });
+                },
+                reject,
+                {
+                    enableHighAccuracy: false,
+                    timeout: 10000,
+                    maximumAge: 0,
+                },
+            );
+        });
+    }
+
+    async function reverseGeocodeCity(latitude, longitude) {
+        const requestUrl = new URL('https://data.geopf.fr/geocodage/reverse');
+        requestUrl.searchParams.set('lat', String(latitude));
+        requestUrl.searchParams.set('lon', String(longitude));
+        requestUrl.searchParams.set('index', 'address');
+        requestUrl.searchParams.set('limit', '1');
+
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(() => controller.abort(), 10000);
+
+        try {
+            const response = await fetch(requestUrl, {
+                cache: 'no-store',
+                headers: { Accept: 'application/json' },
+                signal: controller.signal,
+            });
+
+            if (!response.ok) {
+                throw new Error('GEOCODING_UNAVAILABLE');
+            }
+
+            const payload = await response.json();
+            const properties = payload?.features?.[0]?.properties;
+            const city = String(properties?.city || '').trim();
+            const contextParts = String(properties?.context || '')
+                .split(',')
+                .map((part) => part.trim())
+                .filter(Boolean);
+            const region = contextParts.at(-1) || '';
+
+            if (!city || !region) {
+                throw new Error('CITY_NOT_FOUND');
+            }
+
+            return { city, region };
+        } finally {
+            window.clearTimeout(timeoutId);
+        }
+    }
+
+    function enhanceLocationConsent() {
+        const container = document.querySelector('[data-location-consent]');
+        const button = container?.querySelector('[data-share-location]');
+        const status = container?.querySelector('[data-location-status]');
+
+        if (!container || !button || !status) return;
+
+        const setStatus = (message, state = '') => {
+            status.textContent = message;
+            status.dataset.state = state;
+        };
+
+        button.addEventListener('click', async () => {
+            if (!window.isSecureContext) {
+                setStatus('La localisation nécessite une connexion HTTPS sécurisée.', 'error');
+                return;
+            }
+
+            if (!('geolocation' in navigator)) {
+                setStatus('La localisation n’est pas disponible dans ce navigateur.', 'error');
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = 'Localisation en cours…';
+            setStatus('En attente de votre autorisation…');
+
+            let latitude = null;
+            let longitude = null;
+
+            try {
+                ({ latitude, longitude } = await requestRoundedPosition());
+                setStatus('Recherche de votre commune…');
+
+                const { city, region } = await reverseGeocodeCity(latitude, longitude);
+
+                // Les coordonnées ne sont plus nécessaires après le géocodage.
+                latitude = null;
+                longitude = null;
+
+                if (!window.umami || typeof window.umami.track !== 'function') {
+                    throw new Error('ANALYTICS_UNAVAILABLE');
+                }
+
+                await window.umami.track('location-consented', { city, region });
+                button.textContent = 'Ville partagée';
+                setStatus(`Merci. Seules les valeurs « ${city} » et « ${region} » ont été envoyées à Umami.`, 'success');
+            } catch (error) {
+                if (error?.code === 1) {
+                    setStatus('Partage refusé. Aucune donnée n’a été envoyée.', 'error');
+                } else if (error?.code === 2) {
+                    setStatus('Votre position est actuellement indisponible. Aucune donnée n’a été envoyée.', 'error');
+                } else if (error?.code === 3 || error?.name === 'AbortError') {
+                    setStatus('La demande a expiré. Aucune donnée n’a été envoyée.', 'error');
+                } else if (error?.message === 'CITY_NOT_FOUND') {
+                    setStatus('La commune n’a pas pu être déterminée. Aucune donnée n’a été envoyée.', 'error');
+                } else if (error?.message === 'ANALYTICS_UNAVAILABLE') {
+                    setStatus('Le service de statistiques est bloqué ou indisponible. Aucune donnée n’a été envoyée.', 'error');
+                } else {
+                    setStatus('Le service de localisation est indisponible. Aucune donnée n’a été envoyée.', 'error');
+                }
+
+                button.disabled = false;
+                button.textContent = 'Réessayer de partager ma ville';
+            } finally {
+                latitude = null;
+                longitude = null;
+            }
+        });
     }
 
     function renderProjectCard(project, rootPrefix) {
@@ -421,6 +569,7 @@
 
         enhanceProjectMasonry();
         enhanceHomeInteractions();
+        enhanceLocationConsent();
     }
 
     function renderProjectsPage(rootPrefix) {
@@ -449,6 +598,7 @@
 
         enhanceProjectMasonry();
         enhanceProjectCardInteractions();
+        enhanceLocationConsent();
     }
 
     function renderZoomableFigure({ src, alt, figureClass = '', imgClass = '', loading = 'lazy' }) {
@@ -530,6 +680,7 @@
         if (!project) {
             document.title = 'Projet introuvable';
             document.body.innerHTML = `${renderHeader(rootPrefix, 'projects')}<main><section class="study-hero"><div class="container"><h1 class="study-title">Projet introuvable</h1></div></section></main>${renderFooter(rootPrefix, 'projects')}`;
+            enhanceLocationConsent();
             return;
         }
 
@@ -605,6 +756,7 @@
         `;
         enhanceStudyGalleryMasonry();
         enhanceProjectImageZoom();
+        enhanceLocationConsent();
     }
 
     function enhanceStudyGalleryMasonry() {
