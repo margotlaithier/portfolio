@@ -90,23 +90,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <section class="footer-location" data-location-consent aria-labelledby="location-consent-title">
-                        <div class="footer-location-copy">
-                            <span class="footer-heading" id="location-consent-title">Statistiques de provenance</span>
-                            <p>
-                                Avec votre accord, votre position arrondie est transmise une seule fois au service public de géocodage de l’IGN afin d’obtenir votre commune. Le portfolio ne conserve pas les coordonnées et ne les envoie jamais à Umami. Seules la ville et la région sont ajoutées aux statistiques de visite.
-                            </p>
-                            <small>
-                                Ce partage est facultatif. Géocodage :
-                                <a href="https://cartes.gouv.fr/aide/fr/guides-utilisateur/utiliser-les-services-de-la-geoplateforme/geocodage/" target="_blank" rel="noreferrer">Géoplateforme / IGN</a>.
-                            </small>
-                        </div>
-                        <div class="footer-location-action">
-                            <button type="button" data-share-location>Partager ma ville</button>
-                            <p class="footer-location-status" data-location-status role="status" aria-live="polite"></p>
-                        </div>
-                    </section>
                 </div>
             </footer>
         `;
@@ -172,73 +155,71 @@
         }
     }
 
+    const LOCATION_CONSENT_KEY = 'portfolio-location-consent-v2';
+    const LOCATION_ATTEMPT_KEY = 'portfolio-location-attempted-v2';
+
+    function readStorage(storage, key) {
+        try {
+            return storage.getItem(key);
+        } catch (_error) {
+            return null;
+        }
+    }
+
+    function writeStorage(storage, key, value) {
+        try {
+            storage.setItem(key, value);
+        } catch (_error) {
+            // Le choix reste valable pour la page courante si le stockage est indisponible.
+        }
+    }
+
+    async function sendConsentedLocation(onPermissionGranted = () => {}) {
+        if (!window.isSecureContext) {
+            throw new Error('INSECURE_CONTEXT');
+        }
+
+        if (!('geolocation' in navigator)) {
+            throw new Error('GEOLOCATION_UNAVAILABLE');
+        }
+
+        let latitude = null;
+        let longitude = null;
+
+        try {
+            ({ latitude, longitude } = await requestRoundedPosition());
+            onPermissionGranted();
+
+            if (!window.umami || typeof window.umami.track !== 'function') {
+                throw new Error('ANALYTICS_UNAVAILABLE');
+            }
+
+            const { city, region } = await reverseGeocodeCity(latitude, longitude);
+
+            // Les coordonnées ne sont plus nécessaires après le géocodage.
+            latitude = null;
+            longitude = null;
+
+            await window.umami.track('location-consented', { city, region });
+            return { city, region };
+        } finally {
+            latitude = null;
+            longitude = null;
+        }
+    }
+
     function enhanceLocationConsent() {
-        const container = document.querySelector('[data-location-consent]');
-        const button = container?.querySelector('[data-share-location]');
-        const status = container?.querySelector('[data-location-status]');
+        const consent = readStorage(window.localStorage, LOCATION_CONSENT_KEY);
 
-        if (!container || !button || !status) return;
+        if (consent === 'refused') return;
+        if (readStorage(window.sessionStorage, LOCATION_ATTEMPT_KEY) === 'true') return;
 
-        const setStatus = (message, state = '') => {
-            status.textContent = message;
-            status.dataset.state = state;
-        };
-
-        button.addEventListener('click', async () => {
-            if (!window.isSecureContext) {
-                setStatus('La localisation nécessite une connexion HTTPS sécurisée.', 'error');
-                return;
-            }
-
-            if (!('geolocation' in navigator)) {
-                setStatus('La localisation n’est pas disponible dans ce navigateur.', 'error');
-                return;
-            }
-
-            button.disabled = true;
-            button.textContent = 'Localisation en cours…';
-            setStatus('En attente de votre autorisation…');
-
-            let latitude = null;
-            let longitude = null;
-
-            try {
-                ({ latitude, longitude } = await requestRoundedPosition());
-                setStatus('Recherche de votre commune…');
-
-                const { city, region } = await reverseGeocodeCity(latitude, longitude);
-
-                // Les coordonnées ne sont plus nécessaires après le géocodage.
-                latitude = null;
-                longitude = null;
-
-                if (!window.umami || typeof window.umami.track !== 'function') {
-                    throw new Error('ANALYTICS_UNAVAILABLE');
-                }
-
-                await window.umami.track('location-consented', { city, region });
-                button.textContent = 'Ville partagée';
-                setStatus(`Merci. Seules les valeurs « ${city} » et « ${region} » ont été envoyées à Umami.`, 'success');
-            } catch (error) {
-                if (error?.code === 1) {
-                    setStatus('Partage refusé. Aucune donnée n’a été envoyée.', 'error');
-                } else if (error?.code === 2) {
-                    setStatus('Votre position est actuellement indisponible. Aucune donnée n’a été envoyée.', 'error');
-                } else if (error?.code === 3 || error?.name === 'AbortError') {
-                    setStatus('La demande a expiré. Aucune donnée n’a été envoyée.', 'error');
-                } else if (error?.message === 'CITY_NOT_FOUND') {
-                    setStatus('La commune n’a pas pu être déterminée. Aucune donnée n’a été envoyée.', 'error');
-                } else if (error?.message === 'ANALYTICS_UNAVAILABLE') {
-                    setStatus('Le service de statistiques est bloqué ou indisponible. Aucune donnée n’a été envoyée.', 'error');
-                } else {
-                    setStatus('Le service de localisation est indisponible. Aucune donnée n’a été envoyée.', 'error');
-                }
-
-                button.disabled = false;
-                button.textContent = 'Réessayer de partager ma ville';
-            } finally {
-                latitude = null;
-                longitude = null;
+        writeStorage(window.sessionStorage, LOCATION_ATTEMPT_KEY, 'true');
+        sendConsentedLocation(() => {
+            writeStorage(window.localStorage, LOCATION_CONSENT_KEY, 'accepted');
+        }).catch((error) => {
+            if (error?.code === 1) {
+                writeStorage(window.localStorage, LOCATION_CONSENT_KEY, 'refused');
             }
         });
     }
