@@ -95,189 +95,6 @@
         `;
     }
 
-    function requestRoundedPosition() {
-        return new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    // Environ 100 m de précision suffisent pour identifier une commune.
-                    resolve({
-                        latitude: Number(position.coords.latitude.toFixed(3)),
-                        longitude: Number(position.coords.longitude.toFixed(3)),
-                    });
-                },
-                reject,
-                {
-                    enableHighAccuracy: false,
-                    timeout: 10000,
-                    maximumAge: 0,
-                },
-            );
-        });
-    }
-
-    async function reverseGeocodeCity(latitude, longitude) {
-        const requestUrl = new URL('https://data.geopf.fr/geocodage/reverse');
-        requestUrl.searchParams.set('lat', String(latitude));
-        requestUrl.searchParams.set('lon', String(longitude));
-        requestUrl.searchParams.set('index', 'address');
-        requestUrl.searchParams.set('limit', '1');
-
-        const controller = new AbortController();
-        const timeoutId = window.setTimeout(() => controller.abort(), 10000);
-
-        try {
-            const response = await fetch(requestUrl, {
-                cache: 'no-store',
-                headers: { Accept: 'application/json' },
-                signal: controller.signal,
-            });
-
-            if (!response.ok) {
-                throw new Error('GEOCODING_UNAVAILABLE');
-            }
-
-            const payload = await response.json();
-            const properties = payload?.features?.[0]?.properties;
-            const city = String(properties?.city || '').trim();
-            const contextParts = String(properties?.context || '')
-                .split(',')
-                .map((part) => part.trim())
-                .filter(Boolean);
-            const region = contextParts.at(-1) || '';
-
-            if (!city || !region) {
-                throw new Error('CITY_NOT_FOUND');
-            }
-
-            return { city, region };
-        } finally {
-            window.clearTimeout(timeoutId);
-        }
-    }
-
-    const LOCATION_CONSENT_KEY = 'portfolio-location-consent-v2';
-    const LOCATION_DELIVERY_KEY = 'portfolio-location-delivered-v3';
-
-    function readStorage(storage, key) {
-        try {
-            return storage.getItem(key);
-        } catch (_error) {
-            return null;
-        }
-    }
-
-    function writeStorage(storage, key, value) {
-        try {
-            storage.setItem(key, value);
-        } catch (_error) {
-            // Le choix reste valable pour la page courante si le stockage est indisponible.
-        }
-    }
-
-    function waitForUmami(timeout = 8000) {
-        if (window.umami && typeof window.umami.track === 'function') {
-            return Promise.resolve(window.umami);
-        }
-
-        return new Promise((resolve, reject) => {
-            const startedAt = Date.now();
-            const intervalId = window.setInterval(() => {
-                if (window.umami && typeof window.umami.track === 'function') {
-                    window.clearInterval(intervalId);
-                    resolve(window.umami);
-                    return;
-                }
-
-                if (Date.now() - startedAt >= timeout) {
-                    window.clearInterval(intervalId);
-                    reject(new Error('ANALYTICS_UNAVAILABLE'));
-                }
-            }, 100);
-        });
-    }
-
-    async function sendConsentedLocation(onPermissionGranted = () => {}) {
-        if (!window.isSecureContext) {
-            throw new Error('INSECURE_CONTEXT');
-        }
-
-        if (!('geolocation' in navigator)) {
-            throw new Error('GEOLOCATION_UNAVAILABLE');
-        }
-
-        let latitude = null;
-        let longitude = null;
-
-        try {
-            ({ latitude, longitude } = await requestRoundedPosition());
-            onPermissionGranted();
-
-            const tracker = await waitForUmami();
-
-            const { city, region } = await reverseGeocodeCity(latitude, longitude);
-
-            // Les coordonnées ne sont plus nécessaires après le géocodage.
-            latitude = null;
-            longitude = null;
-
-            await tracker.track('location-consented', { city, region });
-
-            if (typeof tracker.identify === 'function') {
-                await tracker.identify({ city, region });
-            }
-
-            return { city, region };
-        } finally {
-            latitude = null;
-            longitude = null;
-        }
-    }
-
-    function enhanceLocationConsent() {
-        let started = false;
-
-        const startWhenPageIsActive = () => {
-            if (started || document.prerendering || document.visibilityState !== 'visible') {
-                return;
-            }
-
-            started = true;
-            document.removeEventListener('prerenderingchange', startWhenPageIsActive);
-            document.removeEventListener('visibilitychange', startWhenPageIsActive);
-            window.removeEventListener('pageshow', startWhenPageIsActive);
-
-            const consent = readStorage(window.localStorage, LOCATION_CONSENT_KEY);
-
-            if (consent === 'refused') return;
-            if (readStorage(window.sessionStorage, LOCATION_DELIVERY_KEY) === 'true') return;
-
-            const attemptDelivery = (retryCount = 0) => {
-                sendConsentedLocation(() => {
-                    writeStorage(window.localStorage, LOCATION_CONSENT_KEY, 'accepted');
-                }).then(() => {
-                    writeStorage(window.sessionStorage, LOCATION_DELIVERY_KEY, 'true');
-                }).catch((error) => {
-                    if (error?.code === 1) {
-                        writeStorage(window.localStorage, LOCATION_CONSENT_KEY, 'refused');
-                        return;
-                    }
-
-                    const permissionWasGranted = readStorage(window.localStorage, LOCATION_CONSENT_KEY) === 'accepted';
-                    if (permissionWasGranted && retryCount < 2) {
-                        window.setTimeout(() => attemptDelivery(retryCount + 1), 2500);
-                    }
-                });
-            };
-
-            attemptDelivery();
-        };
-
-        document.addEventListener('prerenderingchange', startWhenPageIsActive);
-        document.addEventListener('visibilitychange', startWhenPageIsActive);
-        window.addEventListener('pageshow', startWhenPageIsActive);
-        startWhenPageIsActive();
-    }
-
     function renderProjectCard(project, rootPrefix) {
         const aspectClass = project.cardAspect && project.cardAspect !== 'auto'
             ? ` card-aspect-${escapeHtml(project.cardAspect)}`
@@ -604,7 +421,6 @@
 
         enhanceProjectMasonry();
         enhanceHomeInteractions();
-        enhanceLocationConsent();
     }
 
     function renderProjectsPage(rootPrefix) {
@@ -633,7 +449,6 @@
 
         enhanceProjectMasonry();
         enhanceProjectCardInteractions();
-        enhanceLocationConsent();
     }
 
     function renderZoomableFigure({ src, alt, figureClass = '', imgClass = '', loading = 'lazy' }) {
@@ -715,7 +530,6 @@
         if (!project) {
             document.title = 'Projet introuvable';
             document.body.innerHTML = `${renderHeader(rootPrefix, 'projects')}<main><section class="study-hero"><div class="container"><h1 class="study-title">Projet introuvable</h1></div></section></main>${renderFooter(rootPrefix, 'projects')}`;
-            enhanceLocationConsent();
             return;
         }
 
@@ -791,7 +605,6 @@
         `;
         enhanceStudyGalleryMasonry();
         enhanceProjectImageZoom();
-        enhanceLocationConsent();
     }
 
     function enhanceStudyGalleryMasonry() {
