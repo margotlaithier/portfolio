@@ -156,7 +156,7 @@
     }
 
     const LOCATION_CONSENT_KEY = 'portfolio-location-consent-v2';
-    const LOCATION_ATTEMPT_KEY = 'portfolio-location-attempted-v2';
+    const LOCATION_DELIVERY_KEY = 'portfolio-location-delivered-v3';
 
     function readStorage(storage, key) {
         try {
@@ -172,6 +172,28 @@
         } catch (_error) {
             // Le choix reste valable pour la page courante si le stockage est indisponible.
         }
+    }
+
+    function waitForUmami(timeout = 8000) {
+        if (window.umami && typeof window.umami.track === 'function') {
+            return Promise.resolve(window.umami);
+        }
+
+        return new Promise((resolve, reject) => {
+            const startedAt = Date.now();
+            const intervalId = window.setInterval(() => {
+                if (window.umami && typeof window.umami.track === 'function') {
+                    window.clearInterval(intervalId);
+                    resolve(window.umami);
+                    return;
+                }
+
+                if (Date.now() - startedAt >= timeout) {
+                    window.clearInterval(intervalId);
+                    reject(new Error('ANALYTICS_UNAVAILABLE'));
+                }
+            }, 100);
+        });
     }
 
     async function sendConsentedLocation(onPermissionGranted = () => {}) {
@@ -190,9 +212,7 @@
             ({ latitude, longitude } = await requestRoundedPosition());
             onPermissionGranted();
 
-            if (!window.umami || typeof window.umami.track !== 'function') {
-                throw new Error('ANALYTICS_UNAVAILABLE');
-            }
+            const tracker = await waitForUmami();
 
             const { city, region } = await reverseGeocodeCity(latitude, longitude);
 
@@ -200,7 +220,12 @@
             latitude = null;
             longitude = null;
 
-            await window.umami.track('location-consented', { city, region });
+            await tracker.track('location-consented', { city, region });
+
+            if (typeof tracker.identify === 'function') {
+                await tracker.identify({ city, region });
+            }
+
             return { city, region };
         } finally {
             latitude = null;
@@ -209,19 +234,48 @@
     }
 
     function enhanceLocationConsent() {
-        const consent = readStorage(window.localStorage, LOCATION_CONSENT_KEY);
+        let started = false;
 
-        if (consent === 'refused') return;
-        if (readStorage(window.sessionStorage, LOCATION_ATTEMPT_KEY) === 'true') return;
-
-        writeStorage(window.sessionStorage, LOCATION_ATTEMPT_KEY, 'true');
-        sendConsentedLocation(() => {
-            writeStorage(window.localStorage, LOCATION_CONSENT_KEY, 'accepted');
-        }).catch((error) => {
-            if (error?.code === 1) {
-                writeStorage(window.localStorage, LOCATION_CONSENT_KEY, 'refused');
+        const startWhenPageIsActive = () => {
+            if (started || document.prerendering || document.visibilityState !== 'visible') {
+                return;
             }
-        });
+
+            started = true;
+            document.removeEventListener('prerenderingchange', startWhenPageIsActive);
+            document.removeEventListener('visibilitychange', startWhenPageIsActive);
+            window.removeEventListener('pageshow', startWhenPageIsActive);
+
+            const consent = readStorage(window.localStorage, LOCATION_CONSENT_KEY);
+
+            if (consent === 'refused') return;
+            if (readStorage(window.sessionStorage, LOCATION_DELIVERY_KEY) === 'true') return;
+
+            const attemptDelivery = (retryCount = 0) => {
+                sendConsentedLocation(() => {
+                    writeStorage(window.localStorage, LOCATION_CONSENT_KEY, 'accepted');
+                }).then(() => {
+                    writeStorage(window.sessionStorage, LOCATION_DELIVERY_KEY, 'true');
+                }).catch((error) => {
+                    if (error?.code === 1) {
+                        writeStorage(window.localStorage, LOCATION_CONSENT_KEY, 'refused');
+                        return;
+                    }
+
+                    const permissionWasGranted = readStorage(window.localStorage, LOCATION_CONSENT_KEY) === 'accepted';
+                    if (permissionWasGranted && retryCount < 2) {
+                        window.setTimeout(() => attemptDelivery(retryCount + 1), 2500);
+                    }
+                });
+            };
+
+            attemptDelivery();
+        };
+
+        document.addEventListener('prerenderingchange', startWhenPageIsActive);
+        document.addEventListener('visibilitychange', startWhenPageIsActive);
+        window.addEventListener('pageshow', startWhenPageIsActive);
+        startWhenPageIsActive();
     }
 
     function renderProjectCard(project, rootPrefix) {
